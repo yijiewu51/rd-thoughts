@@ -1,0 +1,73 @@
+name: 🔄 补充历史数据
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '补充天数（7=周报用，30=月报用）'
+        required: true
+        default: '7'
+        type: choice
+        options:
+          - '7'
+          - '14'
+          - '30'
+      run_weekly:
+        description: '补充后生成周报'
+        required: false
+        default: 'true'
+        type: boolean
+      run_monthly:
+        description: '补充后生成月报'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  backfill-and-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🔄 Backfill data
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/backfill.py --days ${{ github.event.inputs.days }}
+
+      - name: 📅 Generate weekly report
+        if: ${{ github.event.inputs.run_weekly == 'true' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/main.py --mode weekly
+
+      - name: 🗓️ Generate monthly report
+        if: ${{ github.event.inputs.run_monthly == 'true' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/main.py --mode monthly
+
+      - name: 📤 Commit and push
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet || git commit -m "🔄 补充 ${{ github.event.inputs.days }} 天历史数据"
+          git pull --rebase origin main
+          git push
