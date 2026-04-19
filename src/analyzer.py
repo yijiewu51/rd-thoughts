@@ -28,6 +28,7 @@ INDUSTRIES = [
     ("🐾", "宠物 / 宠物经济"),
     ("👟", "潮流 / 时尚 / 运动"),
     ("🎌", "动漫 / 二次元 / IP"),
+    ("₿", "加密货币 / Web3 / DeFi"),
     ("📋", "政策 / 监管 / 社会"),
 ]
 
@@ -95,7 +96,7 @@ def analyze_news(china_news, global_news, mode='daily'):
 ━━ 🌍 国际热点新闻 ━━
 {global_text}
 
-请对以上新闻进行深度分析，覆盖以下全部 17 个行业：
+请对以上新闻进行深度分析，覆盖以下全部 18 个行业：
 {INDUSTRY_LIST_STR}
 
 分析要求：
@@ -152,7 +153,7 @@ JSON 格式如下：
   ]
 }}"""
 
-    print("🤖 Claude 正在深度分析中（17个行业，预计 60-90 秒）...")
+    print("🤖 Claude 正在深度分析中（18个行业，预计 60-90 秒）...")
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=20000,
