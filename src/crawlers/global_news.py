@@ -46,12 +46,15 @@ def get_hackernews_by_date(date_str=None):
                         timeout=8
                     ).json()
                     if item and item.get('type') == 'story' and item.get('score', 0) > 50:
+                        ts = item.get('time', 0)
+                        pub_date = datetime.fromtimestamp(ts).strftime('%Y-%m-%d') if ts else datetime.now().strftime('%Y-%m-%d')
                         stories.append({
                             'title': item['title'],
                             'source': 'Hacker News',
                             'hot': f"↑{item.get('score', 0)}",
                             'url': item.get('url', f"https://news.ycombinator.com/item?id={sid}"),
                             'summary': '',
+                            'date': pub_date,
                         })
                 except Exception:
                     continue
@@ -67,12 +70,15 @@ def get_hackernews_by_date(date_str=None):
         stories = []
         for hit in hits[:10]:
             if hit.get('title') and hit.get('points', 0) > 10:
+                ts = hit.get('created_at_i', 0)
+                pub_date = datetime.fromtimestamp(ts).strftime('%Y-%m-%d') if ts else (date_str or datetime.now().strftime('%Y-%m-%d'))
                 stories.append({
                     'title': hit['title'],
                     'source': 'Hacker News',
                     'hot': f"↑{hit.get('points', 0)}",
                     'url': hit.get('url') or f"https://news.ycombinator.com/item?id={hit.get('objectID','')}",
                     'summary': '',
+                    'date': pub_date,
                 })
         print(f"  Hacker News ({date_str}): {len(stories)} 条")
         return stories
@@ -112,12 +118,14 @@ def get_guardian_by_date(date_str=None):
                 soup = BeautifulSoup(summary, 'lxml')
                 summary = soup.get_text(strip=True)[:150]
             if title:
+                pub_date = r.get('webPublicationDate', '')[:10] or (date_str or datetime.now().strftime('%Y-%m-%d'))
                 stories.append({
                     'title': title,
                     'source': 'The Guardian',
                     'hot': '',
                     'url': r.get('webUrl', ''),
                     'summary': summary,
+                    'date': pub_date,
                 })
         print(f"  The Guardian ({date_str or 'today'}): {len(stories)} 条")
         return stories

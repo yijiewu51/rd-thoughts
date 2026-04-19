@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 import feedparser
 from datetime import datetime, timedelta, timezone
 
+TODAY = datetime.now().strftime('%Y-%m-%d')
+
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -33,6 +35,7 @@ def get_weibo_hot():
                     'hot': str(item.get('num', '')),
                     'url': f"https://s.weibo.com/weibo?q=%23{item.get('word', '')}%23",
                     'summary': '',
+                    'date': TODAY,
                 })
         print(f"  微博热搜: {len(result)} 条")
         return result
@@ -59,6 +62,7 @@ def get_baidu_hot():
                     'hot': '',
                     'url': f"https://www.baidu.com/s?wd={text}",
                     'summary': '',
+                    'date': TODAY,
                 })
         print(f"  百度热搜: {len(result)} 条")
         return result
@@ -83,6 +87,7 @@ def get_zhihu_hot():
                     'hot': str(item.get('detail_text', '')),
                     'url': f"https://www.zhihu.com/question/{target.get('id', '')}",
                     'summary': target.get('excerpt', '')[:150],
+                    'date': TODAY,
                 })
         print(f"  知乎热榜: {len(result)} 条")
         return result
@@ -119,12 +124,15 @@ def get_36kr_by_date(date_str=None):
             if summary:
                 summary = BeautifulSoup(summary, 'lxml').get_text(strip=True)[:200]
 
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
             result.append({
                 'title': title,
                 'source': '36氪',
                 'hot': '',
                 'url': entry.get('link', ''),
                 'summary': summary,
+                'date': pub_date,
             })
             if len(result) >= 10:
                 break
@@ -155,12 +163,15 @@ def get_huxiu_by_date(date_str=None):
                     if entry_date != date_str:
                         continue
 
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
             result.append({
                 'title': title,
                 'source': '虎嗅',
                 'hot': '',
                 'url': entry.get('link', ''),
                 'summary': entry.get('summary', '')[:150],
+                'date': pub_date,
             })
             if len(result) >= 8:
                 break
