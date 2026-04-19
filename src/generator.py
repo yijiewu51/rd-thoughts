@@ -1,0 +1,723 @@
+"""
+报告生成器
+输入：新闻数据 + Claude 分析结果
+输出：Markdown 文件 + HTML 文件
+"""
+
+import os
+import json
+from datetime import datetime
+from pathlib import Path
+
+# 行业主题色
+INDUSTRY_COLORS = {
+    "AI / 科技": "#6366f1",
+    "医疗健康": "#10b981",
+    "金融 / 金融科技": "#f59e0b",
+    "教育 / EdTech": "#3b82f6",
+    "消费 / 零售 / 电商": "#ec4899",
+    "能源 / 清洁能源": "#84cc16",
+    "出行 / 交通": "#06b6d4",
+    "农业 / 食品": "#a78bfa",
+    "房产 / 建筑": "#78716c",
+    "制造业 / 工业": "#64748b",
+    "媒体 / 娱乐 / 内容": "#8b5cf6",
+    "政策 / 监管 / 社会": "#ef4444",
+}
+
+DIFFICULTY_STYLE = {
+    "低": ("🟢", "#c6f6d5", "#276749"),
+    "中": ("🟡", "#fefcbf", "#744210"),
+    "高": ("🔴", "#fed7d7", "#822727"),
+}
+
+
+def get_industry_color(name):
+    for key, color in INDUSTRY_COLORS.items():
+        if key in name or name in key:
+            return color
+    return "#667eea"
+
+
+# ─────────────────────────── Markdown ───────────────────────────
+
+def generate_markdown(china_news, global_news, analysis, date_str):
+    lines = []
+    lines.append(f"# 🧠 创业情报日报 — {date_str}\n")
+    lines.append(f"> 由 Claude AI 自动生成 · 数据来源：微博、百度、知乎、36氪、Hacker News、Reddit\n")
+
+    # Overall summary
+    if analysis.get('overall_summary'):
+        lines.append("## 📊 今日趋势总结\n")
+        lines.append(f"{analysis['overall_summary']}\n")
+
+    # Top 3
+    if analysis.get('top3'):
+        lines.append("## 🏆 今日最佳创业机会 TOP 3\n")
+        for pick in analysis['top3']:
+            medal = ["🥇", "🥈", "🥉"][pick['rank'] - 1]
+            lines.append(f"### {medal} #{pick['rank']} {pick['title']}")
+            lines.append(f"**行业：** {pick['industry']}")
+            lines.append(f"\n{pick['reason']}\n")
+
+    # News
+    lines.append("## 📰 今日热点新闻\n")
+    lines.append("### 🇨🇳 中国热点\n")
+    for i, item in enumerate(china_news[:10], 1):
+        title = item['title']
+        url = item.get('url', '')
+        source = item['source']
+        if url:
+            lines.append(f"{i}. [{title}]({url}) `{source}`")
+        else:
+            lines.append(f"{i}. {title} `{source}`")
+        if item.get('summary'):
+            lines.append(f"   > {item['summary'][:120]}")
+    lines.append("")
+
+    lines.append("### 🌍 国际热点\n")
+    for i, item in enumerate(global_news[:10], 1):
+        title = item['title']
+        url = item.get('url', '')
+        source = item['source']
+        if url:
+            lines.append(f"{i}. [{title}]({url}) `{source}`")
+        else:
+            lines.append(f"{i}. {title} `{source}`")
+    lines.append("")
+
+    # Industry analysis
+    lines.append("## 💡 行业创业机会分析\n")
+    for ind in analysis.get('industries', []):
+        emoji = ind.get('emoji', '📌')
+        name = ind.get('name', '')
+        lines.append(f"---\n### {emoji} {name}\n")
+
+        if ind.get('news_connection'):
+            lines.append(f"**📌 新闻关联：** {ind['news_connection']}\n")
+        if ind.get('trend'):
+            lines.append(f"**📈 核心趋势：** {ind['trend']}\n")
+
+        for opp in ind.get('opportunities', []):
+            lines.append(f"#### 💡 {opp['title']}\n")
+            lines.append(f"{opp.get('description', '')}\n")
+            lines.append(f"| 项目 | 内容 |")
+            lines.append(f"|------|------|")
+            lines.append(f"| 商业模式 | {opp.get('business_model', '-')} |")
+            lines.append(f"| AI 赋能 | {opp.get('ai_angle', '-')} |")
+            lines.append(f"| 目标客户 | {opp.get('target_customer', '-')} |")
+            lines.append(f"| 市场规模 | {opp.get('market_size', '-')} |")
+            lines.append(f"| 难度 | {opp.get('difficulty', '-')} |")
+            lines.append(f"| 紧迫性 | {opp.get('urgency', '-')} |")
+            lines.append(f"| 🚀 第一步 | {opp.get('first_step', '-')} |")
+            lines.append("")
+
+        if ind.get('watch_out'):
+            lines.append(f"> ⚠️ **注意：** {ind['watch_out']}\n")
+
+    lines.append("\n---")
+    lines.append(f"*生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')} · [查看所有报告](https://yijiewu51.github.io/rd-thoughts/)*")
+
+    return "\n".join(lines)
+
+
+# ─────────────────────────── HTML ───────────────────────────
+
+CSS = """
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+               'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  line-height: 1.7;
+  font-size: 15px;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  color: white;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+.header-logo span { color: #a5b4fc; }
+.header-date { font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 4px 12px;
+  border-radius: 20px; color: rgba(255,255,255,0.8); }
+.header-nav a {
+  color: rgba(255,255,255,0.75); font-size: 0.85rem;
+  padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-left: 8px; transition: all 0.2s;
+}
+.header-nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+.header-nav a.active { background: rgba(165,180,252,0.2); border-color: #a5b4fc; color: white; }
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+}
+.sidebar-box {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.sidebar-box h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.sidebar-box a {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 0.82rem; color: #475569;
+  margin-bottom: 2px; transition: all 0.15s;
+}
+.sidebar-box a:hover { background: #f8fafc; color: #1e293b; text-decoration: none; }
+.sidebar-box a .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Main ── */
+.main { flex: 1; min-width: 0; }
+section { margin-bottom: 24px; }
+
+/* ── Card base ── */
+.card {
+  background: white; border-radius: 14px;
+  padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+/* ── Summary ── */
+.summary-card { border-left: 4px solid #6366f1; }
+.section-title {
+  font-size: 1rem; font-weight: 700; color: #1e293b;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.summary-text { font-size: 0.925rem; color: #334155; line-height: 1.8; }
+
+/* ── Top 3 ── */
+.picks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pick-card {
+  background: white; border-radius: 12px; padding: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-top: 3px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pick-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.pick-card:nth-child(1) { border-top-color: #f6ad55; }
+.pick-card:nth-child(2) { border-top-color: #a0aec0; }
+.pick-card:nth-child(3) { border-top-color: #c05621; }
+.pick-medal { font-size: 1.8rem; line-height: 1; margin-bottom: 10px; }
+.pick-industry { font-size: 0.72rem; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pick-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+.pick-reason { font-size: 0.8rem; color: #64748b; line-height: 1.6; }
+
+/* ── News ── */
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.news-col-title {
+  font-size: 0.875rem; font-weight: 600; color: #374151;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+  display: flex; align-items: center; gap: 6px;
+}
+.news-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0; border-bottom: 1px solid #f8fafc;
+}
+.news-item:last-child { border-bottom: none; }
+.news-num { font-size: 0.72rem; color: #cbd5e1; font-weight: 700; min-width: 18px; padding-top: 2px; }
+.news-body { flex: 1; }
+.news-title-link { font-size: 0.85rem; color: #1e293b; display: block; margin-bottom: 2px; }
+.news-title-link:hover { color: #6366f1; text-decoration: none; }
+.news-meta { font-size: 0.72rem; color: #94a3b8; display: flex; gap: 8px; align-items: center; }
+.news-source-badge {
+  background: #f1f5f9; padding: 1px 7px; border-radius: 10px; color: #64748b;
+}
+.news-hot { color: #f87171; }
+
+/* ── Industry card ── */
+.industry-card {
+  background: white; border-radius: 14px; padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-left: 4px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+.industry-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.industry-emoji { font-size: 1.6rem; }
+.industry-name { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+.industry-meta-row {
+  background: #f8fafc; border-radius: 10px; padding: 14px 16px;
+  margin-bottom: 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.meta-block .meta-label {
+  font-size: 0.7rem; color: #94a3b8; margin-bottom: 3px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.meta-block .meta-value { font-size: 0.85rem; color: #334155; }
+
+.opps-title { font-size: 0.875rem; font-weight: 600; color: #475569; margin-bottom: 12px; }
+
+/* ── Opportunity card ── */
+.opp-card {
+  border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px;
+  margin-bottom: 12px; transition: border-color 0.2s;
+}
+.opp-card:hover { border-color: #c7d2fe; }
+.opp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.opp-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+.opp-tags { display: flex; gap: 5px; flex-shrink: 0; }
+.tag {
+  font-size: 0.68rem; padding: 2px 8px; border-radius: 10px;
+  font-weight: 600; white-space: nowrap;
+}
+.opp-desc { font-size: 0.855rem; color: #475569; line-height: 1.75; margin-bottom: 12px; }
+.opp-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail-item { background: #f8fafc; border-radius: 7px; padding: 8px 10px; }
+.detail-item.action { grid-column: span 2; background: #eff6ff; border-left: 3px solid #3b82f6; }
+.detail-label { font-size: 0.68rem; color: #94a3b8; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+.detail-value { font-size: 0.82rem; color: #334155; }
+.detail-item.action .detail-label { color: #3b82f6; }
+.detail-item.action .detail-value { color: #1d4ed8; font-weight: 500; }
+
+.watch-out {
+  background: #fff7ed; border-radius: 8px; padding: 10px 14px;
+  font-size: 0.82rem; color: #92400e; margin-top: 12px;
+  border-left: 3px solid #f59e0b;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center; padding: 32px 20px;
+  font-size: 0.8rem; color: #94a3b8;
+}
+.footer a { color: #6366f1; }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .layout { flex-direction: column; padding: 16px; }
+  .sidebar { width: 100%; position: static; }
+  .sidebar-box { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sidebar-box h3 { width: 100%; }
+  .sidebar-box a { margin-bottom: 0; }
+  .picks-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .opp-details { grid-template-columns: 1fr; }
+  .detail-item.action { grid-column: span 1; }
+  .industry-meta-row { grid-template-columns: 1fr; }
+}
+"""
+
+
+def difficulty_tag_html(level, label_prefix=""):
+    icon, bg, fg = DIFFICULTY_STYLE.get(level, ("⚪", "#f1f5f9", "#64748b"))
+    return f'<span class="tag" style="background:{bg};color:{fg}">{icon} {label_prefix}{level}</span>'
+
+
+def build_sidebar_links(industries):
+    links = []
+    for ind in industries:
+        emoji = ind.get('emoji', '📌')
+        name = ind.get('name', '')
+        color = get_industry_color(name)
+        anchor = name.replace('/', '-').replace(' ', '')
+        links.append(
+            f'<a href="#{anchor}">'
+            f'<span class="dot" style="background:{color}"></span>'
+            f'{emoji} {name}</a>'
+        )
+    return "\n".join(links)
+
+
+def build_news_col_html(news_list, flag, label):
+    items_html = []
+    for i, item in enumerate(news_list[:10], 1):
+        title = item['title']
+        url = item.get('url', '')
+        source = item['source']
+        hot = item.get('hot', '')
+        title_part = (
+            f'<a class="news-title-link" href="{url}" target="_blank" rel="noopener">{title}</a>'
+            if url else
+            f'<span class="news-title-link">{title}</span>'
+        )
+        hot_part = f'<span class="news-hot">{hot}</span>' if hot else ''
+        items_html.append(f"""
+        <div class="news-item">
+          <span class="news-num">{i}</span>
+          <div class="news-body">
+            {title_part}
+            <div class="news-meta">
+              <span class="news-source-badge">{source}</span>
+              {hot_part}
+            </div>
+          </div>
+        </div>""")
+    return f"""
+    <div>
+      <div class="news-col-title">{flag} {label}</div>
+      {''.join(items_html)}
+    </div>"""
+
+
+def build_opp_html(opp):
+    diff_tag = difficulty_tag_html(opp.get('difficulty', '-'), "难度 ")
+    urg_tag = difficulty_tag_html(opp.get('urgency', '-'), "紧迫 ")
+    return f"""
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 {opp.get('title', '')}</div>
+        <div class="opp-tags">{diff_tag}{urg_tag}</div>
+      </div>
+      <p class="opp-desc">{opp.get('description', '')}</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">{opp.get('business_model', '-')}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">{opp.get('ai_angle', '-')}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">{opp.get('target_customer', '-')}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">{opp.get('market_size', '-')}</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">{opp.get('first_step', '-')}</div>
+        </div>
+      </div>
+    </div>"""
+
+
+def build_industry_html(ind):
+    name = ind.get('name', '')
+    emoji = ind.get('emoji', '📌')
+    color = get_industry_color(name)
+    anchor = name.replace('/', '-').replace(' ', '')
+    opps_html = "".join(build_opp_html(o) for o in ind.get('opportunities', []))
+    watch = ind.get('watch_out', '')
+    watch_html = f'<div class="watch-out">⚠️ {watch}</div>' if watch else ''
+
+    return f"""
+    <div class="industry-card" id="{anchor}" style="border-left-color:{color}">
+      <div class="industry-header">
+        <span class="industry-emoji">{emoji}</span>
+        <span class="industry-name">{name}</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">{ind.get('news_connection', '-')}</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">{ind.get('trend', '-')}</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      {opps_html}
+      {watch_html}
+    </div>"""
+
+
+def build_top3_html(top3):
+    medals = ["🥇", "🥈", "🥉"]
+    cards = []
+    for pick in top3:
+        medal = medals[pick['rank'] - 1]
+        cards.append(f"""
+        <div class="pick-card">
+          <div class="pick-medal">{medal}</div>
+          <div class="pick-industry">{pick.get('industry', '')}</div>
+          <div class="pick-title">{pick.get('title', '')}</div>
+          <div class="pick-reason">{pick.get('reason', '')}</div>
+        </div>""")
+    return "\n".join(cards)
+
+
+def generate_html(china_news, global_news, analysis, date_str, mode='daily', archive_links=None):
+    mode_label = {"daily": "日报", "weekly": "周报", "monthly": "月报"}.get(mode, "报告")
+    industries = analysis.get('industries', [])
+
+    sidebar_links = build_sidebar_links(industries)
+    china_col = build_news_col_html(china_news, "🇨🇳", "中国热点")
+    global_col = build_news_col_html(global_news, "🌍", "国际热点")
+    industry_sections = "\n".join(build_industry_html(ind) for ind in industries)
+    top3_html = build_top3_html(analysis.get('top3', []))
+
+    archive_section = ""
+    if archive_links:
+        items = "\n".join(
+            f'<li><a href="{link["url"]}">{link["label"]}</a></li>'
+            for link in archive_links[-20:][::-1]
+        )
+        archive_section = f"""
+        <div class="card" style="margin-top:24px">
+          <div class="section-title">📁 历史报告</div>
+          <ul style="list-style:none;columns:2;gap:16px">
+            {items}
+          </ul>
+        </div>"""
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创业情报{mode_label} — {date_str}</title>
+  <style>{CSS}</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">🧠 创业情报<span>雷达</span></div>
+    <span class="header-date">{date_str} · {mode_label}</span>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html" class="active">最新</a>
+    <a href="archive.html">归档</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <h3>行业导航</h3>
+      {sidebar_links}
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 趋势总结 -->
+    <section>
+      <div class="card summary-card">
+        <div class="section-title">📊 今日趋势总结</div>
+        <p class="summary-text">{analysis.get('overall_summary', '')}</p>
+      </div>
+    </section>
+
+    <!-- Top 3 -->
+    <section>
+      <div class="section-title" style="margin-bottom:14px">🏆 今日最佳创业机会 TOP 3</div>
+      <div class="picks-grid">
+        {top3_html}
+      </div>
+    </section>
+
+    <!-- 热点新闻 -->
+    <section>
+      <div class="card">
+        <div class="section-title">📰 今日热点新闻</div>
+        <div class="news-grid">
+          {china_col}
+          {global_col}
+        </div>
+      </div>
+    </section>
+
+    <!-- 行业分析 -->
+    <section>
+      <div class="section-title" style="margin-bottom:16px">💡 全行业创业机会分析</div>
+      {industry_sections}
+    </section>
+
+    {archive_section}
+
+  </main>
+</div>
+
+<footer class="footer">
+  由 Claude AI 自动生成 · {date_str} ·
+  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / Reddit ·
+  <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
+</footer>
+
+</body>
+</html>"""
+
+
+# ─────────────────────────── Archive ───────────────────────────
+
+def load_archive(docs_dir):
+    archive_file = os.path.join(docs_dir, 'archive.json')
+    if os.path.exists(archive_file):
+        with open(archive_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+
+def save_archive(docs_dir, archive):
+    archive_file = os.path.join(docs_dir, 'archive.json')
+    with open(archive_file, 'w', encoding='utf-8') as f:
+        json.dump(archive, f, ensure_ascii=False, indent=2)
+
+
+def update_archive(docs_dir, date_str, url, label):
+    archive = load_archive(docs_dir)
+    # Remove duplicate
+    archive = [a for a in archive if a['url'] != url]
+    archive.append({'date': date_str, 'url': url, 'label': label})
+    archive.sort(key=lambda x: x['date'])
+    save_archive(docs_dir, archive)
+    return archive
+
+
+def generate_archive_html(archive, docs_dir):
+    items_by_month = {}
+    for entry in archive[::-1]:
+        month = entry['date'][:7]
+        items_by_month.setdefault(month, []).append(entry)
+
+    months_html = []
+    for month, entries in sorted(items_by_month.items(), reverse=True):
+        items_html = "\n".join(
+            f'<li><a href="{e["url"]}">{e["label"]}</a></li>'
+            for e in entries
+        )
+        months_html.append(f"""
+        <div style="margin-bottom:24px">
+          <h3 style="font-size:0.9rem;color:#475569;margin-bottom:10px;border-bottom:1px solid #e2e8f0;padding-bottom:6px">{month}</h3>
+          <ul style="list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">
+            {items_html}
+          </ul>
+        </div>""")
+
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>归档 — 创业情报雷达</title>
+  <style>{CSS}</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">🧠 创业情报<span>雷达</span></div>
+    <span class="header-date">历史归档</span>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html">最新</a>
+    <a href="archive.html" class="active">归档</a>
+  </nav>
+</header>
+<div style="max-width:900px;margin:0 auto;padding:32px 20px">
+  <h2 style="font-size:1.2rem;margin-bottom:24px">📁 所有历史报告</h2>
+  {''.join(months_html)}
+</div>
+<footer class="footer">
+  由 Claude AI 自动生成 · <a href="https://github.com/yijiewu51/rd-thoughts">GitHub</a>
+</footer>
+</body>
+</html>"""
+
+    with open(os.path.join(docs_dir, 'archive.html'), 'w', encoding='utf-8') as f:
+        f.write(html)
+
+
+# ─────────────────────────── Main entry ───────────────────────────
+
+def generate_reports(china_news, global_news, analysis, date_str, mode='daily'):
+    """生成 Markdown + HTML，保存到 reports/ 和 docs/"""
+    root = Path(__file__).parent.parent
+    reports_dir = root / 'reports'
+    docs_dir = root / 'docs'
+    data_dir = root / 'data'
+
+    reports_dir.mkdir(exist_ok=True)
+    docs_dir.mkdir(exist_ok=True)
+    data_dir.mkdir(exist_ok=True)
+
+    prefix = {'daily': '', 'weekly': 'weekly-', 'monthly': 'monthly-'}[mode]
+    filename = f"{prefix}{date_str}"
+
+    # Save raw data JSON
+    raw = {
+        'date': date_str,
+        'mode': mode,
+        'china_news': china_news,
+        'global_news': global_news,
+        'analysis': analysis,
+    }
+    with open(data_dir / f"{filename}.json", 'w', encoding='utf-8') as f:
+        json.dump(raw, f, ensure_ascii=False, indent=2)
+    print(f"  💾 数据已保存: data/{filename}.json")
+
+    # Load archive for sidebar links
+    archive = load_archive(str(docs_dir))
+    report_url = f"{filename}.html"
+    mode_label = {"daily": "日报", "weekly": "周报", "monthly": "月报"}[mode]
+    label = f"{date_str} {mode_label}"
+    archive = update_archive(str(docs_dir), date_str, report_url, label)
+
+    # Generate Markdown
+    md_content = generate_markdown(china_news, global_news, analysis, date_str)
+    md_path = reports_dir / f"{filename}.md"
+    with open(md_path, 'w', encoding='utf-8') as f:
+        f.write(md_content)
+    print(f"  📝 Markdown: reports/{filename}.md")
+
+    # Generate HTML (individual report)
+    html_content = generate_html(china_news, global_news, analysis, date_str, mode, archive)
+    html_path = docs_dir / f"{filename}.html"
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    print(f"  🌐 HTML: docs/{filename}.html")
+
+    # Update index.html (always = latest daily report)
+    if mode == 'daily':
+        index_path = docs_dir / 'index.html'
+        with open(index_path, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        print(f"  🏠 index.html 已更新")
+
+    # Update archive.html
+    generate_archive_html(archive, str(docs_dir))
+    print(f"  📁 archive.html 已更新")
+
+    print(f"\n✅ 报告生成完毕！")
+    return str(html_path)
