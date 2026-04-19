@@ -10,22 +10,22 @@
 import argparse
 import sys
 import os
+import json
 
-# Allow running from repo root
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
 from crawlers.china_news import get_all_china_news
 from crawlers.global_news import get_all_global_news
-from analyzer import analyze_news
-from generator import generate_reports
+from analyzer import analyze_news, analyze_synthesis
+from generator import generate_reports, generate_synthesis_reports
 
 
 def run_daily():
     from datetime import datetime
     date_str = datetime.now().strftime('%Y-%m-%d')
-    print(f"\n{'='*50}")
+    print(f"\n{'='*55}")
     print(f"🚀 创业情报雷达 — 日报  {date_str}")
-    print(f"{'='*50}\n")
+    print(f"{'='*55}\n")
 
     china_news = get_all_china_news()
     global_news = get_all_global_news()
@@ -41,114 +41,93 @@ def run_daily():
         print("❌ Claude 分析失败，退出")
         sys.exit(1)
 
+    print(f"✅ 分析完成，覆盖 {len(analysis.get('industries', []))} 个行业\n")
     generate_reports(china_news, global_news, analysis, date_str, mode='daily')
 
 
-def run_weekly():
-    """读取过去7天的日报数据，生成周报"""
-    import json
-    import glob
+def _load_daily_data(n_days):
+    """加载过去 n 天的日报数据"""
     from datetime import datetime, timedelta
     from pathlib import Path
-    from analyzer import analyze_news
-    from generator import generate_reports
 
     root = Path(__file__).parent.parent
     data_dir = root / 'data'
-
     today = datetime.now()
-    week_str = today.strftime('%Y-W%W')
-    print(f"\n{'='*50}")
-    print(f"🚀 创业情报雷达 — 周报  {week_str}")
-    print(f"{'='*50}\n")
+    results = []
 
-    # Collect past 7 days of data
-    all_china, all_global = [], []
-    seen_titles = set()
-
-    for i in range(7):
+    for i in range(n_days):
         day = today - timedelta(days=i)
         day_str = day.strftime('%Y-%m-%d')
         data_file = data_dir / f"{day_str}.json"
         if data_file.exists():
             with open(data_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            for item in data.get('china_news', []):
-                if item['title'] not in seen_titles:
-                    seen_titles.add(item['title'])
-                    all_china.append(item)
-            for item in data.get('global_news', []):
-                if item['title'] not in seen_titles:
-                    seen_titles.add(item['title'])
-                    all_global.append(item)
+            if data.get('analysis'):
+                results.append(data)
 
-    if not all_china and not all_global:
-        print("⚠️ 没有找到过去7天的数据，使用实时数据")
-        all_china = get_all_china_news()
-        all_global = get_all_global_news()
+    return results
 
-    print(f"📊 本周汇总：中国 {len(all_china)} 条 / 国际 {len(all_global)} 条\n")
 
-    analysis = analyze_news(all_china[:15], all_global[:15], mode='weekly')
-    if not analysis:
+def run_weekly():
+    from datetime import datetime
+    today = datetime.now()
+    week_str = today.strftime('%Y-W%W')
+    print(f"\n{'='*55}")
+    print(f"🚀 创业情报雷达 — 周报  {week_str}")
+    print(f"{'='*55}\n")
+
+    daily_data = _load_daily_data(7)
+    print(f"📦 找到过去 7 天中 {len(daily_data)} 天的数据\n")
+
+    if len(daily_data) < 2:
+        print("⚠️ 数据不足（需至少2天），先跑一次日报再生成周报")
+        # Fallback: run daily analysis and use it
+        china_news = get_all_china_news()
+        global_news = get_all_global_news()
+        analysis = analyze_news(china_news, global_news, mode='weekly')
+        if analysis:
+            generate_reports(china_news, global_news, analysis, week_str, mode='weekly')
+        return
+
+    synthesis = analyze_synthesis(daily_data, mode='weekly')
+    if not synthesis:
+        print("❌ 综合分析失败，退出")
         sys.exit(1)
 
-    generate_reports(all_china[:15], all_global[:15], analysis, week_str, mode='weekly')
+    generate_synthesis_reports(synthesis, week_str, mode='weekly')
 
 
 def run_monthly():
-    """读取过去30天的日报数据，生成月报"""
-    import json
-    from datetime import datetime, timedelta
-    from pathlib import Path
-
-    root = Path(__file__).parent.parent
-    data_dir = root / 'data'
-
+    from datetime import datetime
     today = datetime.now()
     month_str = today.strftime('%Y-%m')
-    print(f"\n{'='*50}")
+    print(f"\n{'='*55}")
     print(f"🚀 创业情报雷达 — 月报  {month_str}")
-    print(f"{'='*50}\n")
+    print(f"{'='*55}\n")
 
-    all_china, all_global = [], []
-    seen_titles = set()
+    daily_data = _load_daily_data(30)
+    print(f"📦 找到过去 30 天中 {len(daily_data)} 天的数据\n")
 
-    for i in range(30):
-        day = today - timedelta(days=i)
-        day_str = day.strftime('%Y-%m-%d')
-        data_file = data_dir / f"{day_str}.json"
-        if data_file.exists():
-            with open(data_file, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            for item in data.get('china_news', []):
-                if item['title'] not in seen_titles:
-                    seen_titles.add(item['title'])
-                    all_china.append(item)
-            for item in data.get('global_news', []):
-                if item['title'] not in seen_titles:
-                    seen_titles.add(item['title'])
-                    all_global.append(item)
+    if len(daily_data) < 3:
+        print("⚠️ 数据不足（需至少3天），使用当日新闻生成月报")
+        china_news = get_all_china_news()
+        global_news = get_all_global_news()
+        analysis = analyze_news(china_news, global_news, mode='monthly')
+        if analysis:
+            generate_reports(china_news, global_news, analysis, month_str, mode='monthly')
+        return
 
-    if not all_china and not all_global:
-        print("⚠️ 没有找到过去30天的数据，使用实时数据")
-        all_china = get_all_china_news()
-        all_global = get_all_global_news()
-
-    print(f"📊 本月汇总：中国 {len(all_china)} 条 / 国际 {len(all_global)} 条\n")
-
-    # For monthly, take top items (most recent / most represented)
-    analysis = analyze_news(all_china[:15], all_global[:15], mode='monthly')
-    if not analysis:
+    synthesis = analyze_synthesis(daily_data, mode='monthly')
+    if not synthesis:
+        print("❌ 综合分析失败，退出")
         sys.exit(1)
 
-    generate_reports(all_china[:15], all_global[:15], analysis, month_str, mode='monthly')
+    generate_synthesis_reports(synthesis, month_str, mode='monthly')
 
 
 def main():
     parser = argparse.ArgumentParser(description='创业情报雷达')
-    parser.add_argument('--mode', choices=['daily', 'weekly', 'monthly'], default='daily',
-                        help='运行模式：daily（默认）/ weekly / monthly')
+    parser.add_argument('--mode', choices=['daily', 'weekly', 'monthly'], default='daily')
     args = parser.parse_args()
 
     if args.mode == 'daily':

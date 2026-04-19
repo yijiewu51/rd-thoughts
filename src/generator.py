@@ -12,6 +12,8 @@ from pathlib import Path
 # 行业主题色
 INDUSTRY_COLORS = {
     "AI / 科技": "#6366f1",
+    "芯片 / 半导体": "#0ea5e9",
+    "机器人 / 具身智能": "#7c3aed",
     "医疗健康": "#10b981",
     "金融 / 金融科技": "#f59e0b",
     "教育 / EdTech": "#3b82f6",
@@ -22,6 +24,9 @@ INDUSTRY_COLORS = {
     "房产 / 建筑": "#78716c",
     "制造业 / 工业": "#64748b",
     "媒体 / 娱乐 / 内容": "#8b5cf6",
+    "宠物 / 宠物经济": "#f97316",
+    "潮流 / 时尚 / 运动": "#e11d48",
+    "动漫 / 二次元 / IP": "#d946ef",
     "政策 / 监管 / 社会": "#ef4444",
 }
 
@@ -721,3 +726,287 @@ def generate_reports(china_news, global_news, analysis, date_str, mode='daily'):
 
     print(f"\n✅ 报告生成完毕！")
     return str(html_path)
+
+
+# ─────────────────────────── Synthesis (周报/月报) HTML ───────────────────────────
+
+def generate_synthesis_html(synthesis, date_str, mode, archive=None):
+    """生成周报/月报综合分析 HTML"""
+    period = "本周" if mode == 'weekly' else "本月"
+    mode_label = "周报" if mode == 'weekly' else "月报"
+
+    # Strong signals
+    signals_html = ""
+    for sig in synthesis.get('strong_signals', []):
+        days = sig.get('appeared_days', 0)
+        bar_width = min(100, days * 14)
+        signals_html += f"""
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">{sig.get('signal', '')}</span>
+            <span class="signal-days">出现 {days} 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:{bar_width}%"></div></div>
+          <div class="signal-insight">{sig.get('insight', '')}</div>
+          <div class="signal-industries">{' · '.join(sig.get('industries', []))}</div>
+        </div>"""
+
+    # Top 5
+    top5_html = ""
+    medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"]
+    for pick in synthesis.get('top5', []):
+        rank = pick.get('rank', 1) - 1
+        medal = medals[rank] if rank < len(medals) else "•"
+        color = get_industry_color(pick.get('industry', ''))
+        diff_tag = difficulty_tag_html(pick.get('difficulty', '-'), "难度 ")
+        urg_tag = difficulty_tag_html(pick.get('urgency', '-'), "紧迫 ")
+        top5_html += f"""
+        <div class="opp-card" style="border-left:4px solid {color}">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">{medal}</div>
+              <div class="opp-title">{pick.get('title', '')}</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">{pick.get('industry', '')}</div>
+            </div>
+            <div class="opp-tags">{diff_tag}{urg_tag}</div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ {pick.get('why_this_week', '')}
+          </div>
+          <p class="opp-desc">{pick.get('description', '')}</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">{pick.get('business_model', '-')}</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">{pick.get('ai_angle', '-')}</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">{pick.get('first_step', '-')}</div></div>
+          </div>
+        </div>"""
+
+    # Industry insights (one-liners)
+    ind_insights_html = ""
+    for ind in synthesis.get('industry_insights', []):
+        color = get_industry_color(ind.get('name', ''))
+        ind_insights_html += f"""
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid {color};background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">{ind.get('emoji','')} {ind.get('name','')}</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">{ind.get('one_line','')}</span>
+        </div>"""
+
+    # AI deep dive
+    ai_dive = synthesis.get('ai_deep_dive', {})
+    ai_dive_html = f"""
+    <div class="card" style="border-left:4px solid #6366f1">
+      <div class="section-title">🔬 AI 赛道深度分析</div>
+      <div style="display:grid;gap:12px;margin-top:8px">
+        <div style="background:#f0f4ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#4f46e5;margin-bottom:6px">🤖 AI / 科技</div>
+          <p style="font-size:0.875rem;color:#334155">{ai_dive.get('ai_tech','')}</p>
+        </div>
+        <div style="background:#f0f9ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#0369a1;margin-bottom:6px">💻 芯片 / 半导体</div>
+          <p style="font-size:0.875rem;color:#334155">{ai_dive.get('chip','')}</p>
+        </div>
+        <div style="background:#faf5ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#7c3aed;margin-bottom:6px">🦾 机器人 / 具身智能</div>
+          <p style="font-size:0.875rem;color:#334155">{ai_dive.get('robot','')}</p>
+        </div>
+      </div>
+    </div>"""
+
+    # Next period watch
+    next_html = ""
+    for w in synthesis.get('next_period_watch', []):
+        next_html += f"""
+        <div style="display:flex;gap:12px;padding:12px;background:white;border-radius:8px;margin-bottom:8px">
+          <div style="font-size:1.2rem;color:#94a3b8;font-weight:800;min-width:28px">{w.get('rank','')}</div>
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;color:#1e293b;margin-bottom:3px">{w.get('topic','')}</div>
+            <div style="font-size:0.82rem;color:#64748b">{w.get('reason','')}</div>
+          </div>
+        </div>"""
+
+    archive_links = ""
+    if archive:
+        items = " · ".join(f'<a href="{a["url"]}" style="color:#6366f1">{a["label"]}</a>'
+                           for a in archive[-10:][::-1])
+        archive_links = f'<div style="font-size:0.8rem;color:#94a3b8;margin-top:8px">{items}</div>'
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创业情报{mode_label} — {date_str}</title>
+  <style>
+{CSS}
+.signal-card {{background:white;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.07)}}
+.signal-header {{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}}
+.signal-name {{font-size:0.9rem;font-weight:700;color:#1e293b}}
+.signal-days {{font-size:0.75rem;background:#dbeafe;color:#1e40af;padding:2px 10px;border-radius:20px;font-weight:600}}
+.signal-bar {{height:6px;background:#f1f5f9;border-radius:3px;margin-bottom:8px}}
+.signal-fill {{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);border-radius:3px}}
+.signal-insight {{font-size:0.84rem;color:#475569;margin-bottom:6px}}
+.signal-industries {{font-size:0.75rem;color:#94a3b8}}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">🧠 创业情报<span>雷达</span></div>
+    <span class="header-date">{date_str} · {mode_label}</span>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html">最新日报</a>
+    <a href="archive.html">归档</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <h3>本页导航</h3>
+      <a href="#summary">📊 总结</a>
+      <a href="#signals">📡 强信号</a>
+      <a href="#top5">🏆 TOP 5 机会</a>
+      <a href="#ai-dive">🔬 AI 深度</a>
+      <a href="#industry">💡 行业洞见</a>
+      <a href="#next">🔭 下期预判</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="summary">
+      <div class="card summary-card">
+        <div class="section-title">📊 {period}趋势总结</div>
+        <p class="summary-text">{synthesis.get('period_summary', '')}</p>
+      </div>
+    </section>
+
+    <section id="signals">
+      <div class="section-title" style="margin-bottom:14px">📡 {period}强信号（反复出现的主题）</div>
+      {signals_html}
+    </section>
+
+    <section id="top5">
+      <div class="section-title" style="margin-bottom:14px">🏆 {period}最值得关注的 TOP 5 创业机会</div>
+      {top5_html}
+    </section>
+
+    <section id="ai-dive">
+      {ai_dive_html}
+    </section>
+
+    <section id="industry">
+      <div class="card">
+        <div class="section-title">💡 各行业本{period[1]}核心洞见</div>
+        <div style="margin-top:12px">
+          {ind_insights_html}
+        </div>
+      </div>
+    </section>
+
+    <section id="next">
+      <div class="card">
+        <div class="section-title">🔭 下{period[1]}重点关注方向</div>
+        <div style="margin-top:12px">
+          {next_html}
+        </div>
+      </div>
+    </section>
+
+    {archive_links}
+
+  </main>
+</div>
+
+<footer class="footer">
+  由 Claude AI 自动生成 · {date_str} · {mode_label} ·
+  <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
+</footer>
+</body>
+</html>"""
+
+
+def generate_synthesis_markdown(synthesis, date_str, mode):
+    period = "本周" if mode == 'weekly' else "本月"
+    mode_label = "周报" if mode == 'weekly' else "月报"
+    lines = [f"# 🧠 创业情报{mode_label} — {date_str}\n"]
+    lines.append(f"> 基于过去{'7天' if mode=='weekly' else '30天'}日报综合分析\n")
+
+    lines.append(f"## 📊 {period}趋势总结\n{synthesis.get('period_summary','')}\n")
+
+    lines.append("## 📡 强信号\n")
+    for sig in synthesis.get('strong_signals', []):
+        lines.append(f"**{sig.get('signal','')}** — 出现 {sig.get('appeared_days',0)} 天")
+        lines.append(f"{sig.get('insight','')}\n")
+
+    lines.append("## 🏆 TOP 5 创业机会\n")
+    medals = ["🥇","🥈","🥉","4️⃣","5️⃣"]
+    for pick in synthesis.get('top5', []):
+        r = pick.get('rank',1)-1
+        lines.append(f"### {medals[r] if r<5 else ''} {pick.get('title','')} `{pick.get('industry','')}`\n")
+        lines.append(f"> ⏰ {pick.get('why_this_week','')}\n")
+        lines.append(f"{pick.get('description','')}\n")
+        lines.append(f"| 商业模式 | {pick.get('business_model','-')} |")
+        lines.append(f"| AI赋能 | {pick.get('ai_angle','-')} |")
+        lines.append(f"| 第一步 | {pick.get('first_step','-')} |\n")
+
+    dive = synthesis.get('ai_deep_dive', {})
+    lines.append("## 🔬 AI 赛道深度分析\n")
+    lines.append(f"**🤖 AI / 科技：** {dive.get('ai_tech','')}\n")
+    lines.append(f"**💻 芯片 / 半导体：** {dive.get('chip','')}\n")
+    lines.append(f"**🦾 机器人 / 具身智能：** {dive.get('robot','')}\n")
+
+    lines.append("## 💡 各行业核心洞见\n")
+    for ind in synthesis.get('industry_insights', []):
+        lines.append(f"- **{ind.get('emoji','')} {ind.get('name','')}**：{ind.get('one_line','')}")
+    lines.append("")
+
+    lines.append(f"## 🔭 下{period[1]}关注方向\n")
+    for w in synthesis.get('next_period_watch', []):
+        lines.append(f"{w.get('rank','')}. **{w.get('topic','')}** — {w.get('reason','')}")
+
+    lines.append(f"\n---\n*生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}*")
+    return "\n".join(lines)
+
+
+def generate_synthesis_reports(synthesis, date_str, mode):
+    """生成周报/月报的 MD + HTML"""
+    root = Path(__file__).parent.parent
+    docs_dir = root / 'docs'
+    reports_dir = root / 'reports'
+    data_dir = root / 'data'
+
+    docs_dir.mkdir(exist_ok=True)
+    reports_dir.mkdir(exist_ok=True)
+    data_dir.mkdir(exist_ok=True)
+
+    prefix = 'weekly-' if mode == 'weekly' else 'monthly-'
+    filename = f"{prefix}{date_str}"
+    mode_label = "周报" if mode == 'weekly' else "月报"
+
+    # Save data
+    with open(data_dir / f"{filename}.json", 'w', encoding='utf-8') as f:
+        json.dump({'date': date_str, 'mode': mode, 'synthesis': synthesis}, f,
+                  ensure_ascii=False, indent=2)
+
+    # Archive
+    archive = load_archive(str(docs_dir))
+    archive = update_archive(str(docs_dir), date_str, f"{filename}.html", f"{date_str} {mode_label}")
+
+    # Markdown
+    md = generate_synthesis_markdown(synthesis, date_str, mode)
+    with open(reports_dir / f"{filename}.md", 'w', encoding='utf-8') as f:
+        f.write(md)
+    print(f"  📝 Markdown: reports/{filename}.md")
+
+    # HTML
+    html = generate_synthesis_html(synthesis, date_str, mode, archive)
+    with open(docs_dir / f"{filename}.html", 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"  🌐 HTML: docs/{filename}.html")
+
+    generate_archive_html(archive, str(docs_dir))
+    print(f"  📁 archive.html 已更新")
+    print(f"\n✅ {mode_label}生成完毕！")
+    return str(docs_dir / f"{filename}.html")
