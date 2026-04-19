@@ -126,6 +126,7 @@ def get_36kr_by_date(date_str=None):
 
             pub = entry.get('published_parsed') or entry.get('updated_parsed')
             pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
             result.append({
                 'title': title,
                 'source': '36氪',
@@ -133,6 +134,7 @@ def get_36kr_by_date(date_str=None):
                 'url': entry.get('link', ''),
                 'summary': summary,
                 'date': pub_date,
+                'time': pub_time,
             })
             if len(result) >= 10:
                 break
@@ -165,6 +167,7 @@ def get_huxiu_by_date(date_str=None):
 
             pub = entry.get('published_parsed') or entry.get('updated_parsed')
             pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
             result.append({
                 'title': title,
                 'source': '虎嗅',
@@ -172,6 +175,7 @@ def get_huxiu_by_date(date_str=None):
                 'url': entry.get('link', ''),
                 'summary': entry.get('summary', '')[:150],
                 'date': pub_date,
+                'time': pub_time,
             })
             if len(result) >= 8:
                 break

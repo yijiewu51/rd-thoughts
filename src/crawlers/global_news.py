@@ -47,14 +47,15 @@ def get_hackernews_by_date(date_str=None):
                     ).json()
                     if item and item.get('type') == 'story' and item.get('score', 0) > 50:
                         ts = item.get('time', 0)
-                        pub_date = datetime.fromtimestamp(ts).strftime('%Y-%m-%d') if ts else datetime.now().strftime('%Y-%m-%d')
+                        pub_dt = datetime.fromtimestamp(ts) if ts else datetime.now()
                         stories.append({
                             'title': item['title'],
                             'source': 'Hacker News',
                             'hot': f"↑{item.get('score', 0)}",
                             'url': item.get('url', f"https://news.ycombinator.com/item?id={sid}"),
                             'summary': '',
-                            'date': pub_date,
+                            'date': pub_dt.strftime('%Y-%m-%d'),
+                            'time': pub_dt.strftime('%H:%M'),
                         })
                 except Exception:
                     continue
@@ -71,14 +72,15 @@ def get_hackernews_by_date(date_str=None):
         for hit in hits[:10]:
             if hit.get('title') and hit.get('points', 0) > 10:
                 ts = hit.get('created_at_i', 0)
-                pub_date = datetime.fromtimestamp(ts).strftime('%Y-%m-%d') if ts else (date_str or datetime.now().strftime('%Y-%m-%d'))
+                pub_dt = datetime.fromtimestamp(ts) if ts else datetime.now()
                 stories.append({
                     'title': hit['title'],
                     'source': 'Hacker News',
                     'hot': f"↑{hit.get('points', 0)}",
                     'url': hit.get('url') or f"https://news.ycombinator.com/item?id={hit.get('objectID','')}",
                     'summary': '',
-                    'date': pub_date,
+                    'date': pub_dt.strftime('%Y-%m-%d'),
+                    'time': pub_dt.strftime('%H:%M'),
                 })
         print(f"  Hacker News ({date_str}): {len(stories)} 条")
         return stories
@@ -118,7 +120,9 @@ def get_guardian_by_date(date_str=None):
                 soup = BeautifulSoup(summary, 'lxml')
                 summary = soup.get_text(strip=True)[:150]
             if title:
-                pub_date = r.get('webPublicationDate', '')[:10] or (date_str or datetime.now().strftime('%Y-%m-%d'))
+                web_pub = r.get('webPublicationDate', '')  # e.g. "2026-04-19T15:30:00Z"
+                pub_date = web_pub[:10] if web_pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+                pub_time = web_pub[11:16] if len(web_pub) >= 16 else ''
                 stories.append({
                     'title': title,
                     'source': 'The Guardian',
@@ -126,6 +130,7 @@ def get_guardian_by_date(date_str=None):
                     'url': r.get('webUrl', ''),
                     'summary': summary,
                     'date': pub_date,
+                    'time': pub_time,
                 })
         print(f"  The Guardian ({date_str or 'today'}): {len(stories)} 条")
         return stories

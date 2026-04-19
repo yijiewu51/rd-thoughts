@@ -272,7 +272,7 @@ section { margin-bottom: 24px; }
   background: #f1f5f9; padding: 1px 7px; border-radius: 10px; color: #64748b;
 }
 .news-hot { color: #f87171; }
-.news-date { color: #94a3b8; }
+.news-date { color: #94a3b8; font-size: 0.7rem; }
 
 /* ── Industry card ── */
 .industry-card {
@@ -379,13 +379,15 @@ def build_news_col_html(news_list, flag, label):
         source = item['source']
         hot = item.get('hot', '')
         pub_date = item.get('date', '')
+        pub_time = item.get('time', '')
+        datetime_str = f"{pub_date} {pub_time}".strip() if pub_date else ''
         title_part = (
             f'<a class="news-title-link" href="{url}" target="_blank" rel="noopener">{title}</a>'
             if url else
             f'<span class="news-title-link">{title}</span>'
         )
         hot_part = f'<span class="news-hot">{hot}</span>' if hot else ''
-        date_part = f'<span class="news-date">📅 {pub_date}</span>' if pub_date else ''
+        date_part = f'<span class="news-date">{datetime_str}</span>' if datetime_str else ''
         items_html.append(f"""
         <div class="news-item">
           <span class="news-num">{i}</span>
