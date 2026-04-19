@@ -1,14 +1,16 @@
 """
 国际热点新闻爬取
-来源：Hacker News、Reddit worldnews、Reddit technology
+来源：Hacker News、Reddit worldnews、GitHub Trending
 """
 
 import requests
 import time
+from bs4 import BeautifulSoup
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (compatible; NewsBot/1.0; +https://github.com/yijiewu51)',
-    'Accept': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.9',
 }
 
 
@@ -46,29 +48,34 @@ def get_hackernews_top():
         return []
 
 
-def get_reddit_news(subreddit, label, limit=10):
-    """Reddit 指定版块 Top Posts (今日)"""
+def get_github_trending():
+    """GitHub Trending 今日趋势项目"""
     try:
-        url = f"https://www.reddit.com/r/{subreddit}/top.json?limit={limit}&t=day"
+        url = "https://github.com/trending?since=daily"
         resp = requests.get(url, headers=HEADERS, timeout=15)
-        data = resp.json()
-        posts = data.get('data', {}).get('children', [])
+        soup = BeautifulSoup(resp.text, 'lxml')
+        repos = soup.select('article.Box-row')[:10]
         result = []
-        for p in posts:
-            d = p.get('data', {})
-            if d.get('stickied') or not d.get('title'):
+        for repo in repos:
+            name_el = repo.select_one('h2 a')
+            desc_el = repo.select_one('p')
+            stars_el = repo.select_one('a[href*="/stargazers"]')
+            if not name_el:
                 continue
+            name = name_el.get_text(strip=True).replace('\n', '').replace(' ', '')
+            desc = desc_el.get_text(strip=True) if desc_el else ''
+            stars = stars_el.get_text(strip=True) if stars_el else ''
             result.append({
-                'title': d['title'],
-                'source': f'Reddit r/{subreddit}',
-                'hot': f"↑{d.get('score', 0)}",
-                'url': f"https://reddit.com{d.get('permalink', '')}",
-                'summary': d.get('selftext', '')[:150],
+                'title': f"{name} — {desc}" if desc else name,
+                'source': 'GitHub Trending',
+                'hot': f"⭐{stars}",
+                'url': f"https://github.com{name_el.get('href', '')}",
+                'summary': desc[:150],
             })
-        print(f"  Reddit r/{subreddit}: {len(result)} 条")
+        print(f"  GitHub Trending: {len(result)} 条")
         return result
     except Exception as e:
-        print(f"  Reddit r/{subreddit} 失败: {e}")
+        print(f"  GitHub Trending 失败: {e}")
         return []
 
 
@@ -76,10 +83,9 @@ def get_all_global_news():
     """汇总所有国际热点新闻，去重后返回最多 15 条"""
     print("📡 正在获取国际热点新闻...")
     hn = get_hackernews_top()
-    world = get_reddit_news('worldnews', 'worldnews', 10)
-    tech = get_reddit_news('technology', 'technology', 5)
+    gh = get_github_trending()
 
-    all_news = hn + world + tech
+    all_news = hn + gh
     seen = set()
     unique = []
     for item in all_news:

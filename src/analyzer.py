@@ -130,7 +130,7 @@ def analyze_news(china_news, global_news, mode='daily'):
     print("🤖 Claude 正在深度分析中（预计 30-60 秒）...")
     message = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=8000,
+        max_tokens=16000,
         messages=[{"role": "user", "content": prompt}]
     )
 
