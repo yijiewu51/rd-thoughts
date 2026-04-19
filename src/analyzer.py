@@ -8,6 +8,7 @@ import anthropic
 import json
 import os
 from datetime import datetime
+from json_repair import repair_json
 
 # 行业分类（全覆盖）
 INDUSTRIES = [
@@ -77,7 +78,12 @@ def analyze_news(china_news, global_news, mode='daily'):
 4. 结合中国市场现状（政策、竞争格局、用户习惯）
 5. 给出第一步行动：创业者明天就能开始做什么
 
-请严格按照以下 JSON 格式返回，不要包含任何其他文字或代码块标记：
+⚠️ 重要格式要求：
+- 返回纯 JSON，不要包含任何其他文字或代码块标记（不要用 ```json）
+- JSON 字符串值内部不能出现英文双引号（"），如需强调词语请用「」或【】代替，例如：「价格战」而非"价格战"
+- 所有文本中的双引号必须转义为 \"，或改用「」
+
+请严格按照以下 JSON 格式返回：
 
 {{
   "date": "{datetime.now().strftime('%Y-%m-%d')}",
@@ -141,22 +147,35 @@ def analyze_news(china_news, global_news, mode='daily'):
         lines = response_text.split('\n')
         response_text = '\n'.join(lines[1:-1] if lines[-1] == '```' else lines[1:])
 
+    # Step 1: standard parse
     try:
         data = json.loads(response_text)
         print(f"✅ 分析完成，覆盖 {len(data.get('industries', []))} 个行业")
         return data
-    except json.JSONDecodeError as e:
-        print(f"⚠️ JSON 解析失败，尝试提取...")
-        # Try to find JSON in response
-        start = response_text.find('{')
-        end = response_text.rfind('}') + 1
-        if start >= 0 and end > start:
-            try:
-                data = json.loads(response_text[start:end])
-                print(f"✅ 提取成功")
-                return data
-            except Exception:
-                pass
-        print(f"❌ 解析彻底失败: {e}")
-        print("原始响应前500字符:", response_text[:500])
-        return None
+    except json.JSONDecodeError:
+        pass
+
+    # Step 2: extract JSON block then parse
+    start = response_text.find('{')
+    end = response_text.rfind('}') + 1
+    if start >= 0 and end > start:
+        chunk = response_text[start:end]
+        try:
+            data = json.loads(chunk)
+            print(f"✅ 提取成功，覆盖 {len(data.get('industries', []))} 个行业")
+            return data
+        except json.JSONDecodeError:
+            pass
+
+        # Step 3: repair broken JSON (handles unescaped quotes, trailing commas, etc.)
+        try:
+            repaired = repair_json(chunk, return_objects=True)
+            if isinstance(repaired, dict) and repaired.get('industries'):
+                print(f"✅ JSON 修复成功，覆盖 {len(repaired.get('industries', []))} 个行业")
+                return repaired
+        except Exception as e:
+            print(f"⚠️ JSON 修复失败: {e}")
+
+    print(f"❌ 所有解析方式均失败")
+    print("原始响应前300字符:", response_text[:300])
+    return None
