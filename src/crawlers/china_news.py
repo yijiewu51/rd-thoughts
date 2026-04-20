@@ -188,13 +188,50 @@ def get_huxiu_by_date(date_str=None):
         return []
 
 
+# ── 钛媒体 RSS（科技/创业，补充中国新闻源） ─────────────────────
+
+def get_tmtpost_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.tmtpost.com/rss', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub:
+                    if datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                        continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': '钛媒体',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        label = date_str or 'today'
+        print(f"  钛媒体 ({label}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  钛媒体失败: {e}")
+        return []
+
+
 # ── 公开接口 ──────────────────────────────────────────────────────
 
 def get_all_china_news(date_str=None):
     """
     获取中国热点新闻。
-    date_str=None → 今天实时新闻（微博+百度+知乎+36kr）
-    date_str='YYYY-MM-DD' → 该日期历史新闻（36kr+虎嗅，按日期过滤）
+    date_str=None → 今天实时新闻（微博+百度+知乎+36kr+钛媒体）
+    date_str='YYYY-MM-DD' → 该日期历史新闻（36kr+虎嗅+钛媒体，按日期过滤）
     """
     is_today = date_str is None
     label = "今日" if is_today else date_str
@@ -205,20 +242,19 @@ def get_all_china_news(date_str=None):
         baidu = get_baidu_hot()
         zhihu = get_zhihu_hot()
         kr36 = get_36kr_by_date(None)
-        huxiu = []
-        all_news = weibo + zhihu + kr36 + baidu + huxiu
+        tmt = get_tmtpost_by_date(None)
+        all_news = weibo + zhihu + kr36 + tmt + baidu
     else:
         # Historical: RSS sources with date filter
         kr36 = get_36kr_by_date(date_str)
         huxiu = get_huxiu_by_date(date_str)
-        all_news = kr36 + huxiu
+        tmt = get_tmtpost_by_date(date_str)
+        all_news = kr36 + huxiu + tmt
 
         # If RSS didn't have articles for that date, fall back to latest
         if len(all_news) < 3:
             print(f"  ⚠️ {date_str} 的 RSS 文章不足，使用最新文章补充")
-            kr36_latest = get_36kr_by_date(None)
-            huxiu_latest = get_huxiu_by_date(None)
-            all_news = kr36_latest + huxiu_latest
+            all_news = get_36kr_by_date(None) + get_huxiu_by_date(None) + get_tmtpost_by_date(None)
 
     seen = set()
     unique = []
@@ -227,7 +263,7 @@ def get_all_china_news(date_str=None):
         if key not in seen and item['title']:
             seen.add(key)
             unique.append(item)
-        if len(unique) >= 15:
+        if len(unique) >= 20:
             break
 
     print(f"✅ 中国新闻共 {len(unique)} 条")

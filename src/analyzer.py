@@ -68,8 +68,71 @@ def _parse_response(response_text):
     return None
 
 
+def _build_industry_prompt(china_text, global_text, today, mode, industries_spec, include_summary=True):
+    """Build a prompt for a subset of industries."""
+    industries_str = "\n".join(
+        f"  {e} {n} — {opps}个方向，description控制在{words}字以内"
+        for e, n, opps, words in industries_spec
+    )
+    summary_field = f'"overall_summary": "今日整体趋势总结（3-4句，重点突出AI相关）",' if include_summary else '"overall_summary": "",'
+    top3_block = """
+  "top3": [
+    {"rank": 1, "industry": "所属行业", "title": "创业方向名称", "reason": "最佳时机理由（50字以内）"},
+    {"rank": 2, "industry": "所属行业", "title": "创业方向名称", "reason": "理由"},
+    {"rank": 3, "industry": "所属行业", "title": "创业方向名称", "reason": "理由"}
+  ]""" if include_summary else '  "top3": []'
+
+    return f"""你是顶级创业顾问，深度关注 AI 赋能各行业的创业机会。
+
+今天是 {today}，以下是今日热点新闻：
+
+━━ 🇨🇳 中国热点新闻 ━━
+{china_text}
+
+━━ 🌍 国际热点新闻 ━━
+{global_text}
+
+请分析以下行业，严格按要求输出：
+{industries_str}
+
+要求：
+1. 每个行业必须输出，无直接新闻也要结合宏观趋势
+2. 严格控制字数，不要超出限制
+3. 结合AI赋能思考，给出具体产品形态和第一步行动
+4. 结合中国市场现状
+
+⚠️ 返回纯JSON，不含代码块，字符串内不用英文双引号（改用「」或【】）
+
+{{
+  {summary_field}
+  "industries": [
+    {{
+      "emoji": "emoji",
+      "name": "行业名称",
+      "news_connection": "与新闻关联（1句）",
+      "trend": "核心趋势（1-2句）",
+      "opportunities": [
+        {{
+          "title": "方向名称（≤15字）",
+          "description": "商业逻辑（严格按字数限制）",
+          "business_model": "商业模式（1句）",
+          "ai_angle": "AI切入点（1句）",
+          "target_customer": "目标客户",
+          "market_size": "市场规模",
+          "difficulty": "低/中/高",
+          "urgency": "低/中/高",
+          "first_step": "第一步（1句可执行）"
+        }}
+      ],
+      "watch_out": "风险（1句）"
+    }}
+  ],
+{top3_block}
+}}"""
+
+
 def analyze_news(china_news, global_news, mode='daily'):
-    """调用 Claude 进行深度分析，返回结构化 JSON"""
+    """调用 Claude 进行深度分析（两次调用合并，确保18个行业全覆盖）"""
     api_key = os.environ.get('ANTHROPIC_API_KEY')
     if not api_key:
         raise ValueError("缺少环境变量 ANTHROPIC_API_KEY")
@@ -78,89 +141,75 @@ def analyze_news(china_news, global_news, mode='daily'):
     today = datetime.now().strftime('%Y年%m月%d日')
 
     china_lines = [f"  {i}. 【{item['source']}】{item['title']}" +
-                   (f"\n     摘要: {item['summary'][:120]}" if item.get('summary') else "")
+                   (f" — {item['summary'][:80]}" if item.get('summary') else "")
                    for i, item in enumerate(china_news[:12], 1)]
     global_lines = [f"  {i}. 【{item['source']}】{item['title']}"
                     for i, item in enumerate(global_news[:12], 1)]
-
     china_text = "\n".join(china_lines)
     global_text = "\n".join(global_lines)
 
-    prompt = f"""你是一位顶级创业顾问、行业趋势分析师，深度关注 AI 赋能各行业的创业机会。
+    # Call 1: High-priority industries (3 opps each)
+    BATCH1 = [
+        ("🤖", "AI / 科技",           3, 80),
+        ("🐾", "宠物 / 宠物经济",     3, 70),
+        ("📚", "教育 / EdTech",        3, 70),
+        ("🛍️", "消费 / 零售 / 电商",   3, 70),
+        ("₿",  "加密货币 / Web3 / DeFi", 3, 70),
+    ]
+    # Call 2: Medium + low priority industries (2 and 1 opp respectively)
+    BATCH2 = [
+        ("💻", "芯片 / 半导体",        2, 60),
+        ("🦾", "机器人 / 具身智能",    2, 60),
+        ("💰", "金融 / 金融科技",      2, 50),
+        ("🎬", "媒体 / 娱乐 / 内容",   2, 50),
+        ("👟", "潮流 / 时尚 / 运动",   2, 50),
+        ("🎌", "动漫 / 二次元 / IP",   2, 50),
+        ("🚗", "出行 / 交通",          2, 50),
+        ("⚡", "能源 / 清洁能源",      2, 50),
+        ("🏥", "医疗健康",             1, 40),
+        ("🌾", "农业 / 食品",          1, 40),
+        ("🏭", "制造业 / 工业",        1, 40),
+        ("🏠", "房产 / 建筑",          1, 40),
+        ("📋", "政策 / 监管 / 社会",   1, 40),
+    ]
 
-今天是 {today}，以下是今日全网热点新闻：
-
-━━ 🇨🇳 中国热点新闻 ━━
-{china_text}
-
-━━ 🌍 国际热点新闻 ━━
-{global_text}
-
-请对以上新闻进行深度分析，覆盖以下全部 18 个行业：
-{INDUSTRY_LIST_STR}
-
-分析要求：
-1. **每个行业必须输出**，即使当天无直接相关新闻，也要结合宏观趋势进行思考
-2. 【AI / 科技】是核心赛道，必须输出 **3 个创业方向**，分析要更深入（150-200字/方向）
-3. 其余每个行业输出 **2 个创业方向**（120-150字/方向）
-4. 重点思考 AI 如何赋能每个行业，具体到产品形态
-5. 结合中国市场现状（政策、竞争格局、用户习惯）
-6. 给出第一步行动：创业者明天就能开始做什么
-7. 对于【芯片/半导体】【机器人/具身智能】这两个赛道，重点分析与 AI 的协同机会
-8. 对于【宠物/宠物经济】【潮流/时尚/运动】【动漫/二次元/IP】这三个新兴消费赛道，重点分析 AI+内容/社区/个性化的切入点
-
-⚠️ 格式要求（必须遵守）：
-- 返回纯 JSON，不要包含任何其他文字，不要用 ```json 代码块
-- JSON 字符串中绝对不能出现未转义的英文双引号，强调词语请用「」或【】，例如：「智能体」而非"智能体"
-
-JSON 格式如下：
-
-{{
-  "date": "{datetime.now().strftime('%Y-%m-%d')}",
-  "mode": "{mode}",
-  "overall_summary": "今日整体趋势总结，4-6句，点出最重要的宏观信号，重点突出 AI 相关",
-  "industries": [
-    {{
-      "emoji": "行业emoji",
-      "name": "行业名称",
-      "news_connection": "与今日新闻的关联点（1-2句）",
-      "trend": "当前核心趋势（2-3句，具体有洞见）",
-      "opportunities": [
-        {{
-          "title": "创业方向名称（不超过15字）",
-          "description": "具体描述和商业逻辑（AI赛道150-200字，其他行业120-150字）",
-          "business_model": "商业模式（一句话，含收费方式）",
-          "ai_angle": "AI赋能的具体切入点（产品层面，要具体）",
-          "target_customer": "目标客户（越具体越好）",
-          "market_size": "市场规模估计（含依据）",
-          "difficulty": "低/中/高",
-          "urgency": "低/中/高",
-          "first_step": "第一步行动（具体可执行）"
-        }}
-      ],
-      "watch_out": "风险或注意事项（1-2句）"
-    }}
-  ],
-  "top3": [
-    {{
-      "rank": 1,
-      "industry": "所属行业",
-      "title": "创业方向名称",
-      "reason": "为什么现在是最佳时机（60-100字，有说服力）"
-    }},
-    {{"rank": 2, "industry": "所属行业", "title": "创业方向名称", "reason": "理由"}},
-    {{"rank": 3, "industry": "所属行业", "title": "创业方向名称", "reason": "理由"}}
-  ]
-}}"""
-
-    print("🤖 Claude 正在深度分析中（18个行业，预计 60-90 秒）...")
-    message = client.messages.create(
+    print("🤖 Claude 分析中 - 批次1（重点赛道5个）...")
+    msg1 = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=20000,
-        messages=[{"role": "user", "content": prompt}]
+        max_tokens=8000,
+        messages=[{"role": "user", "content": _build_industry_prompt(
+            china_text, global_text, today, mode, BATCH1, include_summary=True
+        )}]
     )
+    r1 = msg1.stop_reason
+    print(f"  批次1: {r1}, {msg1.usage.output_tokens} tokens")
+    result1 = _parse_response(msg1.content[0].text.strip())
 
-    return _parse_response(message.content[0].text.strip())
+    print("🤖 Claude 分析中 - 批次2（其余13个行业）...")
+    msg2 = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=12000,
+        messages=[{"role": "user", "content": _build_industry_prompt(
+            china_text, global_text, today, mode, BATCH2, include_summary=False
+        )}]
+    )
+    r2 = msg2.stop_reason
+    print(f"  批次2: {r2}, {msg2.usage.output_tokens} tokens")
+    result2 = _parse_response(msg2.content[0].text.strip())
+
+    if not result1 or not result2:
+        return result1 or result2
+
+    # Merge: combine industries, use batch1's summary and top3
+    merged = {
+        'date': datetime.now().strftime('%Y-%m-%d'),
+        'mode': mode,
+        'overall_summary': result1.get('overall_summary', ''),
+        'industries': result1.get('industries', []) + result2.get('industries', []),
+        'top3': result1.get('top3', []),
+    }
+    print(f"✅ 合并完成：{len(merged['industries'])} 个行业")
+    return merged
 
 
 def analyze_synthesis(daily_data_list, mode='weekly'):

@@ -1,11 +1,12 @@
 """
 国际热点新闻爬取
 支持当天 + 历史日期查询
-来源：Hacker News Algolia API、The Guardian API (test key)、GitHub Trending
+来源：Hacker News Algolia API、The Guardian API (test key)、GitHub Trending、CoinTelegraph RSS、TechCrunch RSS
 """
 
 import requests
 import time
+import feedparser
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 
@@ -171,6 +172,80 @@ def get_github_trending():
         return []
 
 
+# ── CoinTelegraph RSS（加密货币/Web3，支持历史日期过滤） ────────────
+
+def get_cointelegraph_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://cointelegraph.com/rss', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub:
+                    if datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                        continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'CoinTelegraph',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        label = date_str or 'today'
+        print(f"  CoinTelegraph ({label}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  CoinTelegraph 失败: {e}")
+        return []
+
+
+# ── TechCrunch RSS（科技创业，支持历史日期过滤） ───────────────────
+
+def get_techcrunch_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://techcrunch.com/feed/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub:
+                    if datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                        continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'TechCrunch',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        label = date_str or 'today'
+        print(f"  TechCrunch ({label}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  TechCrunch 失败: {e}")
+        return []
+
+
 # ── 公开接口 ──────────────────────────────────────────────────────
 
 def get_all_global_news(date_str=None):
@@ -186,8 +261,10 @@ def get_all_global_news(date_str=None):
     hn = get_hackernews_by_date(date_str)
     guardian = get_guardian_by_date(date_str)
     gh = get_github_trending() if is_today else []
+    ct = get_cointelegraph_by_date(date_str)
+    tc = get_techcrunch_by_date(date_str)
 
-    all_news = hn + guardian + gh
+    all_news = hn + guardian + tc + ct + gh
     seen = set()
     unique = []
     for item in all_news:
@@ -195,7 +272,7 @@ def get_all_global_news(date_str=None):
         if key not in seen and item['title']:
             seen.add(key)
             unique.append(item)
-        if len(unique) >= 15:
+        if len(unique) >= 20:
             break
 
     print(f"✅ 国际新闻共 {len(unique)} 条")
