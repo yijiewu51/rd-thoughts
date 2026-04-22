@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
 from crawlers.china_news import get_all_china_news
 from crawlers.global_news import get_all_global_news
+from crawlers.market_data import get_market_signals
+from crawlers.funding_news import get_funding_news
 from analyzer import analyze_news, analyze_synthesis
 from generator import generate_reports, generate_synthesis_reports
 
@@ -36,13 +38,20 @@ def run_daily():
 
     print(f"\n📊 汇总：中国 {len(china_news)} 条 / 国际 {len(global_news)} 条\n")
 
+    print("📈 获取市场信号...")
+    market_data = get_market_signals()
+
+    print("💰 获取融资动态...")
+    funding = get_funding_news()
+
     analysis = analyze_news(china_news, global_news, mode='daily')
     if not analysis:
         print("❌ Claude 分析失败，退出")
         sys.exit(1)
 
     print(f"✅ 分析完成，覆盖 {len(analysis.get('industries', []))} 个行业\n")
-    generate_reports(china_news, global_news, analysis, date_str, mode='daily')
+    generate_reports(china_news, global_news, analysis, date_str, mode='daily',
+                     market_data=market_data, funding_news=funding)
 
 
 def _load_daily_data(n_days):

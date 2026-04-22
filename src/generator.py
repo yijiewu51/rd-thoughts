@@ -6,7 +6,7 @@
 
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 # 行业主题色
@@ -328,6 +328,56 @@ section { margin-bottom: 24px; }
   border-left: 3px solid #f59e0b;
 }
 
+/* ── Market badge ── */
+.market-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 20px; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.02em; margin-left: auto;
+}
+.market-badge.up { background: #dcfce7; color: #166534; }
+.market-badge.down { background: #fee2e2; color: #991b1b; }
+.market-badge.flat { background: #f1f5f9; color: #64748b; }
+.market-badge .badge-etf { opacity: 0.7; font-weight: 500; margin-right: 2px; }
+.sparkline-wrap { margin-left: 8px; opacity: 0.8; }
+
+/* ── Filter bar ── */
+.filter-bar {
+  background: white; border-radius: 14px; padding: 14px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px;
+  display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+}
+.filter-label {
+  font-size: 0.72rem; color: #94a3b8; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px;
+}
+.filter-btn {
+  padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;
+  background: white; cursor: pointer; font-size: 0.78rem; color: #475569;
+  font-family: inherit; transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { background: #f8fafc; border-color: #c7d2fe; color: #4338ca; }
+.filter-btn.active { background: #eef2ff; border-color: #6366f1; color: #4338ca; font-weight: 600; }
+.filter-btn.preset { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.filter-btn.preset.active { background: #dcfce7; border-color: #4ade80; }
+.industry-card.hidden-industry { display: none; }
+
+/* ── Funding sidebar ── */
+.funding-item {
+  padding: 8px 0; border-bottom: 1px solid #f1f5f9;
+  font-size: 0.8rem;
+}
+.funding-item:last-child { border-bottom: none; }
+.funding-title { color: #1e293b; margin-bottom: 3px; line-height: 1.4; }
+.funding-title a { color: inherit; }
+.funding-title a:hover { color: #6366f1; text-decoration: none; }
+.funding-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.funding-amount { font-weight: 700; color: #059669; font-size: 0.75rem; }
+.funding-tag {
+  background: #f1f5f9; color: #64748b; padding: 1px 7px;
+  border-radius: 10px; font-size: 0.68rem;
+}
+.funding-source { color: #94a3b8; font-size: 0.68rem; }
+
 /* ── Footer ── */
 .footer {
   text-align: center; padding: 32px 20px;
@@ -442,7 +492,132 @@ def build_opp_html(opp):
     </div>"""
 
 
-def build_industry_html(ind):
+def compute_industry_trend_data(data_dir: Path) -> dict:
+    """读取最近7天 JSON，统计每天各行业高紧迫机会数，用于 sparkline。"""
+    today = datetime.now()
+    trend = {}
+    dates = [(today - timedelta(days=i)).strftime('%Y-%m-%d') for i in range(6, -1, -1)]
+    for date_str in dates:
+        fpath = data_dir / f"{date_str}.json"
+        if not fpath.exists():
+            continue
+        try:
+            data = json.loads(fpath.read_text(encoding='utf-8'))
+            for ind in data.get('analysis', {}).get('industries', []):
+                name = ind.get('name', '')
+                high_count = sum(1 for o in ind.get('opportunities', []) if o.get('urgency') == '高')
+                trend.setdefault(name, {})
+                trend[name][date_str] = high_count
+        except Exception:
+            pass
+    # Normalise to ordered lists
+    result = {}
+    for name, day_map in trend.items():
+        result[name] = [day_map.get(d, 0) for d in dates]
+    return result
+
+
+def build_market_badge_html(signal: dict) -> str:
+    if not signal:
+        return ''
+    pct = signal.get('change_pct')
+    etf = signal.get('etf', '')
+    is_proxy = signal.get('is_proxy', False)
+    if pct is None:
+        return ''
+    if pct > 0.3:
+        cls, arrow = 'up', '▲'
+    elif pct < -0.3:
+        cls, arrow = 'down', '▼'
+    else:
+        cls, arrow = 'flat', '—'
+    proxy_note = '*' if is_proxy else ''
+    return f'<span class="market-badge {cls}"><span class="badge-etf">{etf}{proxy_note}</span>{arrow} {pct:+.1f}%</span>'
+
+
+def build_filter_bar_html(industries: list) -> str:
+    btns = []
+    preset_ids = ['AI-科技', '宠物-宠物经济', '教育-EdTech', '消费-零售-电商', '加密货币-Web3-DeFi']
+    for ind in industries:
+        name = ind.get('name', '')
+        emoji = ind.get('emoji', '')
+        anchor = name.replace('/', '-').replace(' ', '')
+        color = get_industry_color(name)
+        btns.append(
+            f'<button class="filter-btn" data-id="{anchor}" '
+            f'style="border-color:{color}20">{emoji} {name}</button>'
+        )
+    preset_ids_js = json.dumps(preset_ids)
+    btns_html = '\n      '.join(btns)
+    return f"""
+    <div class="filter-bar" id="filter-bar">
+      <span class="filter-label">筛选</span>
+      <button class="filter-btn active" id="filter-all">全部</button>
+      <button class="filter-btn preset" id="filter-preset">🔥 重点赛道</button>
+      {btns_html}
+    </div>
+    <script>
+    (function(){{
+      var PRESET = {preset_ids_js};
+      var KEY = 'rd_filter_v1';
+      var sel = null;
+      function save(v){{ try{{ localStorage.setItem(KEY, JSON.stringify(v)); }}catch(e){{}} }}
+      function apply(ids){{
+        document.querySelectorAll('.industry-card').forEach(function(c){{
+          c.classList.toggle('hidden-industry', !(!ids || ids.includes(c.id)));
+        }});
+        document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){{
+          b.classList.toggle('active', !!(ids && ids.includes(b.dataset.id)));
+        }});
+        document.getElementById('filter-all').classList.toggle('active', !ids);
+        document.getElementById('filter-preset').classList.toggle('active',
+          !!(ids && ids.length===PRESET.length && PRESET.every(function(p){{return ids.includes(p);}})));
+      }}
+      function toggle(id){{
+        var cur = sel ? sel.slice() : [];
+        var i = cur.indexOf(id);
+        if(i>=0) cur.splice(i,1); else cur.push(id);
+        sel = cur.length ? cur : null; apply(sel); save(sel);
+      }}
+      document.getElementById('filter-all').onclick = function(){{ sel=null; apply(null); save(null); }};
+      document.getElementById('filter-preset').onclick = function(){{ sel=PRESET.slice(); apply(sel); save(sel); }};
+      document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){{
+        b.onclick = function(){{ toggle(b.dataset.id); }};
+      }});
+      try{{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length){{ sel=s; apply(sel); }} }}catch(e){{}}
+    }})();
+    </script>"""
+
+
+def build_funding_sidebar_html(funding_news: list) -> str:
+    if not funding_news:
+        return ''
+    items = []
+    for f in funding_news[:6]:
+        title = f.get('title', '')
+        url = f.get('url', '')
+        amount = f.get('amount', '')
+        tag = f.get('industry_tag', '')
+        source = f.get('source', '')
+        title_part = f'<a href="{url}" target="_blank" rel="noopener">{title}</a>' if url else title
+        amount_part = f'<span class="funding-amount">{amount}</span>' if amount else ''
+        items.append(f"""
+        <div class="funding-item">
+          <div class="funding-title">{title_part}</div>
+          <div class="funding-meta">
+            {amount_part}
+            <span class="funding-tag">{tag}</span>
+            <span class="funding-source">{source}</span>
+          </div>
+        </div>""")
+    return f"""
+    <div class="sidebar-box" style="margin-top:16px">
+      <h3>💰 融资动态</h3>
+      {''.join(items)}
+    </div>"""
+
+
+def build_industry_html(ind, trend_values=None, market_signal=None):
     name = ind.get('name', '')
     emoji = ind.get('emoji', '📌')
     color = get_industry_color(name)
@@ -451,11 +626,21 @@ def build_industry_html(ind):
     watch = ind.get('watch_out', '')
     watch_html = f'<div class="watch-out">⚠️ {watch}</div>' if watch else ''
 
+    market_badge = build_market_badge_html(market_signal) if market_signal else ''
+
+    # Sparkline canvas
+    spark_html = ''
+    if trend_values and any(v > 0 for v in trend_values):
+        vals_json = json.dumps(trend_values)
+        spark_html = f'<canvas class="sparkline-wrap" id="spark-{anchor}" data-values=\'{vals_json}\' width="80" height="28"></canvas>'
+
     return f"""
     <div class="industry-card" id="{anchor}" style="border-left-color:{color}">
       <div class="industry-header">
         <span class="industry-emoji">{emoji}</span>
         <span class="industry-name">{name}</span>
+        {spark_html}
+        {market_badge}
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -488,14 +673,28 @@ def build_top3_html(top3):
     return "\n".join(cards)
 
 
-def generate_html(china_news, global_news, analysis, date_str, mode='daily', archive_links=None):
+def generate_html(china_news, global_news, analysis, date_str, mode='daily',
+                  archive_links=None, market_data=None, funding_news=None, trend_data=None):
     mode_label = {"daily": "日报", "weekly": "周报", "monthly": "月报"}.get(mode, "报告")
     industries = analysis.get('industries', [])
+    market_data = market_data or {}
+    funding_news = funding_news or []
+    trend_data = trend_data or {}
 
     sidebar_links = build_sidebar_links(industries)
     china_col = build_news_col_html(china_news, "🇨🇳", "中国热点")
     global_col = build_news_col_html(global_news, "🌍", "国际热点")
-    industry_sections = "\n".join(build_industry_html(ind) for ind in industries)
+    filter_bar = build_filter_bar_html(industries)
+    funding_sidebar = build_funding_sidebar_html(funding_news)
+
+    industry_sections = "\n".join(
+        build_industry_html(
+            ind,
+            trend_values=trend_data.get(ind.get('name', '')),
+            market_signal=market_data.get(ind.get('name', ''))
+        )
+        for ind in industries
+    )
     top3_html = build_top3_html(analysis.get('top3', []))
 
     archive_section = ""
@@ -519,6 +718,8 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily', arc
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>创业情报{mode_label} — {date_str}</title>
   <style>{CSS}</style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+          onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js'"></script>
 </head>
 <body>
 
@@ -540,6 +741,7 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily', arc
       <h3>行业导航</h3>
       {sidebar_links}
     </div>
+    {funding_sidebar}
   </aside>
 
   <main class="main">
@@ -574,6 +776,7 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily', arc
     <!-- 行业分析 -->
     <section>
       <div class="section-title" style="margin-bottom:16px">💡 全行业创业机会分析</div>
+      {filter_bar}
       {industry_sections}
     </section>
 
@@ -584,10 +787,32 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily', arc
 
 <footer class="footer">
   由 Claude AI 自动生成 · {date_str} ·
-  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / Reddit ·
+  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / TechCrunch / CoinTelegraph ·
   <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
 </footer>
 
+<script>
+if(typeof Chart !== 'undefined') {{
+  document.querySelectorAll('[data-values]').forEach(function(c) {{
+    var vals = JSON.parse(c.dataset.values);
+    var color = (c.closest('.industry-card') || {{}}).style && c.closest('.industry-card').style.borderLeftColor || '#6366f1';
+    new Chart(c, {{
+      type: 'line',
+      data: {{
+        labels: vals.map(function(_,i){{ return i; }}),
+        datasets: [{{ data: vals, borderColor: color, borderWidth: 1.5,
+          fill: true, backgroundColor: 'rgba(99,102,241,0.07)',
+          pointRadius: 0, tension: 0.4 }}]
+      }},
+      options: {{
+        responsive: false, animation: false,
+        plugins: {{ legend: {{ display: false }}, tooltip: {{ enabled: false }} }},
+        scales: {{ x: {{ display: false }}, y: {{ display: false, min: 0 }} }}
+      }}
+    }});
+  }});
+}}
+</script>
 </body>
 </html>"""
 
@@ -673,7 +898,8 @@ def generate_archive_html(archive, docs_dir):
 
 # ─────────────────────────── Main entry ───────────────────────────
 
-def generate_reports(china_news, global_news, analysis, date_str, mode='daily'):
+def generate_reports(china_news, global_news, analysis, date_str, mode='daily',
+                     market_data=None, funding_news=None):
     """生成 Markdown + HTML，保存到 reports/ 和 docs/"""
     root = Path(__file__).parent.parent
     reports_dir = root / 'reports'
@@ -706,6 +932,9 @@ def generate_reports(china_news, global_news, analysis, date_str, mode='daily'):
     label = f"{date_str} {mode_label}"
     archive = update_archive(str(docs_dir), date_str, report_url, label)
 
+    # Compute sparkline trend data from historical files
+    trend_data = compute_industry_trend_data(data_dir)
+
     # Generate Markdown
     md_content = generate_markdown(china_news, global_news, analysis, date_str)
     md_path = reports_dir / f"{filename}.md"
@@ -714,7 +943,10 @@ def generate_reports(china_news, global_news, analysis, date_str, mode='daily'):
     print(f"  📝 Markdown: reports/{filename}.md")
 
     # Generate HTML (individual report)
-    html_content = generate_html(china_news, global_news, analysis, date_str, mode, archive)
+    html_content = generate_html(
+        china_news, global_news, analysis, date_str, mode, archive,
+        market_data=market_data, funding_news=funding_news, trend_data=trend_data
+    )
     html_path = docs_dir / f"{filename}.html"
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(html_content)

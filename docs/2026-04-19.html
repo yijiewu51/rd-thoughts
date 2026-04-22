@@ -203,6 +203,56 @@ section { margin-bottom: 24px; }
   border-left: 3px solid #f59e0b;
 }
 
+/* ── Market badge ── */
+.market-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 20px; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.02em; margin-left: auto;
+}
+.market-badge.up { background: #dcfce7; color: #166534; }
+.market-badge.down { background: #fee2e2; color: #991b1b; }
+.market-badge.flat { background: #f1f5f9; color: #64748b; }
+.market-badge .badge-etf { opacity: 0.7; font-weight: 500; margin-right: 2px; }
+.sparkline-wrap { margin-left: 8px; opacity: 0.8; }
+
+/* ── Filter bar ── */
+.filter-bar {
+  background: white; border-radius: 14px; padding: 14px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px;
+  display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+}
+.filter-label {
+  font-size: 0.72rem; color: #94a3b8; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px;
+}
+.filter-btn {
+  padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;
+  background: white; cursor: pointer; font-size: 0.78rem; color: #475569;
+  font-family: inherit; transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { background: #f8fafc; border-color: #c7d2fe; color: #4338ca; }
+.filter-btn.active { background: #eef2ff; border-color: #6366f1; color: #4338ca; font-weight: 600; }
+.filter-btn.preset { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.filter-btn.preset.active { background: #dcfce7; border-color: #4ade80; }
+.industry-card.hidden-industry { display: none; }
+
+/* ── Funding sidebar ── */
+.funding-item {
+  padding: 8px 0; border-bottom: 1px solid #f1f5f9;
+  font-size: 0.8rem;
+}
+.funding-item:last-child { border-bottom: none; }
+.funding-title { color: #1e293b; margin-bottom: 3px; line-height: 1.4; }
+.funding-title a { color: inherit; }
+.funding-title a:hover { color: #6366f1; text-decoration: none; }
+.funding-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.funding-amount { font-weight: 700; color: #059669; font-size: 0.75rem; }
+.funding-tag {
+  background: #f1f5f9; color: #64748b; padding: 1px 7px;
+  border-radius: 10px; font-size: 0.68rem;
+}
+.funding-source { color: #94a3b8; font-size: 0.68rem; }
+
 /* ── Footer ── */
 .footer {
   text-align: center; padding: 32px 20px;
@@ -224,6 +274,8 @@ section { margin-bottom: 24px; }
   .industry-meta-row { grid-template-columns: 1fr; }
 }
 </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+          onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js'"></script>
 </head>
 <body>
 
@@ -261,6 +313,59 @@ section { margin-bottom: 24px; }
 <a href="#制造业-工业"><span class="dot" style="background:#667eea"></span>🏭 制造业/工业</a>
 <a href="#房产-建筑"><span class="dot" style="background:#667eea"></span>🏠 房产/建筑</a>
 <a href="#政策-监管-社会"><span class="dot" style="background:#667eea"></span>📋 政策/监管/社会</a>
+    </div>
+    
+    <div class="sidebar-box" style="margin-top:16px">
+      <h3>💰 融资动态</h3>
+      
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/04/16/upscale-ai-in-talks-to-raise-at-2b-valuation-says-report/" target="_blank" rel="noopener">Upscale AI in talks to raise at $2B valuation, says report</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$2B</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/04/15/accel-raises-5b-to-back-late-stage-bets/" target="_blank" rel="noopener">Accel raises $5B to back late-stage bets</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$5B</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/04/15/anthropic-shrugs-off-vc-funding-offers-valuing-it-at-800b-for-now/" target="_blank" rel="noopener">Anthropic shrugs off VC funding offers valuing it at $800B+, for now</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$800B</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/04/14/financial-risk-management-platform-pillar-raises-20m-seed-in-round-led-by-a16z/" target="_blank" rel="noopener">Financial risk management platform Pillar raises $20M seed in round led by a16z</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$20M</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/04/09/collide-capital-raises-95m-fund-to-back-fintech-future-of-work-startups/" target="_blank" rel="noopener">Collide Capital raises $95M fund to back fintech, future-of-work startups</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$95M</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://36kr.com/p/3777981126644745?f=rss" target="_blank" rel="noopener">最前线｜华为猛士深化战略合作，新技术将逐步落地4款以上全新车型</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">4</span>
+            <span class="funding-tag">科技 / 其他</span>
+            <span class="funding-source">36氪</span>
+          </div>
+        </div>
     </div>
   </aside>
 
@@ -545,10 +650,67 @@ section { margin-bottom: 24px; }
     <section>
       <div class="section-title" style="margin-bottom:16px">💡 全行业创业机会分析</div>
       
+    <div class="filter-bar" id="filter-bar">
+      <span class="filter-label">筛选</span>
+      <button class="filter-btn active" id="filter-all">全部</button>
+      <button class="filter-btn preset" id="filter-preset">🔥 重点赛道</button>
+      <button class="filter-btn" data-id="AI-科技" style="border-color:#6366f120">🤖 AI / 科技</button>
+      <button class="filter-btn" data-id="宠物-宠物经济" style="border-color:#f9731620">🐾 宠物 / 宠物经济</button>
+      <button class="filter-btn" data-id="教育-EdTech" style="border-color:#3b82f620">📚 教育 / EdTech</button>
+      <button class="filter-btn" data-id="消费-零售-电商" style="border-color:#ec489920">🛍️ 消费 / 零售 / 电商</button>
+      <button class="filter-btn" data-id="加密货币-Web3-DeFi" style="border-color:#f7931a20">₿ 加密货币 / Web3 / DeFi</button>
+      <button class="filter-btn" data-id="芯片-半导体" style="border-color:#667eea20">💻 芯片/半导体</button>
+      <button class="filter-btn" data-id="机器人-具身智能" style="border-color:#667eea20">🦾 机器人/具身智能</button>
+      <button class="filter-btn" data-id="金融-金融科技" style="border-color:#667eea20">💰 金融/金融科技</button>
+      <button class="filter-btn" data-id="媒体-娱乐-内容" style="border-color:#667eea20">🎬 媒体/娱乐/内容</button>
+      <button class="filter-btn" data-id="潮流-时尚-运动" style="border-color:#667eea20">👟 潮流/时尚/运动</button>
+      <button class="filter-btn" data-id="动漫-二次元-IP" style="border-color:#667eea20">🎌 动漫/二次元/IP</button>
+      <button class="filter-btn" data-id="出行-交通" style="border-color:#667eea20">🚗 出行/交通</button>
+      <button class="filter-btn" data-id="能源-清洁能源" style="border-color:#667eea20">⚡ 能源/清洁能源</button>
+      <button class="filter-btn" data-id="医疗健康" style="border-color:#10b98120">🏥 医疗健康</button>
+      <button class="filter-btn" data-id="农业-食品" style="border-color:#667eea20">🌾 农业/食品</button>
+      <button class="filter-btn" data-id="制造业-工业" style="border-color:#667eea20">🏭 制造业/工业</button>
+      <button class="filter-btn" data-id="房产-建筑" style="border-color:#667eea20">🏠 房产/建筑</button>
+      <button class="filter-btn" data-id="政策-监管-社会" style="border-color:#667eea20">📋 政策/监管/社会</button>
+    </div>
+    <script>
+    (function(){
+      var PRESET = ["AI-\u79d1\u6280", "\u5ba0\u7269-\u5ba0\u7269\u7ecf\u6d4e", "\u6559\u80b2-EdTech", "\u6d88\u8d39-\u96f6\u552e-\u7535\u5546", "\u52a0\u5bc6\u8d27\u5e01-Web3-DeFi"];
+      var KEY = 'rd_filter_v1';
+      var sel = null;
+      function save(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){} }
+      function apply(ids){
+        document.querySelectorAll('.industry-card').forEach(function(c){
+          c.classList.toggle('hidden-industry', !(!ids || ids.includes(c.id)));
+        });
+        document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){
+          b.classList.toggle('active', !!(ids && ids.includes(b.dataset.id)));
+        });
+        document.getElementById('filter-all').classList.toggle('active', !ids);
+        document.getElementById('filter-preset').classList.toggle('active',
+          !!(ids && ids.length===PRESET.length && PRESET.every(function(p){return ids.includes(p);})));
+      }
+      function toggle(id){
+        var cur = sel ? sel.slice() : [];
+        var i = cur.indexOf(id);
+        if(i>=0) cur.splice(i,1); else cur.push(id);
+        sel = cur.length ? cur : null; apply(sel); save(sel);
+      }
+      document.getElementById('filter-all').onclick = function(){ sel=null; apply(null); save(null); };
+      document.getElementById('filter-preset').onclick = function(){ sel=PRESET.slice(); apply(sel); save(sel); };
+      document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){
+        b.onclick = function(){ toggle(b.dataset.id); };
+      });
+      try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length){ sel=s; apply(sel); } }catch(e){}
+    })();
+    </script>
+      
     <div class="industry-card" id="AI-科技" style="border-left-color:#6366f1">
       <div class="industry-header">
         <span class="industry-emoji">🤖</span>
         <span class="industry-name">AI / 科技</span>
+        <canvas class="sparkline-wrap" id="spark-AI-科技" data-values='[2, 2, 2, 3, 3, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLK</span>▲ +11.0%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -656,6 +818,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🐾</span>
         <span class="industry-name">宠物 / 宠物经济</span>
+        <canvas class="sparkline-wrap" id="spark-宠物-宠物经济" data-values='[0, 0, 1, 0, 1, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLY*</span>▲ +5.4%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -763,6 +927,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">📚</span>
         <span class="industry-name">教育 / EdTech</span>
+        <canvas class="sparkline-wrap" id="spark-教育-EdTech" data-values='[3, 2, 2, 2, 1, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLK*</span>▲ +11.0%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -870,6 +1036,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🛍️</span>
         <span class="industry-name">消费 / 零售 / 电商</span>
+        <canvas class="sparkline-wrap" id="spark-消费-零售-电商" data-values='[1, 2, 1, 2, 1, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLY</span>▲ +5.4%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -977,6 +1145,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">₿</span>
         <span class="industry-name">加密货币 / Web3 / DeFi</span>
+        <canvas class="sparkline-wrap" id="spark-加密货币-Web3-DeFi" data-values='[0, 0, 1, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">BITO</span>▲ +9.2%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1084,6 +1254,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">💻</span>
         <span class="industry-name">芯片/半导体</span>
+        <canvas class="sparkline-wrap" id="spark-芯片-半导体" data-values='[2, 0, 0, 2, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1162,6 +1334,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🦾</span>
         <span class="industry-name">机器人/具身智能</span>
+        <canvas class="sparkline-wrap" id="spark-机器人-具身智能" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1240,6 +1414,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">💰</span>
         <span class="industry-name">金融/金融科技</span>
+        <canvas class="sparkline-wrap" id="spark-金融-金融科技" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1318,6 +1494,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🎬</span>
         <span class="industry-name">媒体/娱乐/内容</span>
+        <canvas class="sparkline-wrap" id="spark-媒体-娱乐-内容" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1396,6 +1574,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">👟</span>
         <span class="industry-name">潮流/时尚/运动</span>
+        
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1474,6 +1654,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🎌</span>
         <span class="industry-name">动漫/二次元/IP</span>
+        <canvas class="sparkline-wrap" id="spark-动漫-二次元-IP" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1552,6 +1734,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🚗</span>
         <span class="industry-name">出行/交通</span>
+        <canvas class="sparkline-wrap" id="spark-出行-交通" data-values='[2, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1630,6 +1814,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">⚡</span>
         <span class="industry-name">能源/清洁能源</span>
+        <canvas class="sparkline-wrap" id="spark-能源-清洁能源" data-values='[1, 0, 0, 2, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1708,6 +1894,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🏥</span>
         <span class="industry-name">医疗健康</span>
+        <canvas class="sparkline-wrap" id="spark-医疗健康" data-values='[0, 0, 0, 0, 1, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">XLV</span>▼ -2.1%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1757,6 +1945,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🌾</span>
         <span class="industry-name">农业/食品</span>
+        
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1806,6 +1996,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🏭</span>
         <span class="industry-name">制造业/工业</span>
+        <canvas class="sparkline-wrap" id="spark-制造业-工业" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1855,6 +2047,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">🏠</span>
         <span class="industry-name">房产/建筑</span>
+        <canvas class="sparkline-wrap" id="spark-房产-建筑" data-values='[0, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1904,6 +2098,8 @@ section { margin-bottom: 24px; }
       <div class="industry-header">
         <span class="industry-emoji">📋</span>
         <span class="industry-name">政策/监管/社会</span>
+        <canvas class="sparkline-wrap" id="spark-政策-监管-社会" data-values='[1, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -1967,9 +2163,31 @@ section { margin-bottom: 24px; }
 
 <footer class="footer">
   由 Claude AI 自动生成 · 2026-04-19 ·
-  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / Reddit ·
+  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / TechCrunch / CoinTelegraph ·
   <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
 </footer>
 
+<script>
+if(typeof Chart !== 'undefined') {
+  document.querySelectorAll('[data-values]').forEach(function(c) {
+    var vals = JSON.parse(c.dataset.values);
+    var color = (c.closest('.industry-card') || {}).style && c.closest('.industry-card').style.borderLeftColor || '#6366f1';
+    new Chart(c, {
+      type: 'line',
+      data: {
+        labels: vals.map(function(_,i){ return i; }),
+        datasets: [{ data: vals, borderColor: color, borderWidth: 1.5,
+          fill: true, backgroundColor: 'rgba(99,102,241,0.07)',
+          pointRadius: 0, tension: 0.4 }]
+      },
+      options: {
+        responsive: false, animation: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: { x: { display: false }, y: { display: false, min: 0 } }
+      }
+    });
+  });
+}
+</script>
 </body>
 </html>
