@@ -717,6 +717,12 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>创业情报{mode_label} — {date_str}</title>
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="情报雷达">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
   <style>{CSS}</style>
   <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
           onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js'"></script>
@@ -792,6 +798,9 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
 </footer>
 
 <script>
+if ('serviceWorker' in navigator) {{
+  navigator.serviceWorker.register('/rd-thoughts/sw.js');
+}}
 if(typeof Chart !== 'undefined') {{
   document.querySelectorAll('[data-values]').forEach(function(c) {{
     var vals = JSON.parse(c.dataset.values);

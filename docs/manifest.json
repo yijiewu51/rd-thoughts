@@ -1,0 +1,20 @@
+{
+  "name": "创业情报雷达",
+  "short_name": "情报雷达",
+  "description": "AI 驱动的全行业创业机会日报，覆盖 18 个赛道",
+  "start_url": "/rd-thoughts/",
+  "scope": "/rd-thoughts/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "今日日报", "url": "/rd-thoughts/", "description": "查看今日创业机会分析" },
+    { "name": "历史归档", "url": "/rd-thoughts/archive.html", "description": "查看历史报告" }
+  ]
+}

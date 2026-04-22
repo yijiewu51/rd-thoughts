@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>创业情报日报 — 2026-04-16</title>
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="情报雷达">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
   <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -710,7 +716,7 @@ section { margin-bottom: 24px; }
         <span class="industry-emoji">🤖</span>
         <span class="industry-name">AI / 科技</span>
         <canvas class="sparkline-wrap" id="spark-AI-科技" data-values='[2, 2, 2, 3, 3, 2, 2]' width="80" height="28"></canvas>
-        <span class="market-badge up"><span class="badge-etf">XLK</span>▲ +11.0%</span>
+        <span class="market-badge up"><span class="badge-etf">XLK</span>▲ +11.1%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -928,7 +934,7 @@ section { margin-bottom: 24px; }
         <span class="industry-emoji">📚</span>
         <span class="industry-name">教育 / EdTech</span>
         <canvas class="sparkline-wrap" id="spark-教育-EdTech" data-values='[3, 2, 2, 2, 1, 2, 2]' width="80" height="28"></canvas>
-        <span class="market-badge up"><span class="badge-etf">XLK*</span>▲ +11.0%</span>
+        <span class="market-badge up"><span class="badge-etf">XLK*</span>▲ +11.1%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -2156,6 +2162,8 @@ section { margin-bottom: 24px; }
 <li><a href="2026-04-21.html">2026-04-21 日报</a></li>
 <li><a href="2026-04-20.html">2026-04-20 日报</a></li>
 <li><a href="2026-04-19.html">2026-04-19 日报</a></li>
+<li><a href="2026-04-18.html">2026-04-18 日报</a></li>
+<li><a href="2026-04-17.html">2026-04-17 日报</a></li>
 <li><a href="2026-04-16.html">2026-04-16 日报</a></li>
 <li><a href="2026-04-15.html">2026-04-15 日报</a></li>
 <li><a href="2026-04-14.html">2026-04-14 日报</a></li>
@@ -2175,6 +2183,9 @@ section { margin-bottom: 24px; }
 </footer>
 
 <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/rd-thoughts/sw.js');
+}
 if(typeof Chart !== 'undefined') {
   document.querySelectorAll('[data-values]').forEach(function(c) {
     var vals = JSON.parse(c.dataset.values);
