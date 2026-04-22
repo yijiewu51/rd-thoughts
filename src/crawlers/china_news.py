@@ -225,6 +225,78 @@ def get_tmtpost_by_date(date_str=None):
         return []
 
 
+# ── 创业邦 RSS（创业/投融资） ─────────────────────────────────────
+
+def get_cyzone_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.cyzone.cn/rss/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': '创业邦',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 6:
+                break
+        label = date_str or 'today'
+        print(f"  创业邦 ({label}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  创业邦 失败: {e}")
+        return []
+
+
+# ── 爱范儿 RSS（消费科技/潮流数码） ──────────────────────────────
+
+def get_ifanr_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.ifanr.com/feed', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or TODAY)
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': '爱范儿',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        label = date_str or 'today'
+        print(f"  爱范儿 ({label}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  爱范儿 失败: {e}")
+        return []
+
+
 # ── 公开接口 ──────────────────────────────────────────────────────
 
 def get_all_china_news(date_str=None):
@@ -243,18 +315,23 @@ def get_all_china_news(date_str=None):
         zhihu = get_zhihu_hot()
         kr36 = get_36kr_by_date(None)
         tmt = get_tmtpost_by_date(None)
-        all_news = weibo + zhihu + kr36 + tmt + baidu
+        cyzone = get_cyzone_by_date(None)
+        ifanr = get_ifanr_by_date(None)
+        all_news = weibo + zhihu + kr36 + tmt + cyzone + ifanr + baidu
     else:
         # Historical: RSS sources with date filter
         kr36 = get_36kr_by_date(date_str)
         huxiu = get_huxiu_by_date(date_str)
         tmt = get_tmtpost_by_date(date_str)
-        all_news = kr36 + huxiu + tmt
+        cyzone = get_cyzone_by_date(date_str)
+        ifanr = get_ifanr_by_date(date_str)
+        all_news = kr36 + huxiu + tmt + cyzone + ifanr
 
         # If RSS didn't have articles for that date, fall back to latest
         if len(all_news) < 3:
             print(f"  ⚠️ {date_str} 的 RSS 文章不足，使用最新文章补充")
-            all_news = get_36kr_by_date(None) + get_huxiu_by_date(None) + get_tmtpost_by_date(None)
+            all_news = (get_36kr_by_date(None) + get_huxiu_by_date(None) +
+                        get_tmtpost_by_date(None) + get_cyzone_by_date(None) + get_ifanr_by_date(None))
 
     seen = set()
     unique = []
@@ -263,7 +340,7 @@ def get_all_china_news(date_str=None):
         if key not in seen and item['title']:
             seen.add(key)
             unique.append(item)
-        if len(unique) >= 20:
+        if len(unique) >= 30:
             break
 
     print(f"✅ 中国新闻共 {len(unique)} 条")

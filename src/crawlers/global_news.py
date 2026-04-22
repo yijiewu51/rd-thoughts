@@ -1,7 +1,8 @@
 """
 国际热点新闻爬取
 支持当天 + 历史日期查询
-来源：Hacker News Algolia API、The Guardian API (test key)、GitHub Trending、CoinTelegraph RSS、TechCrunch RSS
+来源：Hacker News、The Guardian、GitHub Trending、CoinTelegraph、TechCrunch、
+      VentureBeat、MIT科技评论、The Block(Web3)、CleanTechnica(能源)、STAT News(医疗)
 """
 
 import requests
@@ -9,6 +10,7 @@ import time
 import feedparser
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+from .translate import translate_items
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
@@ -61,6 +63,7 @@ def get_hackernews_by_date(date_str=None):
                 except Exception:
                     continue
                 time.sleep(0.1)
+            translate_items(stories)
             print(f"  Hacker News (today): {len(stories)} 条")
             return stories
 
@@ -83,6 +86,7 @@ def get_hackernews_by_date(date_str=None):
                     'date': pub_dt.strftime('%Y-%m-%d'),
                     'time': pub_dt.strftime('%H:%M'),
                 })
+        translate_items(stories)
         print(f"  Hacker News ({date_str}): {len(stories)} 条")
         return stories
     except Exception as e:
@@ -133,6 +137,7 @@ def get_guardian_by_date(date_str=None):
                     'date': pub_date,
                     'time': pub_time,
                 })
+        translate_items(stories)
         print(f"  The Guardian ({date_str or 'today'}): {len(stories)} 条")
         return stories
     except Exception as e:
@@ -201,6 +206,7 @@ def get_cointelegraph_by_date(date_str=None):
             })
             if len(result) >= 5:
                 break
+        translate_items(result)
         label = date_str or 'today'
         print(f"  CoinTelegraph ({label}): {len(result)} 条")
         return result
@@ -238,11 +244,192 @@ def get_techcrunch_by_date(date_str=None):
             })
             if len(result) >= 5:
                 break
+        translate_items(result)
         label = date_str or 'today'
         print(f"  TechCrunch ({label}): {len(result)} 条")
         return result
     except Exception as e:
         print(f"  TechCrunch 失败: {e}")
+        return []
+
+
+# ── VentureBeat RSS（AI/科技/创投） ───────────────────────────────
+
+def get_venturebeat_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://venturebeat.com/feed/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'VentureBeat',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        translate_items(result)
+        print(f"  VentureBeat ({date_str or 'today'}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  VentureBeat 失败: {e}")
+        return []
+
+
+# ── MIT Technology Review RSS（深度科技） ─────────────────────────
+
+def get_mit_techreview_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.technologyreview.com/feed/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'MIT科技评论',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 4:
+                break
+        translate_items(result)
+        print(f"  MIT科技评论 ({date_str or 'today'}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  MIT科技评论 失败: {e}")
+        return []
+
+
+# ── The Block RSS（Web3/加密货币专业媒体） ────────────────────────
+
+def get_theblock_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.theblock.co/rss.xml', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'The Block',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 5:
+                break
+        translate_items(result)
+        print(f"  The Block ({date_str or 'today'}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  The Block 失败: {e}")
+        return []
+
+
+# ── CleanTechnica RSS（清洁能源/EV） ──────────────────────────────
+
+def get_cleantechnica_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://cleantechnica.com/feed/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'CleanTechnica',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 4:
+                break
+        translate_items(result)
+        print(f"  CleanTechnica ({date_str or 'today'}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  CleanTechnica 失败: {e}")
+        return []
+
+
+# ── STAT News RSS（生物医疗健康） ──────────────────────────────────
+
+def get_statnews_by_date(date_str=None):
+    try:
+        feed = feedparser.parse('https://www.statnews.com/feed/', request_headers=HEADERS)
+        result = []
+        for entry in feed.entries:
+            title = entry.get('title', '').strip()
+            if not title:
+                continue
+            if date_str:
+                pub = entry.get('published_parsed') or entry.get('updated_parsed')
+                if pub and datetime(*pub[:3]).strftime('%Y-%m-%d') != date_str:
+                    continue
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            pub_date = datetime(*pub[:3]).strftime('%Y-%m-%d') if pub else (date_str or datetime.now().strftime('%Y-%m-%d'))
+            pub_time = f"{pub[3]:02d}:{pub[4]:02d}" if pub else ''
+            result.append({
+                'title': title,
+                'source': 'STAT News',
+                'hot': '',
+                'url': entry.get('link', ''),
+                'summary': BeautifulSoup(entry.get('summary', ''), 'lxml').get_text(strip=True)[:150],
+                'date': pub_date,
+                'time': pub_time,
+            })
+            if len(result) >= 4:
+                break
+        translate_items(result)
+        print(f"  STAT News ({date_str or 'today'}): {len(result)} 条")
+        return result
+    except Exception as e:
+        print(f"  STAT News 失败: {e}")
         return []
 
 
@@ -263,8 +450,13 @@ def get_all_global_news(date_str=None):
     gh = get_github_trending() if is_today else []
     ct = get_cointelegraph_by_date(date_str)
     tc = get_techcrunch_by_date(date_str)
+    vb = get_venturebeat_by_date(date_str)
+    mit = get_mit_techreview_by_date(date_str)
+    tb = get_theblock_by_date(date_str)
+    clt = get_cleantechnica_by_date(date_str)
+    stat = get_statnews_by_date(date_str)
 
-    all_news = hn + guardian + tc + ct + gh
+    all_news = hn + tc + vb + ct + tb + mit + stat + clt + guardian + gh
     seen = set()
     unique = []
     for item in all_news:
@@ -272,7 +464,7 @@ def get_all_global_news(date_str=None):
         if key not in seen and item['title']:
             seen.add(key)
             unique.append(item)
-        if len(unique) >= 20:
+        if len(unique) >= 30:
             break
 
     print(f"✅ 国际新闻共 {len(unique)} 条")
