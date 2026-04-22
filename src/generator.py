@@ -8,6 +8,9 @@ import os
 import json
 from datetime import datetime, timedelta
 from pathlib import Path
+import sys
+sys.path.insert(0, os.path.dirname(__file__))
+from crawlers.translate import translate_items
 
 # 行业主题色
 INDUSTRY_COLORS = {
@@ -914,7 +917,7 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
 
 <footer class="footer">
   由 Claude AI 自动生成 · {date_str} ·
-  数据来源：微博 / 百度 / 知乎 / 36氪 / Hacker News / TechCrunch / CoinTelegraph ·
+  数据来源：微博 / 百度 / 知乎 / 36氪 / 创业邦 / 爱范儿 / 黑客新闻 / TechCrunch / 加密电讯 / VentureBeat ·
   <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
 </footer>
 
@@ -1210,6 +1213,29 @@ def generate_archive_html(archive, docs_dir):
 
 # ─────────────────────────── Main entry ───────────────────────────
 
+_SOURCE_ZH = {
+    "Hacker News":   "黑客新闻",
+    "The Guardian":  "卫报",
+    "GitHub Trending": "GitHub热榜",
+    "TechCrunch":    "TechCrunch",
+    "CoinTelegraph": "加密电讯",
+    "VentureBeat":   "VentureBeat",
+    "The Block":     "The Block",
+    "CleanTechnica": "清洁技术",
+    "STAT News":     "STAT医疗",
+}
+
+
+def _localize_news(news_list: list) -> list:
+    """翻译英文标题并中文化来源名称（原地修改）。"""
+    translate_items(news_list)
+    for item in news_list:
+        src = item.get('source', '')
+        if src in _SOURCE_ZH:
+            item['source'] = _SOURCE_ZH[src]
+    return news_list
+
+
 def generate_reports(china_news, global_news, analysis, date_str, mode='daily',
                      market_data=None, funding_news=None):
     """生成 Markdown + HTML，保存到 reports/ 和 docs/"""
@@ -1243,6 +1269,12 @@ def generate_reports(china_news, global_news, analysis, date_str, mode='daily',
     mode_label = {"daily": "日报", "weekly": "周报", "monthly": "月报"}[mode]
     label = f"{date_str} {mode_label}"
     archive = update_archive(str(docs_dir), date_str, report_url, label)
+
+    # Translate / localize news titles (idempotent — skips already-Chinese text)
+    _localize_news(china_news)
+    _localize_news(global_news)
+    if funding_news:
+        _localize_news(funding_news)
 
     # Compute sparkline trend data from historical files
     trend_data = compute_industry_trend_data(data_dir)

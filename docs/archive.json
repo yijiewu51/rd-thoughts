@@ -1,5 +1,10 @@
 [
   {
+    "date": "2026-04",
+    "url": "monthly-2026-04.html",
+    "label": "2026-04 月报"
+  },
+  {
     "date": "2026-04-12",
     "url": "2026-04-12.html",
     "label": "2026-04-12 日报"
@@ -55,18 +60,13 @@
     "label": "2026-04-22 日报"
   },
   {
+    "date": "2026-W15",
+    "url": "weekly-2026-W15.html",
+    "label": "2026-W15 周报"
+  },
+  {
     "date": "2026-W16",
     "url": "weekly-2026-W16.html",
     "label": "2026-W16 周报"
-  },
-  {
-    "date": "monthly-2026-04",
-    "url": "monthly-2026-04.html",
-    "label": "monthly-2026-04 日报"
-  },
-  {
-    "date": "weekly-2026-W15",
-    "url": "weekly-2026-W15.html",
-    "label": "weekly-2026-W15 日报"
   }
 ]
