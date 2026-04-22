@@ -927,8 +927,21 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
       <div class="chat-header-title">🧠 AI 创业顾问</div>
       <div class="chat-header-sub">基于今日报告内容 · {date_str}</div>
     </div>
-    <button class="chat-close" id="chat-close">✕</button>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button id="chat-settings-btn" title="设置 API Key" style="background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:1rem;padding:4px 6px;border-radius:6px;">⚙️</button>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
   </div>
+
+  <!-- Key setup screen -->
+  <div id="chat-setup" style="display:none;padding:24px 20px;color:#94a3b8;font-size:0.85rem;">
+    <div style="font-size:1.1rem;margin-bottom:8px;color:white;">🔑 设置 API Key</div>
+    <div style="margin-bottom:16px;line-height:1.6;">输入 DeepSeek API Key，只需一次，存在本地不上传。</div>
+    <input id="key-input" class="chat-key-input" type="password" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
+    <button id="key-save" class="chat-key-save">保存并开始对话</button>
+    <div style="margin-top:12px;font-size:0.75rem;color:#475569;">Key 仅保存在你的浏览器本地，不会发送给任何第三方。</div>
+  </div>
+
   <div class="chat-messages" id="chat-messages">
     <div class="chat-msg ai">
       <div class="chat-avatar">🤖</div>
@@ -959,8 +972,50 @@ window.__REPORT__ = {chat_context};
   var sendBtn = document.getElementById('chat-send');
   var history = [];
 
-  document.getElementById('chat-toggle').onclick = function() {{ panel.classList.toggle('open'); }};
+  var setup = document.getElementById('chat-setup');
+  var keyInput = document.getElementById('key-input');
+  var chatMsgs = document.getElementById('chat-messages');
+  var chatSugg = document.getElementById('chat-suggestions');
+  var chatInputRow = document.querySelector('.chat-input-row');
+
+  function showSetup() {{
+    setup.style.display = 'block';
+    chatMsgs.style.display = 'none';
+    chatSugg.style.display = 'none';
+    chatInputRow.style.display = 'none';
+  }}
+
+  function showChat() {{
+    setup.style.display = 'none';
+    chatMsgs.style.display = '';
+    chatSugg.style.display = '';
+    chatInputRow.style.display = '';
+  }}
+
+  document.getElementById('chat-toggle').onclick = function() {{
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {{
+      if (!getKey()) {{ showSetup(); }} else {{ showChat(); }}
+    }}
+  }};
   document.getElementById('chat-close').onclick = function() {{ panel.classList.remove('open'); }};
+
+  document.getElementById('key-save').onclick = function() {{
+    var k = keyInput.value.trim();
+    if (k) {{
+      localStorage.setItem(KEY_STORE, k);
+      showChat();
+    }}
+  }};
+
+  document.getElementById('chat-settings-btn').onclick = function() {{
+    if (setup.style.display === 'none' || setup.style.display === '') {{
+      keyInput.value = getKey() || '';
+      showSetup();
+    }} else {{
+      showChat();
+    }}
+  }};
 
   document.querySelectorAll('.chat-sugg').forEach(function(b) {{
     b.onclick = function() {{
@@ -1002,7 +1057,7 @@ window.__REPORT__ = {chat_context};
     var text = input.value.trim();
     if (!text) return;
     var key = getKey();
-    if (!key) {{ promptKey(); return; }}
+    if (!key) {{ showSetup(); return; }}
     input.value = '';
     sendBtn.disabled = true;
     addMsg('user', text);
@@ -1042,16 +1097,8 @@ window.__REPORT__ = {chat_context};
     }});
   }}
 
-  function promptKey() {{
-    var old = localStorage.getItem(KEY_STORE) || '';
-    var k = window.prompt('请输入 DeepSeek API Key（只需输入一次，存在本地）:', old);
-    if(k && k.trim()) {{ localStorage.setItem(KEY_STORE, k.trim()); send(); }}
-  }}
-
-  // Pre-fill key if provided
-  if(!getKey()) {{
-    // User can click chat and will be prompted
-  }}
+  // Initialize: hide setup by default
+  setup.style.display = 'none';
 }})();
 
 if ('serviceWorker' in navigator) {{
