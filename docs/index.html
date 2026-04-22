@@ -259,6 +259,108 @@ section { margin-bottom: 24px; }
 }
 .funding-source { color: #94a3b8; font-size: 0.68rem; }
 
+/* ── AI Chat ── */
+.chat-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white; font-size: 1.4rem; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(99,102,241,0.6); }
+
+.chat-panel {
+  position: fixed; right: 0; top: 0; bottom: 0; z-index: 1001;
+  width: 380px; max-width: 100vw;
+  background: #0f172a; display: flex; flex-direction: column;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.4);
+  transform: translateX(100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.chat-panel.open { transform: translateX(0); }
+.chat-header {
+  padding: 16px 18px; background: #1e1b4b;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.chat-header-title { color: white; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.chat-header-sub { color: #a5b4fc; font-size: 0.72rem; margin-top: 1px; }
+.chat-close {
+  background: none; border: none; color: rgba(255,255,255,0.5);
+  font-size: 1.3rem; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+}
+.chat-close:hover { background: rgba(255,255,255,0.1); color: white; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin; scrollbar-color: #334155 transparent;
+}
+.chat-msg { display: flex; gap: 8px; align-items: flex-start; max-width: 100%; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+}
+.chat-msg.user .chat-avatar { background: #6366f1; }
+.chat-msg.ai .chat-avatar { background: #1e293b; border: 1px solid #334155; }
+.chat-bubble {
+  padding: 10px 14px; border-radius: 14px; font-size: 0.83rem;
+  line-height: 1.65; max-width: calc(100% - 44px);
+}
+.chat-msg.user .chat-bubble {
+  background: #6366f1; color: white; border-bottom-right-radius: 4px;
+}
+.chat-msg.ai .chat-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-msg.ai .chat-bubble.loading { color: #64748b; }
+.chat-suggestions {
+  padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+}
+.chat-sugg {
+  background: #1e293b; border: 1px solid #334155; color: #94a3b8;
+  padding: 5px 11px; border-radius: 20px; font-size: 0.73rem;
+  cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.chat-sugg:hover { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
+.chat-input-row {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.chat-input {
+  flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 22px;
+  padding: 9px 16px; color: white; font-size: 0.85rem; font-family: inherit;
+  outline: none; resize: none; max-height: 100px; line-height: 1.4;
+}
+.chat-input:focus { border-color: #6366f1; }
+.chat-input::placeholder { color: #475569; }
+.chat-send {
+  width: 38px; height: 38px; border-radius: 50%; background: #6366f1;
+  border: none; color: white; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.chat-send:hover { background: #4f46e5; }
+.chat-send:disabled { background: #334155; cursor: not-allowed; }
+.chat-key-prompt {
+  padding: 20px; color: #94a3b8; font-size: 0.83rem; text-align: center;
+}
+.chat-key-input {
+  width: 100%; margin-top: 10px; background: #1e293b; border: 1px solid #334155;
+  border-radius: 8px; padding: 8px 12px; color: white; font-size: 0.83rem;
+  font-family: inherit; outline: none;
+}
+.chat-key-input:focus { border-color: #6366f1; }
+.chat-key-save {
+  margin-top: 8px; width: 100%; padding: 8px; background: #6366f1;
+  border: none; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 0.83rem; font-family: inherit;
+}
+
 /* ── Footer ── */
 .footer {
   text-align: center; padding: 32px 20px;
@@ -1152,7 +1254,7 @@ section { margin-bottom: 24px; }
         <span class="industry-emoji">₿</span>
         <span class="industry-name">加密货币 / Web3 / DeFi</span>
         <canvas class="sparkline-wrap" id="spark-加密货币-Web3-DeFi" data-values='[0, 0, 1, 1, 0, 1, 1]' width="80" height="28"></canvas>
-        <span class="market-badge up"><span class="badge-etf">BITO</span>▲ +9.5%</span>
+        <span class="market-badge up"><span class="badge-etf">BITO</span>▲ +9.7%</span>
       </div>
       <div class="industry-meta-row">
         <div class="meta-block">
@@ -2182,7 +2284,142 @@ section { margin-bottom: 24px; }
   <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
 </footer>
 
+<!-- AI Chat -->
+<button class="chat-btn" id="chat-toggle" title="问问 AI">💬</button>
+
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div>
+      <div class="chat-header-title">🧠 AI 创业顾问</div>
+      <div class="chat-header-sub">基于今日报告内容 · 2026-04-19</div>
+    </div>
+    <button class="chat-close" id="chat-close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg ai">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-bubble">你好！我已读取今日报告的全部内容，可以回答你关于各行业机会、创业策略、市场分析的问题。有什么想深入了解的？</div>
+    </div>
+  </div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-sugg">🔥 今天最值得做的机会是？</button>
+    <button class="chat-sugg">₿ Web3 机会详细分析</button>
+    <button class="chat-sugg">🐾 宠物行业怎么切入？</button>
+    <button class="chat-sugg">💰 50万预算选哪个赛道？</button>
+    <button class="chat-sugg">📈 和上周比有什么变化？</button>
+  </div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" placeholder="问任何关于创业机会的问题..." rows="1"></textarea>
+    <button class="chat-send" id="chat-send">➤</button>
+  </div>
+</div>
+
 <script>
+window.__REPORT__ = {"date": "2026-04-19", "summary": "华为鸿蒙AI眼镜发布标志着AI硬件进入穿戴新阶段，字节跳动AI投入致净利大降70%印证大模型军备竞赛白热化。灵光「手搓应用朋友圈」与儿童多智能体AI玩具获融资，说明AI民主化工具与AI硬件消费品正同步爆发。Vercel安全事件与Notion邮件泄露提示AI基础设施安全需求紧迫，RAM短缺将进一步推高AI算力成本，创业窗口向轻量化、垂直化方向倾斜。", "top3": [{"rank": 1, "industry": "AI / 科技", "title": "个人AI应用创作社区", "reason": "灵光已验证传播模型，窗口期极短，轻资产快速复制，AI民主化红利叠加社交病毒传播，6个月内可见规模效应。"}, {"rank": 2, "industry": "消费 / 零售 / 电商", "title": "AI导购私域运营SaaS", "reason": "中小品牌私域运营人效瓶颈明确，AI替代重复劳动ROI清晰，付费意愿强，可在30天内用低代码工具跑出MVP。"}, {"rank": 3, "industry": "AI / 科技", "title": "AI眼镜垂直场景SaaS", "reason": "华为鸿蒙AI眼镜发布创造生态空档期，率先绑定1-2个垂直行业可建立先发护城河，时机唯一性极强。"}], "industries": [{"name": "AI / 科技", "trend": "AI正从云端大模型下沉至边缘硬件与个人创作工具，同时Vercel/Notion安全事件揭示AI基础设施安全成刚需。", "opportunities": [{"title": "AI眼镜垂直场景SaaS", "description": "鸿蒙AI眼镜开放生态，但缺乏垂直行业应用。面向导游、销售、医护等高频外勤场景，提供实时语音转录+知识库问答+任务提醒的轻量SaaS，以鸿蒙生态开发者身份切入，快速占据行业标杆客户。", "urgency": "高", "first_step": "立即申请华为鸿蒙AI眼镜开发者计划，锁定1个垂直行业做MVP演示。"}, {"title": "个人AI应用创作社区", "description": "灵光证明「手搓应用+朋友圈传播」模式可行。搭建面向普通用户的无代码AI应用构建+一键分享平台，内置病毒传播机制，用创作者经济（打赏/付费订阅）驱动UGC生态，对标海外Poe但更社交化。", "urgency": "高", "first_step": "两周内上线微信小程序版，复刻SBTI测试类爆款验证传播机制。"}, {"title": "AI基础设施安全审计SaaS", "description": "Vercel被攻击、Notion泄露用户邮件，AI原生产品安全漏洞频发。面向中国AI创业公司提供自动化安全扫描+合规报告+泄露监控服务，嵌入CI/CD流程，让安全成为开发日常而非事后补救。", "urgency": "高", "first_step": "开源一个针对LLM应用的提示注入检测工具，GitHub积累早期用户。"}]}, {"name": "宠物 / 宠物经济", "trend": "中国宠物市场规模突破3000亿，从基础食粮向医疗、情感陪伴、智能化升级，AI介入宠物健康管理成新风口。", "opportunities": [{"title": "AI宠物健康监测硬件", "description": "宠物主最痛点是「不会说话、病了才知道」。智能项圈+AI模型持续监测心率、活动量、睡眠，异常自动预警并推荐附近宠物医院，与保险公司合作做健康数据定价。", "urgency": "中", "first_step": "与1家宠物连锁医院合作，用现有运动手环改装做100只宠物数据采集验证模型。"}, {"title": "宠物AI陪伴与训练App", "description": "铲屎官出差、上班时宠物独处焦虑普遍。AI驱动的宠物行为识别+远程互动+个性化训练计划App，结合摄像头实时分析宠物情绪，生成每日报告，增强宠主与宠物的情感连接。", "urgency": "中", "first_step": "上线微信小程序版宠物行为打卡+AI分析功能，冷启动宠物博主社群。"}, {"title": "宠物营养AI定制食品", "description": "参照「人类精准营养」趋势，依据宠物品种、年龄、体检数据，AI生成个性化配方并按月订阅鲜粮配送。与宠物医院数据打通，形成「诊断-营养-随访」闭环，强化医疗背书溢价。", "urgency": "中", "first_step": "联系3家宠物医院获取脱敏体检数据，训练营养配方推荐模型做内测。"}]}, {"name": "教育 / EdTech", "trend": "AI家教从「刷题工具」升级为「自适应学习伙伴」，儿童AI硬件+成人职业技能AI培训是两个高增长极。", "opportunities": [{"title": "多智能体儿童AI学伴硬件", "description": "灵机天赐「玩偶+主机」模式验证可行，但场景可更垂直。专注3-8岁儿童语言启蒙，多个AI角色扮演互动，动态调整对话难度，家长端实时查看学习报告，切入幼小衔接付费意愿最强节点。", "urgency": "高", "first_step": "采购现有TTS+LLM API，3个月内出最小化原型机，进5所幼儿园做用户测试。"}, {"title": "职场AI技能速成平台", "description": "AI工具普及倒逼职场人快速补课，但现有课程更新慢。以「每周更新的AI工具实战课」为核心，结合AI模拟练习题和导师答疑，面向企业做团队订阅，个人端用免费短视频引流付费系统课。", "urgency": "高", "first_step": "本周上线1门「DeepSeek企业实战」短课，抖音/视频号投流测试转化率。"}, {"title": "AI出海语言教育工具", "description": "申根签证申请同比增20%，出境游回暖带动语言学习需求。面向商务出境、留学、移民用户，AI实时模拟真实场景对话（机场、面签、商务谈判），用语音评分+场景化记忆替代枯燥背单词。", "urgency": "中", "first_step": "用现有语音API搭建「签证面试英语模拟器」小程序，VFS Global用户群测试。"}]}, {"name": "消费 / 零售 / 电商", "trend": "消费分级加剧，高端成分护理与情感共鸣型消费（书店、独立品牌）逆势增长，AI在选品、个性化推荐、私域运营三端赋能效果显著。", "opportunities": [{"title": "AI成分党护肤选品平台", "description": "雅诗兰黛「微酵护发」等成分故事营销见效，说明成分教育驱动转化。搭建AI驱动的护肤成分分析+个人肤质匹配平台，用户拍照或输入肤质，AI推荐成分组合并链接选品，媒体+电商闭环。", "urgency": "中", "first_step": "用小红书+微信生态上线「成分检测」免费工具，冷启动1万用户后引入品牌合作。"}, {"title": "AI导购私域运营SaaS", "description": "实体零售和独立品牌复苏但缺人效工具。为中小品牌提供AI驱动的微信私域自动导购：用户发消息即获个性化推荐+优惠，自动跟进、复购提醒、售后处理，让1个运营管理10倍私域规模。", "urgency": "高", "first_step": "招募5家愿意免费试用的线下门店，用企业微信+Dify快速搭建MVP验证留存。"}, {"title": "出境游AI行前消费平台", "description": "申根签证增20%，出境游人群在行前有装备采购、换汇、保险、签证等高频需求。聚合AI行程规划+物品清单+跨境商品比价，以内容引流将需求导入消费，形成「规划即购买」闭环。", "urgency": "高", "first_step": "上线「出境装备AI清单生成器」小程序，与1家跨境电商平台对接佣金链接。"}]}, {"name": "加密货币 / Web3 / DeFi", "trend": "中国监管环境下Web3创业需走「出海+合规」双轨，AI×Web3（AI Agent自主链上操作）成2026年最热叙事，香港合规市场是重要切入口。", "opportunities": [{"title": "AI Agent链上自主交易协议", "description": "AI Agent需要自主管理资产和执行链上操作，但现有钱包和协议为人类设计。面向开发者提供「AI Agent专用链上账户+权限管理+自动化交易SDK」，抓住AI×Web3交叉叙事最前沿窗口期。", "urgency": "高", "first_step": "在GitHub开源一个EVM兼容的AI Agent钱包抽象合约，发布技术博客吸引开发者。"}, {"title": "香港合规RWA代币化平台", "description": "香港监管框架明确，真实资产代币化（RWA）是合规Web3最大机会。聚焦中国优质资产（供应链票据、商业地产收益权）在香港合规代币化，引入海外华人资本，打通在岸资产与离岸流动性。", "urgency": "中", "first_step": "获取香港VASP牌照咨询，同步接触3家有供应链票据资产的实体企业谈合作意向。"}, {"title": "去中心化数据隐私保护工具", "description": "Notion泄露编辑邮件、Vercel被攻击，用户数据在中心化平台毫无保障。面向创作者和开发者提供基于去中心化存储（Arweave/IPFS）+零知识证明的隐私数据保险箱，主打「你的数据真正属于你」。", "urgency": "中", "first_step": "开发一个Chrome插件自动检测并提示当前网站隐私风险，冷启动技术社区用户。"}]}, {"name": "芯片/半导体", "trend": "端侧AI推理芯片需求随可穿戴/机器人爆发急速增长，国产替代叠加RAM短缺（HN报道）推动本土存储与计算芯片研发提速。", "opportunities": [{"title": "端侧AI推理芯片IP授权", "description": "面向AI眼镜、耳机等低功耗可穿戴场景，提供专用NPU IP核授权，帮助中小硬件厂商快速集成端侧推理能力，绕开自研芯片高门槛。", "urgency": "高", "first_step": "联系3家AI眼镜ODM厂商做需求访谈，锁定功耗与算力基线指标"}, {"title": "HBM国产替代存储模组", "description": "RAM短缺预计持续数年，国内AI训练集群对HBM依赖度极高，切入国产高带宽存储封装测试及模组集成环节，提供可替代进口的解决方案。", "urgency": "高", "first_step": "对接长鑫/长江存储生态伙伴，确认先进封装代工合作可行性"}]}, {"name": "机器人/具身智能", "trend": "具身智能从工业场景向消费/教育场景渗透，多智能体协作与低成本感知方案成为差异化竞争核心。", "opportunities": [{"title": "多智能体儿童教育机器人", "description": "借鉴「玩偶+主机」模式，多个低成本实体玩偶通过主机协同交互，构建角色扮演式AI陪伴教育场景，订阅内容持续变现，复购率高于单体玩具。", "urgency": "高", "first_step": "用现有大模型API搭建2个虚拟角色对话Demo，邀请20个家庭内测"}, {"title": "空悬/底盘配套机器人运动控制软件", "description": "时驾科技等空悬供应商切入车企，同类底盘感知与控制技术可平移至轮式服务机器人，提供运动控制SDK降低机器人厂商研发成本。", "urgency": "中", "first_step": "开源一个轮式机器人运动控制基础版SDK，积累开发者社区"}]}, {"name": "金融/金融科技", "trend": "AI驱动的量化风控与大宗商品智能定价成为金融科技新热点，企业财务AI化需求随监管趋严持续释放。", "opportunities": [{"title": "大宗商品AI量化风控SaaS", "description": "锂、铜等周期品波动剧烈，为中游制造企业提供AI对冲策略推荐与敞口监控SaaS，降低原材料价格波动损益。", "urgency": "高", "first_step": "拜访3家锂电池厂采购/财务总监，验证原材料对冲痛点"}, {"title": "AI驱动的中小企业信贷审核平台", "description": "结合经营数据、税务发票、供应链流水，AI替代人工审核，将中小企业贷款审批周期从7天压缩至1小时内。", "urgency": "中", "first_step": "与一家城商行签订POC协议，用100笔历史贷款数据验证模型精度"}]}, {"name": "媒体/娱乐/内容", "trend": "AI内容生产工具普及导致内容泛滥，「情感深度+社交裂变」成为突围关键，灵光「手搓应用朋友圈」验证UGC+社交传播新模式。", "opportunities": [{"title": "AI情感共鸣内容创作平台", "description": "为短视频/游戏创作者提供AI情绪分析工具，预测内容情感曲线与用户共鸣峰值，辅助优化剧情节奏提升完播率。", "urgency": "中", "first_step": "上线免费情感曲线分析Chrome插件，获取1000名创作者种子用户"}, {"title": "社交裂变型AI人格测试工具", "description": "SBTI测试刷屏朋友圈印证社交测试赛道爆发力，快速搭建AI驱动的个性化测试生成SaaS，帮助品牌定制专属病毒营销测试活动。", "urgency": "高", "first_step": "用现有大模型API在72小时内搭建MVP，找一个品牌免费做首个案例"}]}, {"name": "潮流/时尚/运动", "trend": "成分科技叙事与个性化定制成为高端美护增长引擎，AI驱动的个人形象管理与智能穿搭需求在中高收入人群中快速释放。", "opportunities": [{"title": "AI成分科学护肤顾问App", "description": "用AI解析用户发质/肤质数据，匹配微生物发酵等功能成分，生成个性化护肤发方案，绑定高客单产品复购。", "urgency": "中", "first_step": "构建300种功能成分知识图谱，上线小程序内测版获取500名用户反馈"}, {"title": "运动数据驱动的智能装备选配平台", "description": "整合可穿戴设备运动数据，AI推荐最适配跑步/骑行装备，与品牌合作打通导购链路，解决「专业选手买错装备」痛点。", "urgency": "中", "first_step": "整合Keep/Garmin开放API，搭建跑步鞋智能推荐MVP上架小程序"}]}, {"name": "动漫/二次元/IP", "trend": "AI角色扮演与虚拟IP陪伴需求持续爆发，UGC+AIGC结合的二次元内容生态正在形成新的创作者经济闭环。", "opportunities": [{"title": "AIGC二次元IP孵化平台", "description": "为独立创作者提供AI辅助角色设计、剧情生成、声音克隆工具，降低虚拟IP冷启动成本，平台抽取IP变现分成。", "urgency": "高", "first_step": "搭建Discord/QQ频道社区，招募100名独立画师内测IP创作工具链"}, {"title": "虚拟IP授权智能管理SaaS", "description": "帮助中小IP方管理授权合同、监控盗版侵权、追踪衍生品销售数据，AI自动生成授权合规报告，降低法务成本。", "urgency": "中", "first_step": "与3家中小动漫公司签订免费POC，验证盗版检测准确率"}]}, {"name": "出行/交通", "trend": "新能源汽车智能化竞争从算力向底盘控制延伸，Uber/Lyft司机燃油成本压力（Guardian）推动网约车电动化与效率工具需求。", "opportunities": [{"title": "网约车司机AI效率增收工具", "description": "针对油价上涨压缩司机利润痛点，AI预测高需求区域与最优接单策略，提升单位时间收入，按月订阅收费。", "urgency": "高", "first_step": "招募50名全职司机进行深度访谈，明确最核心的3个效率痛点"}, {"title": "智能底盘供应链数字化平台", "description": "整合空悬、线控转向等智能底盘零部件供应商，为Tier1和整车厂提供供应链可视化与交付进度管理SaaS。", "urgency": "中", "first_step": "以时驾科技等空悬企业为切入点，提供免费供应链可视化工具换取数据合作"}]}, {"name": "能源/清洁能源", "trend": "锂价回暖叠加储能装机提速，电池全生命周期管理与退役锂电池回收再利用成为高价值创业窗口。", "opportunities": [{"title": "退役锂电池AI评估与交易平台", "description": "锂价回升使退役电池残值凸显，AI快速评估电池健康度，撮合梯次利用买卖双方，打通二手电池交易市场。", "urgency": "高", "first_step": "与一家新能源车企售后部门合作，用100块退役电池验证AI评估模型精度"}, {"title": "工商业储能AI能量管理SaaS", "description": "为工厂/商场提供AI驱动的储能充放电策略优化，通过峰谷电价套利自动测算回报周期，加速储能投资决策。", "urgency": "高", "first_step": "免费为一家制造工厂部署能耗监测系统，积累3个月真实数据验证节电效果"}]}, {"name": "医疗健康", "trend": "AI制药与精准诊断进入临床验证加速期，科学家创业生态逐步成熟。", "opportunities": [{"title": "AI驱动临床试验患者招募平台", "description": "用AI匹配电子病历与临床试验入组标准，将患者招募周期从18个月缩短至3个月。", "urgency": "中", "first_step": "联系3家三甲医院临床研究中心，谈妥脱敏病历数据合作协议"}]}, {"name": "农业/食品", "trend": "功能性食品与精准营养赛道高速增长，AI个性化饮食方案成为连接消费者与农业供应链的新接口。", "opportunities": [{"title": "AI精准营养订阅餐食服务", "description": "基于用户健康数据生成每日营养方案，对接预制菜/生鲜供应链按需配送，客单价高复购稳。", "urgency": "中", "first_step": "招募100名用户做营养问卷+7天试吃，验证留存率与NPS"}]}, {"name": "制造业/工业", "trend": "工业AI质检与数字孪生从头部车企向中小零部件厂快速渗透，降本增效压力推动AI工具普及提速。", "opportunities": [{"title": "中小零部件厂AI视觉质检SaaS", "description": "以低成本工业相机+边缘AI替代人工质检，缺陷识别准确率超99%，按检测工位数收取年费。", "urgency": "高", "first_step": "免费为一家汽车冲压件厂部署2周质检POC，产出精度对比报告"}]}, {"name": "房产/建筑", "trend": "增量开发萎缩推动存量楼宇数字化运营、AI辅助资产处置与租赁匹配成为新需求。", "opportunities": [{"title": "AI驱动的不良房产资产处置平台", "description": "聚合银行不良抵押房产，AI评估快速定价，匹配投资买家，帮助银行加速不良资产出清。", "urgency": "高", "first_step": "拜访2家AMC公司不良资产部门，了解现有估值流程痛点与合规要求"}]}, {"name": "政策/监管/社会", "trend": "中国数据安全法与个人信息保护法落地执行深化，企业合规需求转化为AI安全治理产品的持续市场。", "opportunities": [{"title": "AI数据安全合规自动化平台", "description": "自动扫描企业数据资产，识别违规存储与权限漏洞，生成符合监管要求的合规报告，降低企业合规人力成本。", "urgency": "高", "first_step": "针对PIPL和数据安全法核心条款，开发免费在线合规自查工具获取线索"}]}]};
+
+(function() {
+  var KEY_STORE = 'ds_api_key';
+  var panel = document.getElementById('chat-panel');
+  var msgs = document.getElementById('chat-messages');
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  var history = [];
+
+  document.getElementById('chat-toggle').onclick = function() { panel.classList.toggle('open'); };
+  document.getElementById('chat-close').onclick = function() { panel.classList.remove('open'); };
+
+  document.querySelectorAll('.chat-sugg').forEach(function(b) {
+    b.onclick = function() {
+      input.value = b.textContent.replace(/^[^\s]+\s/, '');
+      send();
+    };
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  sendBtn.onclick = send;
+
+  function getKey() { return localStorage.getItem(KEY_STORE); }
+
+  function addMsg(role, text, loading) {
+    var d = document.createElement('div');
+    d.className = 'chat-msg ' + (role === 'user' ? 'user' : 'ai');
+    var bubble = loading ? '<div class="chat-bubble loading">思考中…</div>' :
+      '<div class="chat-bubble">' + text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') + '</div>';
+    d.innerHTML = '<div class="chat-avatar">' + (role==='user'?'👤':'🤖') + '</div>' + bubble;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
+
+  function buildSystem() {
+    var r = window.__REPORT__;
+    var inds = (r.industries||[]).map(function(i) {
+      var opps = (i.opportunities||[]).map(function(o) {
+        return o.title + '（' + o.description + '，紧迫度:' + o.urgency + '，第一步:' + o.first_step + '）';
+      }).join('；');
+      return i.name + '——趋势:' + i.trend + '；机会:' + opps;
+    }).join('\n');
+    return '你是创业顾问AI，基于' + r.date + '的市场分析报告回答用户问题。\n\n报告摘要：' + r.summary + '\n\n各行业详情：\n' + inds + '\n\n请用中文回答，结合报告数据，给出具体可行的建议。';
+  }
+
+  function send() {
+    var text = input.value.trim();
+    if (!text) return;
+    var key = getKey();
+    if (!key) { promptKey(); return; }
+    input.value = '';
+    sendBtn.disabled = true;
+    addMsg('user', text);
+    history.push({'role':'user','content':text});
+    var placeholder = addMsg('ai', '', true);
+    var messages = [{'role':'system','content':buildSystem()}].concat(history);
+    fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body: JSON.stringify({model:'deepseek-chat',messages:messages,stream:true,max_tokens:1000})
+    }).then(function(resp) {
+      if(!resp.ok) throw new Error('API错误 '+resp.status);
+      var bubble = placeholder.querySelector('.chat-bubble');
+      bubble.className = 'chat-bubble';
+      bubble.textContent = '';
+      var full = '';
+      var reader = resp.body.getReader();
+      var dec = new TextDecoder();
+      function read() {
+        return reader.read().then(function(r) {
+          if(r.done) { history.push({'role':'assistant','content':full}); sendBtn.disabled=false; return; }
+          dec.decode(r.value).split('\n').forEach(function(line) {
+            line = line.replace(/^data: /,'').trim();
+            if(!line||line==='[DONE]') return;
+            try {
+              var d = JSON.parse(line).choices[0].delta.content;
+              if(d) { full+=d; bubble.textContent=full; msgs.scrollTop=msgs.scrollHeight; }
+            } catch(e) {}
+          });
+          return read();
+        });
+      }
+      return read();
+    }).catch(function(e) {
+      placeholder.querySelector('.chat-bubble').textContent = '出错了：'+e.message+'，请检查 API Key 是否正确。';
+      sendBtn.disabled = false;
+    });
+  }
+
+  function promptKey() {
+    var old = localStorage.getItem(KEY_STORE) || '';
+    var k = window.prompt('请输入 DeepSeek API Key（只需输入一次，存在本地）:', old);
+    if(k && k.trim()) { localStorage.setItem(KEY_STORE, k.trim()); send(); }
+  }
+
+  // Pre-fill key if provided
+  if(!getKey()) {
+    // User can click chat and will be prompted
+  }
+})();
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/rd-thoughts/sw.js');
 }

@@ -378,6 +378,108 @@ section { margin-bottom: 24px; }
 }
 .funding-source { color: #94a3b8; font-size: 0.68rem; }
 
+/* ── AI Chat ── */
+.chat-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white; font-size: 1.4rem; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(99,102,241,0.6); }
+
+.chat-panel {
+  position: fixed; right: 0; top: 0; bottom: 0; z-index: 1001;
+  width: 380px; max-width: 100vw;
+  background: #0f172a; display: flex; flex-direction: column;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.4);
+  transform: translateX(100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.chat-panel.open { transform: translateX(0); }
+.chat-header {
+  padding: 16px 18px; background: #1e1b4b;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.chat-header-title { color: white; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.chat-header-sub { color: #a5b4fc; font-size: 0.72rem; margin-top: 1px; }
+.chat-close {
+  background: none; border: none; color: rgba(255,255,255,0.5);
+  font-size: 1.3rem; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+}
+.chat-close:hover { background: rgba(255,255,255,0.1); color: white; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin; scrollbar-color: #334155 transparent;
+}
+.chat-msg { display: flex; gap: 8px; align-items: flex-start; max-width: 100%; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+}
+.chat-msg.user .chat-avatar { background: #6366f1; }
+.chat-msg.ai .chat-avatar { background: #1e293b; border: 1px solid #334155; }
+.chat-bubble {
+  padding: 10px 14px; border-radius: 14px; font-size: 0.83rem;
+  line-height: 1.65; max-width: calc(100% - 44px);
+}
+.chat-msg.user .chat-bubble {
+  background: #6366f1; color: white; border-bottom-right-radius: 4px;
+}
+.chat-msg.ai .chat-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-msg.ai .chat-bubble.loading { color: #64748b; }
+.chat-suggestions {
+  padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+}
+.chat-sugg {
+  background: #1e293b; border: 1px solid #334155; color: #94a3b8;
+  padding: 5px 11px; border-radius: 20px; font-size: 0.73rem;
+  cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.chat-sugg:hover { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
+.chat-input-row {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.chat-input {
+  flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 22px;
+  padding: 9px 16px; color: white; font-size: 0.85rem; font-family: inherit;
+  outline: none; resize: none; max-height: 100px; line-height: 1.4;
+}
+.chat-input:focus { border-color: #6366f1; }
+.chat-input::placeholder { color: #475569; }
+.chat-send {
+  width: 38px; height: 38px; border-radius: 50%; background: #6366f1;
+  border: none; color: white; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.chat-send:hover { background: #4f46e5; }
+.chat-send:disabled { background: #334155; cursor: not-allowed; }
+.chat-key-prompt {
+  padding: 20px; color: #94a3b8; font-size: 0.83rem; text-align: center;
+}
+.chat-key-input {
+  width: 100%; margin-top: 10px; background: #1e293b; border: 1px solid #334155;
+  border-radius: 8px; padding: 8px 12px; color: white; font-size: 0.83rem;
+  font-family: inherit; outline: none;
+}
+.chat-key-input:focus { border-color: #6366f1; }
+.chat-key-save {
+  margin-top: 8px; width: 100%; padding: 8px; background: #6366f1;
+  border: none; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 0.83rem; font-family: inherit;
+}
+
 /* ── Footer ── */
 .footer {
   text-align: center; padding: 32px 20px;
@@ -681,6 +783,25 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
     funding_news = funding_news or []
     trend_data = trend_data or {}
 
+    # Embed report context for AI chat (compact JSON)
+    chat_context = json.dumps({
+        'date': date_str,
+        'summary': analysis.get('overall_summary', ''),
+        'top3': analysis.get('top3', []),
+        'industries': [
+            {
+                'name': ind.get('name', ''),
+                'trend': ind.get('trend', ''),
+                'opportunities': [
+                    {'title': o.get('title', ''), 'description': o.get('description', ''),
+                     'urgency': o.get('urgency', ''), 'first_step': o.get('first_step', '')}
+                    for o in ind.get('opportunities', [])
+                ]
+            }
+            for ind in industries
+        ]
+    }, ensure_ascii=False)
+
     sidebar_links = build_sidebar_links(industries)
     china_col = build_news_col_html(china_news, "🇨🇳", "中国热点")
     global_col = build_news_col_html(global_news, "🌍", "国际热点")
@@ -797,7 +918,142 @@ def generate_html(china_news, global_news, analysis, date_str, mode='daily',
   <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
 </footer>
 
+<!-- AI Chat -->
+<button class="chat-btn" id="chat-toggle" title="问问 AI">💬</button>
+
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div>
+      <div class="chat-header-title">🧠 AI 创业顾问</div>
+      <div class="chat-header-sub">基于今日报告内容 · {date_str}</div>
+    </div>
+    <button class="chat-close" id="chat-close">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg ai">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-bubble">你好！我已读取今日报告的全部内容，可以回答你关于各行业机会、创业策略、市场分析的问题。有什么想深入了解的？</div>
+    </div>
+  </div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-sugg">🔥 今天最值得做的机会是？</button>
+    <button class="chat-sugg">₿ Web3 机会详细分析</button>
+    <button class="chat-sugg">🐾 宠物行业怎么切入？</button>
+    <button class="chat-sugg">💰 50万预算选哪个赛道？</button>
+    <button class="chat-sugg">📈 和上周比有什么变化？</button>
+  </div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" placeholder="问任何关于创业机会的问题..." rows="1"></textarea>
+    <button class="chat-send" id="chat-send">➤</button>
+  </div>
+</div>
+
 <script>
+window.__REPORT__ = {chat_context};
+
+(function() {{
+  var KEY_STORE = 'ds_api_key';
+  var panel = document.getElementById('chat-panel');
+  var msgs = document.getElementById('chat-messages');
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  var history = [];
+
+  document.getElementById('chat-toggle').onclick = function() {{ panel.classList.toggle('open'); }};
+  document.getElementById('chat-close').onclick = function() {{ panel.classList.remove('open'); }};
+
+  document.querySelectorAll('.chat-sugg').forEach(function(b) {{
+    b.onclick = function() {{
+      input.value = b.textContent.replace(/^[^\s]+\s/, '');
+      send();
+    }};
+  }});
+
+  input.addEventListener('keydown', function(e) {{
+    if (e.key === 'Enter' && !e.shiftKey) {{ e.preventDefault(); send(); }}
+  }});
+  sendBtn.onclick = send;
+
+  function getKey() {{ return localStorage.getItem(KEY_STORE); }}
+
+  function addMsg(role, text, loading) {{
+    var d = document.createElement('div');
+    d.className = 'chat-msg ' + (role === 'user' ? 'user' : 'ai');
+    var bubble = loading ? '<div class="chat-bubble loading">思考中…</div>' :
+      '<div class="chat-bubble">' + text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\\n/g,'<br>') + '</div>';
+    d.innerHTML = '<div class="chat-avatar">' + (role==='user'?'👤':'🤖') + '</div>' + bubble;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }}
+
+  function buildSystem() {{
+    var r = window.__REPORT__;
+    var inds = (r.industries||[]).map(function(i) {{
+      var opps = (i.opportunities||[]).map(function(o) {{
+        return o.title + '（' + o.description + '，紧迫度:' + o.urgency + '，第一步:' + o.first_step + '）';
+      }}).join('；');
+      return i.name + '——趋势:' + i.trend + '；机会:' + opps;
+    }}).join('\\n');
+    return '你是创业顾问AI，基于' + r.date + '的市场分析报告回答用户问题。\\n\\n报告摘要：' + r.summary + '\\n\\n各行业详情：\\n' + inds + '\\n\\n请用中文回答，结合报告数据，给出具体可行的建议。';
+  }}
+
+  function send() {{
+    var text = input.value.trim();
+    if (!text) return;
+    var key = getKey();
+    if (!key) {{ promptKey(); return; }}
+    input.value = '';
+    sendBtn.disabled = true;
+    addMsg('user', text);
+    history.push({{'role':'user','content':text}});
+    var placeholder = addMsg('ai', '', true);
+    var messages = [{{'role':'system','content':buildSystem()}}].concat(history);
+    fetch('https://api.deepseek.com/v1/chat/completions', {{
+      method: 'POST',
+      headers: {{'Content-Type':'application/json','Authorization':'Bearer '+key}},
+      body: JSON.stringify({{model:'deepseek-chat',messages:messages,stream:true,max_tokens:1000}})
+    }}).then(function(resp) {{
+      if(!resp.ok) throw new Error('API错误 '+resp.status);
+      var bubble = placeholder.querySelector('.chat-bubble');
+      bubble.className = 'chat-bubble';
+      bubble.textContent = '';
+      var full = '';
+      var reader = resp.body.getReader();
+      var dec = new TextDecoder();
+      function read() {{
+        return reader.read().then(function(r) {{
+          if(r.done) {{ history.push({{'role':'assistant','content':full}}); sendBtn.disabled=false; return; }}
+          dec.decode(r.value).split('\\n').forEach(function(line) {{
+            line = line.replace(/^data: /,'').trim();
+            if(!line||line==='[DONE]') return;
+            try {{
+              var d = JSON.parse(line).choices[0].delta.content;
+              if(d) {{ full+=d; bubble.textContent=full; msgs.scrollTop=msgs.scrollHeight; }}
+            }} catch(e) {{}}
+          }});
+          return read();
+        }});
+      }}
+      return read();
+    }}).catch(function(e) {{
+      placeholder.querySelector('.chat-bubble').textContent = '出错了：'+e.message+'，请检查 API Key 是否正确。';
+      sendBtn.disabled = false;
+    }});
+  }}
+
+  function promptKey() {{
+    var old = localStorage.getItem(KEY_STORE) || '';
+    var k = window.prompt('请输入 DeepSeek API Key（只需输入一次，存在本地）:', old);
+    if(k && k.trim()) {{ localStorage.setItem(KEY_STORE, k.trim()); send(); }}
+  }}
+
+  // Pre-fill key if provided
+  if(!getKey()) {{
+    // User can click chat and will be prompted
+  }}
+}})();
+
 if ('serviceWorker' in navigator) {{
   navigator.serviceWorker.register('/rd-thoughts/sw.js');
 }}
