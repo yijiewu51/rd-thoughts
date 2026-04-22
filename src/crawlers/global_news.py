@@ -170,6 +170,7 @@ def get_github_trending():
                 'url': f"https://github.com{name_el.get('href', '')}",
                 'summary': desc[:150],
             })
+        translate_items(result)
         print(f"  GitHub Trending: {len(result)} 条")
         return result
     except Exception as e:

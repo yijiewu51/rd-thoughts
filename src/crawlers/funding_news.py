@@ -7,6 +7,7 @@ import re
 import feedparser
 from datetime import datetime
 from bs4 import BeautifulSoup
+from .translate import translate_items
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
@@ -125,5 +126,6 @@ def get_funding_news(date_str=None) -> list:
     except Exception as e:
         print(f"  36kr 融资过滤失败: {e}")
 
+    translate_items(results)
     print(f"  融资动态: {len(results)} 条")
     return results[:8]
