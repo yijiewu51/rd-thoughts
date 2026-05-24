@@ -1,0 +1,1129 @@
+{
+  "date": "2026-05-24",
+  "mode": "daily",
+  "china_news": [
+    {
+      "title": "圆桌对话：下一个杀手级AI产品，会出现在哪个赛道？| 2026AI Partner·北京亦庄AI+产业大会",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821714896408713?f=rss",
+      "summary": "下一个杀手级AI产品，是眼镜、是Agent，还是某个尚未命名的“物理世界入口”？这场圆桌没有标准答案，却达成一个共识：单纯套壳大模型的应用注定短命，只有长期在线、连接物理世界、能完成真实交互闭环的产品，才可能成为下一个百亿级赛道。从AI眼镜到具身智能，入口之争已悄然打响。硬件先行还是生态为王？C端规模还是B端付费？最终指向同一个逻辑：纯套壳应用、弱交互硬件注定被淘汰，只有“多模态底座+AI原生智能",
+      "date": "2026-05-23",
+      "time": "10:10"
+    },
+    {
+      "title": "圆桌对话：当AI进入产业前线：未来最稀缺的AI人才，会是谁？| 2026AI Partner·北京亦庄AI+产业大会",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821542483857801?f=rss",
+      "summary": "稀缺的，到底是懂AI的人，还是懂业务的人？一个反直觉的判断——懂AI这件事正在快速贬值，而能在关键低频决策中做出判断的人，才是未来的稀缺品。高频重复的工作最容易被AI替代，但在打造爆品、建立品牌等低频高影响力的决策上，人的判断依然不可替代，企业AI转型的最大卡点也不是技术或数据，而是“想不到应用场景”， 当前AI的利润大头仍在基础设施层，应用端的ROI尚未完全释放，但拐点会比预想来得更快。以下为圆",
+      "date": "2026-05-23",
+      "time": "07:14"
+    },
+    {
+      "title": "圆桌对话：人才特种兵：“AI原生人才”与“产业老炮”的共生手册| 2026AI Partner·北京亦庄AI+产业大会",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821533415985283?f=rss",
+      "summary": "真正AI原生的人，甚至不会来这个现场。但对于那些积极转型的20%，如何找到、培养并留住他们，这里有一本实战手册。只有1%的企业是AI原生企业，20%积极拥抱变化，80%在苦苦挣扎；人才亦然。圆桌深入探讨了企业“赶时髦招AI人才”的焦虑、通过黑客松内部挖掘AI人才的方法、以及“事业留人、文化留人”的留存策略。以下为圆桌对话内容，经36氪整理编辑：帮主丨36氪《AI局内人》主播（主持）郑鹏宇丨杭州颜柯",
+      "date": "2026-05-23",
+      "time": "07:05"
+    },
+    {
+      "title": "对话王小川：离开通用人工智能的主干道之后",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821521291038856?f=rss",
+      "summary": "“如果没有转型，继续走主流道路，你也会有同等程度的焦虑。”王小川说，这次转型，让他真正回归到从创业第一天就最想做的事情：造AI医生。访谈｜邓咏仪 杨轩文｜邓咏仪编辑｜张雨忻一年前，王小川带着百川智能来了一次激烈的“大刹车”：大幅缩减通用模型团队，关闭金融等多条行业线，All in医疗大模型。但与此同时，整个大模型行业却热闹非凡，大厂和创业公司轮番进行“轰炸式更新”——过去半年里，平均3天就有一个新",
+      "date": "2026-05-23",
+      "time": "06:53"
+    },
+    {
+      "title": "圆桌对话：AI浓度与转化率：数字体验的实战增长法则",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821519307591811?f=rss",
+      "summary": "AI浓度并非越高越好，转化率的秘密在于人机共生的平衡点。“AI应像手机一样贯穿全流程”，而面对亲子游客和老年群体，主动将AI浓度降至50%，却实现了超50%的转化率。浓度的关键是以人为本、文化温度先行。以下为圆桌对话内容，经36氪整理编辑：薛冰丨上海蜚语信息科技副总裁（主持）崔健南丨广州搞搞镇文化科技创始人兼CEO杨晟丨珀乐互动科技创始人薛冰：各位嘉宾大家下午好，我是主持人薛冰，很荣幸受到36氪以",
+      "date": "2026-05-23",
+      "time": "06:53"
+    },
+    {
+      "title": "36氪首发 | 北大项目孵化，国内首家原生机器人“大脑芯片”企业获数亿元融资",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821371042877575?f=rss",
+      "summary": "作者 | 乔钰杰编辑 | 袁斯来硬氪获悉，北京维泛智能科技有限公司（以下简称“维泛智能”）近日完成数亿元种子轮融资，由中关村资本及旗下启航投资联合领投，上海未来产业基金、石溪资本、佰维存储、燕创集团、海益投资、探元创投共同投资。维泛智能成立于2025年5月，孵化自北京大学类脑芯片实验室（PAICORE Lab），专注于具身智能“大小脑”融合芯片研发，致力于打造全国产化机器人核心计算方案。联合创始人",
+      "date": "2026-05-23",
+      "time": "04:20"
+    },
+    {
+      "title": "用AI来管公司，Moka推出三款AI HR工具｜涌现新栏目",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3819979202253189?f=rss",
+      "summary": "作者｜梁键强编辑｜王毓婵一句话介绍Moka为AI人力资源软件服务商，早期从智能化招聘管理系统起步，后逐步扩展至更完整的HR管理系统。5月，Moka上线了招聘Eva、人事Eva和BPEva三款AI HR产品。招聘Eva覆盖招聘全流程，辅助企业完成识人、筛选和面试；人事Eva聚焦报表处理、流程流转和员工咨询等重复事务；BPEva则用于动态更新人才画像，辅助企业进行人才识别和组织决策。支撑这三款产品的是",
+      "date": "2026-05-23",
+      "time": "02:00"
+    },
+    {
+      "title": "千禧年流行的老式漂亮饭，居然翻红了",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821213026570627?f=rss",
+      "summary": "过去这几年，餐饮行业的新店越开越多，淘汰速度也越来越快。精致餐饮仍在发展，但人们愿意为摆盘和氛围买单的冲动在减弱，转而开始寻求一种体面而高性价比的社交空间。在这样的节奏中，上岛咖啡、米萝咖啡、老树咖啡、良木缘、绿茵阁、豪享来等颇具年代感的老式咖啡餐吧，又开始悄悄爬上了年轻人的打卡清单。二三十年前，它们是城市里最洋气的餐厅，菜单上写着影视剧男女主角才会点的黑椒牛排意面和卡布奇诺咖啡。隔壁桌是商务人士",
+      "date": "2026-05-23",
+      "time": "01:41"
+    },
+    {
+      "title": "9点1氪丨永辉超市向王健林等追债超36亿元；《柳叶刀》：全球近12亿人有精神障碍；微信回应“只能撤回2分钟内消息”",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3821177784881541?f=rss",
+      "summary": "今日热点导览曝泡泡玛特8.8亿买楼：不予置评雷军透露小米YU7临时降价教育部拟同意设置34所新大学腾讯承诺不再与相关版权方达成或变相达成版权独家授权合同特朗普凯旋门方案获批TOP 3大新闻永辉超市向王健林等追债超36亿元5月21日，永辉超市发布公告称，公司于近日收到法院出具的《受理案件通知书》。永辉超市与大连御锦贸易有限公司（以下简称大连御锦）、王健林、孙喜双、大连一方集团有限公司（以下简称一方集",
+      "date": "2026-05-23",
+      "time": "01:13"
+    },
+    {
+      "title": "新鲜零食品牌「金粒门」加速全国化：粤鄂6店同装｜最前线",
+      "source": "36氪",
+      "hot": "",
+      "url": "https://36kr.com/p/3808777731464966?f=rss",
+      "summary": "新鲜零食品牌争相竞逐新市场。36氪获悉，新鲜零食品牌「金粒门」近期密集落地全国布局，正式开启跨区域快速发展阶段。近日，金粒门华南首店、湖北首批合计6家门店已经进场装修。与此同时，金粒门华东首店将于5月29日正式入驻南京新街口IFCX，持续布局长三角核心市场。金粒门相关负责人表示，金粒门将持续加码门店布局，年内将全力推进拓店计划，让更多消费者体验到新鲜短保零食产品与服务。金粒门华南首店位于深圳龙岗布",
+      "date": "2026-05-22",
+      "time": "12:12"
+    },
+    {
+      "title": "宇树赌未来，云深处先挣钱：机器狗赚到了具身智能的第一桶金",
+      "source": "钛媒体",
+      "hot": "",
+      "url": "https://www.tmtpost.com/8000008.html",
+      "summary": "同样从机器狗起家，宇树赌未来，云深处赚当下。具身智能的第一桶金，为什么是机器狗先赚到？",
+      "date": "2026-05-24",
+      "time": "01:22"
+    },
+    {
+      "title": "能随意窃取数据！这款热门 AI 编程工具曝重大隐患",
+      "source": "钛媒体",
+      "hot": "",
+      "url": "https://www.tmtpost.com/7997541.html",
+      "summary": "Claude Code 沙箱防护形同虚设，全线版本中招。",
+      "date": "2026-05-24",
+      "time": "00:59"
+    },
+    {
+      "title": "曾助罗永浩还债，昔日“互联网招聘鼻祖”申请破产",
+      "source": "钛媒体",
+      "hot": "",
+      "url": "https://www.tmtpost.com/8000018.html",
+      "summary": "估值曾达2亿美元的“互联网招聘鼻祖”拉勾网，最终还是走到了破产的悬崖边。",
+      "date": "2026-05-24",
+      "time": "00:58"
+    },
+    {
+      "title": "宇树、云深处和乐聚：三份招股书，一条生存线",
+      "source": "钛媒体",
+      "hot": "",
+      "url": "https://www.tmtpost.com/8000072.html",
+      "summary": "“碾压式领先”的背后是行业最核心的竞争力",
+      "date": "2026-05-24",
+      "time": "00:52"
+    },
+    {
+      "title": "Edge AI Daily 早报（5月24日）",
+      "source": "钛媒体",
+      "hot": "",
+      "url": "https://www.tmtpost.com/8000103.html",
+      "summary": "Claude Opus 4.8疑似现身Google Vertex加速模型部署竞争，Mistral AI收购Emmi AI强化工业AI转型领先地位。微软Fara1.5浏览器智能体在基准测试中成功率超OpenAI竞品，谷歌DeepMind AlphaProof Nexus突破数学证明难题。Anthrop",
+      "date": "2026-05-24",
+      "time": "00:40"
+    },
+    {
+      "title": "慧慧饱饱关联公司曾变更投资人",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://",
+      "summary": "据媒体报道，近日，百万网红慧慧饱饱被合伙人前妻指控“知三当三”和“代孕生子”，引起网友关注。公开信息显示，慧慧饱饱原名沈聪慧。天眼查App显示，慧慧饱饱关联公司播乐文化传媒（南阳市宛城区）有限责任公司成立于2022年5月，法定代表人为邱金兴，注册资本100万人民币。股东信息显示，该公司目前由邱金兴、",
+      "date": "2026-05-22",
+      "time": "09:38"
+    },
+    {
+      "title": "拉勾网参保人数4年骤降92%",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://",
+      "summary": "据媒体报道，近日，曾红极一时的互联网行业垂直招聘平台拉勾网已经申请破产，经查询，拉勾招聘官方微博和公众号均已停更一年多，最后一条消息停留在2025年3月。天眼查App显示，拉勾网关联公司北京拉勾网络技术有限公司成立于2013年3月，法定代表人为许单单，注册资本约556万人民币，经营范围包括软件开发、",
+      "date": "2026-05-22",
+      "time": "02:53"
+    },
+    {
+      "title": "华晨宇告黑新进展",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://",
+      "summary": "近日，华晨宇委托律师事务所针对用户“危******号”启动名誉维权诉讼程序。该用户在网络平台中实施了针对委托人的涉嫌侵权行为。律师事务所已受托将上述微博用户起诉至法院，现已完成立案材料（身份信息披露阶段）的递交工作。待法院披露涉案微博用户实名身份信息后，本律师事务所将受托继续将该实名主体诉至法院，请",
+      "date": "2026-05-21",
+      "time": "08:29"
+    },
+    {
+      "title": "损毁明长城煤矿累计被罚超百万",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://",
+      "summary": "据媒体报道，5月20日，山西宁武县委宣传部发布情况通报称，针对媒体报道的神达朝凯煤业相关问题，已依法责令涉事企业停产整顿，对4人以涉嫌非法采矿罪、损毁文物罪采取刑事强制措施。天眼查App显示，涉事企业山西忻州神达朝凯煤业有限公司成立于2013年2月，法定代表人为王建军，注册资本5000万人民币，经营",
+      "date": "2026-05-21",
+      "time": "03:33"
+    },
+    {
+      "title": "BOSS直聘：第一季度营收20.7亿元，AI助力招聘端人均达成提升",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://www.cyzone.cn/article/834099.html",
+      "summary": "5月20日美股盘前，BOSS直聘（NASDAQ: BZ；HKEX: 2076）发布2026年第一季度财报。财报显示，2026年第一季度，公司实现营收20.7亿元，同比增长7.6%；其中来自企业客户的招聘收入为20.6亿元，同比上涨8.2%。截至2026年3月31日止的十二个月内，公司付费企业客户数达",
+      "date": "2026-05-21",
+      "time": "00:51"
+    },
+    {
+      "title": "&quot;电影+&quot;激活消费新引擎，现存电影相关企业超173万家",
+      "source": "创业邦",
+      "hot": "",
+      "url": "http://",
+      "summary": "2026年度全国电影总票房已突破143亿元。电影产业正跳出单一银幕经济，以\"电影+\"深度链接文旅、商圈、餐饮、文创等多元业态，把观影流量转化为消费增量。各地影院与商圈实现票根互通、双向优惠，打造集观影、餐饮、购物、休闲于一体的\"一站式\"消费体验。\"电影+\"模式正向县域和乡村延伸。以电影文化产业园为核",
+      "date": "2026-05-20",
+      "time": "06:02"
+    },
+    {
+      "title": "10 万元级双电机四驱！吉利银河星耀 7 MAX 要给友商上一课",
+      "source": "爱范儿",
+      "hot": "",
+      "url": "https://www.ifanr.com/1666802?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "summary": "多给一点冗余，说不定真能让通勤路变得有些不一样。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "date": "2026-05-23",
+      "time": "04:33"
+    },
+    {
+      "title": "早报｜国产手机618前集体降价/微信解释「2 分钟内可撤回」/买智能手表以后不能再刷医保",
+      "source": "爱范儿",
+      "hot": "",
+      "url": "https://www.ifanr.com/1666843?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "summary": "· DeepSeek 700 亿融资曝光\n· 1688 商家遭遇 2.36 万元「仅退款」，跨省维权后追回货款\n· 三星内存芯片员工达成临时奖金协议，平均奖金可达 34 万美元#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "date": "2026-05-23",
+      "time": "00:30"
+    },
+    {
+      "title": "岚图泰山 X8 上市：28.29 万元起，大五座 SUV 开始从「够坐」进入「够住」！",
+      "source": "爱范儿",
+      "hot": "",
+      "url": "https://www.ifanr.com/1666785?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "summary": "它还说「何以览胜，唯有泰山」。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "date": "2026-05-22",
+      "time": "13:20"
+    },
+    {
+      "title": "安克重塑安克｜安克消噪耳机体验",
+      "source": "爱范儿",
+      "hot": "",
+      "url": "https://www.ifanr.com/1666783?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "summary": "2026 年的旗舰耳机，不能只是耳机#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "date": "2026-05-22",
+      "time": "10:26"
+    },
+    {
+      "title": "Codex 这波大更新后，Mac 的含金量再次提升",
+      "source": "爱范儿",
+      "hot": "",
+      "url": "https://www.ifanr.com/1666706?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "summary": "要成为 OpenAI 最赚钱的产品#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "date": "2026-05-22",
+      "time": "09:43"
+    },
+    {
+      "title": "把安全生产这根弦绷得更紧",
+      "source": "百度热搜",
+      "hot": "",
+      "url": "https://www.baidu.com/s?wd=把安全生产这根弦绷得更紧",
+      "summary": "",
+      "date": "2026-05-24"
+    },
+    {
+      "title": "山西煤矿爆炸致82人遇难128人受伤",
+      "source": "百度热搜",
+      "hot": "",
+      "url": "https://www.baidu.com/s?wd=山西煤矿爆炸致82人遇难128人受伤",
+      "summary": "",
+      "date": "2026-05-24"
+    },
+    {
+      "title": "记者直击：凌晨3点救援机器人下井探测",
+      "source": "百度热搜",
+      "hot": "",
+      "url": "https://www.baidu.com/s?wd=记者直击：凌晨3点救援机器人下井探测",
+      "summary": "",
+      "date": "2026-05-24"
+    },
+    {
+      "title": "首位来自香港的航天员为何是她",
+      "source": "百度热搜",
+      "hot": "",
+      "url": "https://www.baidu.com/s?wd=首位来自香港的航天员为何是她",
+      "summary": "",
+      "date": "2026-05-24"
+    }
+  ],
+  "global_news": [
+    {
+      "title": "是时候谈谈我的 writerdeck 了",
+      "source": "Hacker News",
+      "hot": "↑293",
+      "url": "https://veronicaexplains.net/my-first-writerdeck/",
+      "summary": "",
+      "date": "2026-05-23",
+      "time": "18:45"
+    },
+    {
+      "title": "我的两部分办公桌设置（2025）",
+      "source": "Hacker News",
+      "hot": "↑221",
+      "url": "https://arslan.io/2025/11/18/my-two-part-desk-setup/",
+      "summary": "",
+      "date": "2026-05-20",
+      "time": "21:21"
+    },
+    {
+      "title": "论<dl> (2021)",
+      "source": "Hacker News",
+      "hot": "↑349",
+      "url": "https://benmyers.dev/blog/on-the-dl/",
+      "summary": "",
+      "date": "2026-05-23",
+      "time": "13:03"
+    },
+    {
+      "title": "特朗普政府表示绿卡申请者必须离开美国才能申请",
+      "source": "Hacker News",
+      "hot": "↑565",
+      "url": "https://www.nytimes.com/2026/05/22/us/politics/green-card-changes-trump.html",
+      "summary": "",
+      "date": "2026-05-22",
+      "time": "21:27"
+    },
+    {
+      "title": ".NET（好的，C#）最终获得联合类型",
+      "source": "Hacker News",
+      "hot": "↑136",
+      "url": "https://andrewlock.net/exploring-the-dotnet-11-preview-2-dotnet-gets-union-types/",
+      "summary": "",
+      "date": "2026-05-22",
+      "time": "12:28"
+    },
+    {
+      "title": "Hengefinder：查找太阳何时与您的街道对齐",
+      "source": "Hacker News",
+      "hot": "↑112",
+      "url": "https://victoriaritvo.com/blog/hengefinder/",
+      "summary": "",
+      "date": "2026-05-22",
+      "time": "20:39"
+    },
+    {
+      "title": "SpaceX 发射 Starship v3 火箭",
+      "source": "Hacker News",
+      "hot": "↑364",
+      "url": "https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-v3-megarocket-first-test-flight",
+      "summary": "",
+      "date": "2026-05-22",
+      "time": "23:41"
+    },
+    {
+      "title": "1980 年太空实验室计算机中的逆向工程电路",
+      "source": "Hacker News",
+      "hot": "↑82",
+      "url": "https://www.righto.com/2026/05/reverse-engineering-spacelab-computer.html",
+      "summary": "",
+      "date": "2026-05-23",
+      "time": "16:24"
+    },
+    {
+      "title": "80386微码反汇编",
+      "source": "Hacker News",
+      "hot": "↑220",
+      "url": "https://www.reenigne.org/blog/80386-microcode-disassembled/",
+      "summary": "",
+      "date": "2026-05-23",
+      "time": "12:11"
+    },
+    {
+      "title": "赚钱的艺术",
+      "source": "Hacker News",
+      "hot": "↑198",
+      "url": "https://kk.org/cooltools/book-freak-210-the-art-of-money-getting/",
+      "summary": "",
+      "date": "2026-05-23",
+      "time": "12:48"
+    },
+    {
+      "title": "随着印度屋顶太阳能市场吸引了大量风险投资的兴趣，SolarSquare 正在洽谈筹集至多 6000 万美元的资金",
+      "source": "TechCrunch",
+      "hot": "",
+      "url": "https://techcrunch.com/2026/05/23/solarsquare-in-talks-to-raise-up-to-60m-as-indias-rooftop-solar-market-draws-major-vc-interest/",
+      "summary": "SolarSquare could be valued at up to $500 million in the financing expected to close next month.",
+      "date": "2026-05-23",
+      "time": "20:03"
+    },
+    {
+      "title": "这些特殊的手机和应用程序功能可以帮助您免受间谍软件的侵害",
+      "source": "TechCrunch",
+      "hot": "",
+      "url": "https://techcrunch.com/2026/05/23/you-dont-have-to-click-anything-to-get-hacked-anymore-heres-how-to-fight-back/",
+      "summary": "Apple, Meta, and Google offer special security modes that provide your devices more secure against targeted spyware attacks. Here are how those modes ",
+      "date": "2026-05-23",
+      "time": "16:00"
+    },
+    {
+      "title": "法拉利正在利用 IBM 的 AI 打造 F1 超级粉丝",
+      "source": "TechCrunch",
+      "hot": "",
+      "url": "https://techcrunch.com/2026/05/23/ferrari-is-using-ai-to-create-f1-superfans/",
+      "summary": "IBM and Scuderia Ferrari HP take TechCrunch inside how they are redefining the fan experience.",
+      "date": "2026-05-23",
+      "time": "15:08"
+    },
+    {
+      "title": "核初创公司 Deep Fission 表示将再次上市，我有疑问",
+      "source": "TechCrunch",
+      "hot": "",
+      "url": "https://techcrunch.com/2026/05/23/nuclear-startup-deep-fission-says-its-going-public-again-and-i-have-questions/",
+      "summary": "Deep Fission is seeking an IPO that could raise $157 million, though investors may have trouble buying the nuclear startup's story.",
+      "date": "2026-05-23",
+      "time": "14:50"
+    },
+    {
+      "title": "埃隆·马斯克（Elon Musk）放弃了（在地球上）太阳能",
+      "source": "TechCrunch",
+      "hot": "",
+      "url": "https://techcrunch.com/2026/05/23/elon-musk-has-given-up-on-solar-power-on-earth/",
+      "summary": "Elon Muks's xAI has gone all in on natural gas, while SpaceX is obsessed with orbital data centers. What happened to the \"solar-electric economy\" he p",
+      "date": "2026-05-23",
+      "time": "13:00"
+    },
+    {
+      "title": "有效证书、被盗帐户：攻击者如何破坏 npm 最后的信任信号",
+      "source": "VentureBeat",
+      "hot": "",
+      "url": "https://venturebeat.com/security/npm-sigstore-provenance-stolen-identity-audit-grid-2026",
+      "summary": "On May 19, 633 malicious npm package versionspassed Sigstore provenance verification. They were cleared by the system because the attacker had generat",
+      "date": "2026-05-22",
+      "time": "22:21"
+    },
+    {
+      "title": "您的人工智能代理需要一个终端，而不仅仅是一个矢量数据库",
+      "source": "VentureBeat",
+      "hot": "",
+      "url": "https://venturebeat.com/orchestration/your-ai-agents-need-a-terminal-not-just-a-vector-database",
+      "summary": "When agentic workflows fail, developers often assume the problem lies in the underlying model’s reasoning abilities. In reality, the limited informati",
+      "date": "2026-05-22",
+      "time": "21:05"
+    },
+    {
+      "title": "D&B 包含 6.42 亿家企业的数据库是为人类而不是人工智能代理构建的。所以他们重建了它。",
+      "source": "VentureBeat",
+      "hot": "",
+      "url": "https://venturebeat.com/data/d-and-bs-database-of-642-million-businesses-was-built-for-humans-not-ai-agents-so-they-rebuilt-it",
+      "summary": "Dun & Bradstreet has spent over 180 years building a comprehensive commercial database. Its Commercial Graph, covering 642 million businesses and thei",
+      "date": "2026-05-22",
+      "time": "13:00"
+    },
+    {
+      "title": "阿里巴巴专有的Qwen3.7-Max可以自主运行35小时，并支持外部线束，例如Anthropic的Claude Code",
+      "source": "VentureBeat",
+      "hot": "",
+      "url": "https://venturebeat.com/technology/alibabas-proprietary-qwen3-7-max-can-run-for-35-hours-autonomously-and-supports-external-harnesses-like-anthropics-claude-code",
+      "summary": "The AI industry has fully entered the \"agent era,\" a paradigm where AI models do far more than generate text — they now actively plan, execute, and co",
+      "date": "2026-05-21",
+      "time": "23:53"
+    },
+    {
+      "title": "0.12% 的参数附加为 AI 代理提供了 RAG 无法提供的工作内存",
+      "source": "VentureBeat",
+      "hot": "",
+      "url": "https://venturebeat.com/orchestration/a-0-12-parameter-add-on-gives-ai-agents-the-working-memory-rag-cant",
+      "summary": "AI agents forget. Every time a coding assistant loses track of a debugging thread, or a data analysis agent re-ingests the same context it already pro",
+      "date": "2026-05-21",
+      "time": "19:00"
+    },
+    {
+      "title": "报告称，70% 的加密扳手攻击发生在法国",
+      "source": "CoinTelegraph",
+      "hot": "",
+      "url": "https://cointelegraph.com/news/70-crypto-wrench-attacks-happen-france?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "summary": "Centralized data collection is a honeypot for hackers and organized criminals looking to target crypto holders and their families, according to Bitcoi",
+      "date": "2026-05-23",
+      "time": "23:07"
+    },
+    {
+      "title": "分析师预测比特币将跌至 6 万美元水平，重回 2026 年低点",
+      "source": "CoinTelegraph",
+      "hot": "",
+      "url": "https://cointelegraph.com/news/analysts-forecast-bitcoin-crash-60k-february-low?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "summary": "The price of Bitcoin is about $75,800 at the time of publication, a nearly 40% decrease from the all-time high of about $126,000 reached in October 20",
+      "date": "2026-05-23",
+      "time": "20:49"
+    },
+    {
+      "title": "尽管加息的共识，沃什仍将降息：分析师",
+      "source": "CoinTelegraph",
+      "hot": "",
+      "url": "https://cointelegraph.com/news/warsh-cut-rate-despite-consensus-rate-hikes?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "summary": "The current Federal Funds target rate is between 350 and 375 basis points, which traders project to rise by at least 25 basis points in December 2026.",
+      "date": "2026-05-23",
+      "time": "18:20"
+    },
+    {
+      "title": "币安否认《华尔街日报》新报告称伊朗相关交易涉及 8.5 亿美元",
+      "source": "CoinTelegraph",
+      "hot": "",
+      "url": "https://cointelegraph.com/news/binance-denies-new-wsj-report-alleging-850m-in-iran-linked-transactions?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "summary": "Binance CEO Richard Teng denied a new WSJ report alleging $850 million in Iran-linked transactions flowed through the exchange to the IRGC.",
+      "date": "2026-05-23",
+      "time": "14:03"
+    },
+    {
+      "title": "这是今天加密货币领域发生的事情",
+      "source": "CoinTelegraph",
+      "hot": "",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "summary": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 a",
+      "date": "2026-05-23",
+      "time": "14:02"
+    },
+    {
+      "title": "欧洲央行警告欧盟财长放宽欧元稳定币规则将削弱银行实力：路透",
+      "source": "The Block",
+      "hot": "",
+      "url": "https://www.theblock.co/post/402427/ecb-warns-eu-finance-ministers-that-easing-euro-stablecoin-rules-would-weaken-banks-reuters?utm_source=rss&utm_medium=rss",
+      "summary": "ECB President Christine Lagarde warned the changes would destabilize bank funding and weaken interest-rate transmission.",
+      "date": "2026-05-23",
+      "time": "20:21"
+    },
+    {
+      "title": "FTX 前律师事务所、审计师同意支付 6600 万美元以解决客户欺诈索赔",
+      "source": "The Block",
+      "hot": "",
+      "url": "https://www.theblock.co/post/402425/ftxs-former-law-firm-auditor-agree-to-pay-66-million-to-settle-customer-claims-over-fraud?utm_source=rss&utm_medium=rss",
+      "summary": "The law firm, Fenwick & West, denied wrongdoing and still faces a separate $525 million suit in Washington that is not covered by Friday's deal.",
+      "date": "2026-05-23",
+      "time": "17:50"
+    },
+    {
+      "title": "以太坊基金连续 10 天流出，现货比特币 ETF 损失 12.6 亿美元，这是自 1 月底以来最糟糕的一周",
+      "source": "The Block",
+      "hot": "",
+      "url": "https://www.theblock.co/post/402420/spot-bitcoin-etfs-shed-1-26-billion-in-worst-week-since-late-january-as-ether-funds-see-10-day-outflow-streak?utm_source=rss&utm_medium=rss",
+      "summary": "BlackRock's IBIT now holds $61.1 billion in net assets against $64.8 billion in cumulative inflows, a difference of roughly $3.7 billion.",
+      "date": "2026-05-23",
+      "time": "15:19"
+    },
+    {
+      "title": "新比特币战略储备法案下调100万枚比特币购买目标，增加20年锁定期",
+      "source": "The Block",
+      "hot": "",
+      "url": "https://www.theblock.co/post/402264/new-strategic-bitcoin-reserve-bill-drops-btc-purchase-target-adds-lockup?utm_source=rss&utm_medium=rss",
+      "summary": "The bill would require quarterly public proof-of-reserve disclosures and third-party audits of government bitcoin holdings.",
+      "date": "2026-05-22",
+      "time": "19:45"
+    },
+    {
+      "title": "由于对第三方代币的担忧，美国证券交易委员会推迟了代币化资产豁免：彭博法",
+      "source": "The Block",
+      "hot": "",
+      "url": "https://www.theblock.co/post/402409/sec-delays-tokenized-asset-exemption-third-party-tokens-bloomberg-law?utm_source=rss&utm_medium=rss",
+      "summary": "The SEC has delayed its plan for an anticipated exemption that would clarify the agency's stance on tokenized assets, Bloomberg Law reported.",
+      "date": "2026-05-22",
+      "time": "19:29"
+    }
+  ],
+  "analysis": {
+    "date": "2026-05-24",
+    "mode": "daily",
+    "overall_summary": "2026年AI产业化进入深水区，杀手级应用争夺从通用走向垂直，AI医生、机器人大脑芯片、AI HR工具相继涌现。单纯套壳大模型时代终结，懂业务+懂AI的复合型人才与产品成为稀缺资产。具身智能赛道机器狗率先商业化验证，为行业提供第一桶金范本。中国市场AI产业化节奏加速，垂直场景深耕是2026年核心创业主题。",
+    "industries": [
+      {
+        "emoji": "🤖",
+        "name": "AI / 科技",
+        "news_connection": "亦庄AI大会共识：套壳短命，垂直深耕+具身智能+AI原生人才是三大主线。",
+        "trend": "AI应用从「功能演示」转向「产业前线落地」，能与业务深度融合的垂直AI产品进入爆发期。机器人大脑芯片获数亿融资，具身智能硬件化趋势明确。",
+        "opportunities": [
+          {
+            "title": "垂直行业AI决策Agent",
+            "description": "聚焦制造、医疗、法律等行业低频高价值决策场景，构建专业知识图谱+Agent工作流，替代人工完成复杂判断。非套壳，而是深度业务建模。王小川转型AI医生印证此路径可行，企业付费意愿强且壁垒高。",
+            "business_model": "向B端企业收取年度SaaS订阅费+决策量计费，头部客户定制化服务。",
+            "ai_angle": "以领域大模型微调+RAG知识库+多Agent协作，实现专业决策自动化。",
+            "target_customer": "中大型医疗机构、律所、制造企业",
+            "market_size": "千亿级B端AI应用市场",
+            "difficulty": "高",
+            "urgency": "高",
+            "first_step": "锁定一个细分行业，访谈20位从业者提炼3个高频低频决策痛点，搭建MVP原型。"
+          },
+          {
+            "title": "AI原生人才评估与培训平台",
+            "description": "会议共识指出懂AI正在贬值，真正稀缺是「业务+AI」复合人才。搭建企业AI人才评估体系，提供情景化测评+定向培训，帮助企业识别并激活内部20%积极转型者，比外部招聘成本低80%。",
+            "business_model": "企业按人头收取评估费+按模块订阅培训课程，招聘平台导流分成。",
+            "ai_angle": "AI模拟真实业务场景出题，动态追踪学员能力成长曲线，个性化推送训练内容。",
+            "target_customer": "500人以上传统企业HR部门",
+            "market_size": "百亿级企业培训市场",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与3家大型传统企业HR合作，免费跑一轮AI人才摸底评估，验证评估指标有效性。"
+          },
+          {
+            "title": "机器人感知模组SaaS平台",
+            "description": "维泛智能获数亿融资印证机器人大脑芯片热度。面向中小机器人厂商提供「感知即服务」，将SLAM、视觉、力控等算法模块化封装成API，降低具身智能开发门槛，类比云计算对服务器的革命。",
+            "business_model": "按API调用量计费+硬件模组销售+联合研发分成。",
+            "ai_angle": "端侧小模型+云端大模型协同推理，实现低延迟高精度的实时感知决策。",
+            "target_customer": "中小机器人整机厂商、高校实验室",
+            "market_size": "具身智能万亿赛道，模组市场超百亿",
+            "difficulty": "高",
+            "urgency": "中",
+            "first_step": "开源一个轻量级机器人感知SDK，吸引开发者社区，统计最高频调用需求优先商业化。"
+          }
+        ],
+        "watch_out": "Claude Code安全漏洞警示AI工具链安全隐患，To B产品需将数据安全合规列为核心竞争力而非附加项。"
+      },
+      {
+        "emoji": "🐾",
+        "name": "宠物 / 宠物经济",
+        "news_connection": "消费升级与AI渗透并行，宠物主对专业化、个性化服务需求持续攀升。",
+        "trend": "中国宠物经济突破6000亿，年轻一代宠物主「拟人化」消费升级，AI诊断与行为分析成为差异化切入口。",
+        "opportunities": [
+          {
+            "title": "AI宠物健康管理助手",
+            "description": "类比王小川做AI医生逻辑，聚焦宠物慢病管理与日常健康监测。用户上传症状视频+可穿戴数据，AI给出初步判断并推荐就诊。降低主人焦虑，提升兽医诊前效率，形成线上线下闭环。",
+            "business_model": "订阅制健康会员+导流宠物医院分成+保险公司联名佣金。",
+            "ai_angle": "宠物病历多模态大模型，结合视觉识别和行为分析判断健康风险。",
+            "target_customer": "25-35岁城市宠物主",
+            "market_size": "宠物医疗市场超800亿",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与5家连锁宠物医院合作，收集脱敏病历数据，训练宠物常见病初诊模型。"
+          },
+          {
+            "title": "宠物行为AI陪伴硬件",
+            "description": "结合AI眼镜热点趋势，开发具备宠物行为识别的智能摄像+互动玩具设备。主人不在家时AI自动识别宠物情绪，触发喂食、逗玩、视频通话，解决分离焦虑痛点，硬件+服务双重变现。",
+            "business_model": "硬件买断+月度AI服务订阅，宠物食品耗材自动补货分成。",
+            "ai_angle": "端侧视觉模型实时识别宠物行为状态，本地推理保护隐私。",
+            "target_customer": "独居年轻宠物主、双职工家庭",
+            "market_size": "智能宠物硬件市场百亿级",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "采购现成摄像模组，开发宠物行为识别APP验证用户付费意愿，硬件后置。"
+          },
+          {
+            "title": "宠物营养AI定制餐饮",
+            "description": "金粒门全国化显示零食赛道竞争加剧，差异化在于个性化。用AI分析宠物品种、年龄、体检数据，定制每周营养配方并配送鲜食，订阅模式锁定复购，客单价是传统粮食3倍以上。",
+            "business_model": "订阅制鲜食配送，首月低价获客，长期锁定复购。",
+            "ai_angle": "AI营养师根据宠物体检报告动态调整配方，个性化推荐升级迭代。",
+            "target_customer": "高消费意愿宠物主，一线及新一线城市",
+            "market_size": "宠物食品市场超1500亿",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "开发AI营养问卷小程序，测试用户完成率和付费转化，积累300个种子用户再建供应链。"
+          }
+        ],
+        "watch_out": "鲜食配送供应链管理复杂、食品安全监管趋严，需提前布局合规资质与冷链体系。"
+      },
+      {
+        "emoji": "📚",
+        "name": "教育 / EdTech",
+        "news_connection": "教育部拟同意设置34所新大学，AI人才培养缺口加剧，产教融合成政策重点。",
+        "trend": "传统教育机构加速AI化转型，但「AI工具堆砌」陷阱普遍存在，真正有效的AI自适应学习仍是蓝海。职业技能再教育需求因AI替代就业而激增。",
+        "opportunities": [
+          {
+            "title": "职场人AI技能再教育平台",
+            "description": "亦庄大会指出懂业务才是稀缺，平台聚焦在职人群「用AI提升本职工作效率」的实战培训。非理论课，而是行业场景化练习，金融、法律、制造各垂直模块，企业采购为主要获客渠道。",
+            "business_model": "企业团购课程包+个人订阅，政府职业培训补贴申报。",
+            "ai_angle": "AI模拟真实工作任务出题，实时反馈操作路径优化建议。",
+            "target_customer": "传统行业在职员工、企业HR采购方",
+            "market_size": "职业培训市场超5000亿",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "选定金融行业，开发10节「Excel+AI提效」实战课，投放LinkedIn和脉脉验证付费意愿。"
+          },
+          {
+            "title": "K12 AI自适应学科辅导",
+            "description": "聚焦数学、物理高考刚需科目，AI实时分析错题归因，生成专属薄弱点训练计划。区别于猿辅导等平台，主打「无需真人教师」的纯AI路线，边际成本接近零，下沉市场定价竞争力强。",
+            "business_model": "按学期订阅，家长端低价引流，学校渠道批量采购。",
+            "ai_angle": "知识图谱+强化学习，动态调整题目难度与知识点复习频率。",
+            "target_customer": "三四线城市初高中生家长",
+            "market_size": "K12课外辅导市场千亿级",
+            "difficulty": "高",
+            "urgency": "中",
+            "first_step": "招募100名初中生免费测试，收集错题数据验证AI归因准确率，达80%以上再推广。"
+          },
+          {
+            "title": "高校产教融合AI实训平台",
+            "description": "34所新大学获批背景下，高校急需AI实践课程体系。提供「AI+行业」实训仿真平台，学生在虚拟企业环境中完成真实项目，毕业即上岗。学校付费买课，企业付费招聘形成双边收入。",
+            "business_model": "向高校收取平台年费，向企业收取精准招聘导流费。",
+            "ai_angle": "AI生成行业真实案例仿真环境，智能评估学生实操能力并出具报告。",
+            "target_customer": "新建本科院校、职业院校",
+            "market_size": "高等职业教育市场超千亿",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "与1-2所新建本科院校教务处谈合作，免费提供一门AI实训课，收集学校反馈打磨产品。"
+          }
+        ],
+        "watch_out": "教育监管政策频繁变动，学科类培训红线仍在，需严格区分学科辅导与素质教育边界。"
+      },
+      {
+        "emoji": "🛍️",
+        "name": "消费 / 零售 / 电商",
+        "news_connection": "金粒门加速全国化、千禧年老式漂亮饭翻红，显示消费者回归性价比与情绪价值双轨并行。",
+        "trend": "精致消费退潮，「体面而高性价比」成新消费共识；同时AI浓度过高反伤转化，人机共生的零售体验设计成为核心命题。",
+        "opportunities": [
+          {
+            "title": "AI导购+人工收尾混合电商",
+            "description": "亦庄大会案例显示AI浓度降至50%反而转化率提升50%。打造AI快速筛选+人工临门一脚的导购模式，AI负责千人千面推荐和FAQ，人工专注成交关键节点，适合客单价500元以上品类。",
+            "business_model": "向品牌方收取GMV分成或导购坐席SaaS费，按效果付费。",
+            "ai_angle": "AI实时分析用户浏览行为预判购买意向，精准触发人工介入时机。",
+            "target_customer": "美妆、家电、家居等中高客单品牌",
+            "market_size": "电商导购市场超千亿",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "接入1个美妆品牌直播间，部署AI意向识别+人工话术提示系统，A/B测试转化率提升数据。"
+          },
+          {
+            "title": "怀旧情绪消费内容电商",
+            "description": "千禧年饭局翻红印证情绪消费强需求。打造以「年代感」为主题的内容电商账号矩阵，挖掘80后90后集体记忆商品，短视频种草+私域复购，选品标准是情绪溢价而非功能性。",
+            "business_model": "自营选品+品牌白牌代销，直播带货+私域复购双轮驱动。",
+            "ai_angle": "AI分析各年代热门文化关键词，预测下一个情绪爆点商品方向。",
+            "target_customer": "28-42岁城市中产，以女性为主",
+            "market_size": "情绪消费市场超千亿",
+            "difficulty": "低",
+            "urgency": "高",
+            "first_step": "开设一个千禧年主题抖音账号，测试10条怀旧内容视频，找到最高互动率的情绪锚点。"
+          },
+          {
+            "title": "下沉市场新鲜零食连锁",
+            "description": "金粒门粤鄂同步扩张验证新鲜零食连锁模式可行。聚焦三四线城市，以低于一线20%的租金成本+本地化选品，复制「量贩零食」模式但主打「当日现制」差异，客流与利润空间优于一线。",
+            "business_model": "加盟为主降低自营风险，总部供应链输出收取加盟费+食材差价。",
+            "ai_angle": "AI预测各区域门店日销量，动态调整备货计划，降低损耗率至5%以下。",
+            "target_customer": "三四线城市年轻消费者，加盟商",
+            "market_size": "休闲零食市场超万亿",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "选择1个三线城市开设直营标杆店，跑通AI补货系统，损耗率达标后开放加盟招募。"
+          }
+        ],
+        "watch_out": "新鲜零食供应链损耗与食品安全是命门，AI库存管理必须在扩张前跑通，否则规模越大亏损越大。"
+      },
+      {
+        "emoji": "₿",
+        "name": "加密货币 / Web3 / DeFi",
+        "news_connection": "特朗普政府绿卡新政引发全球资产配置焦虑，跨境资产流动需求升温，为加密合规工具带来机遇。",
+        "trend": "2026年全球监管框架逐步明朗化，合规赛道成为Web3创业主流；AI+DeFi融合加速，链上自动化策略执行进入实用阶段。",
+        "opportunities": [
+          {
+            "title": "AI链上合规风控SaaS",
+            "description": "随着各国加密监管收紧，交易所与机构急需KYC/AML自动化工具。AI实时分析链上地址风险，自动生成合规报告，满足中国持牌机构出海合规需求。监管越严需求越刚性，壁垒在数据积累。",
+            "business_model": "向持牌交易所、资产管理机构收取年度合规SaaS订阅费。",
+            "ai_angle": "图神经网络分析链上交易模式，识别混币、洗钱等风险行为，准确率超95%。",
+            "target_customer": "持牌加密交易所、Web3资管机构",
+            "market_size": "全球加密合规市场超百亿美元",
+            "difficulty": "高",
+            "urgency": "高",
+            "first_step": "申请香港VASP牌照相关资质，与1家持牌交易所谈数据合作，开发链上风险评分MVP。"
+          },
+          {
+            "title": "AI驱动的DeFi自动策略平台",
+            "description": "链上流动性挖矿、套利策略复杂度超普通用户认知，AI Agent自动执行收益优化策略，用户只需存入资产。类比「DeFi版余额宝」，目标非Crypto OG，而是有闲置资产的普通投资者。",
+            "business_model": "按年化收益抽取15-20%表现费，无收益不收费。",
+            "ai_angle": "AI实时监控数百个DeFi协议收益率，动态再平衡最优策略组合。",
+            "target_customer": "有稳定币资产的加密新手，50万以上持有者",
+            "market_size": "DeFi TVL已超千亿美元",
+            "difficulty": "高",
+            "urgency": "中",
+            "first_step": "在以太坊测试网部署AI策略机器人，模拟跑6个月历史数据，年化超15%再上线主网。"
+          },
+          {
+            "title": "跨境资产配置Web3工具",
+            "description": "美国绿卡新政引发高净值人群跨境资产焦虑，Web3提供无国界资产转移方案。开发合规包装的稳定币跨境工具，聚焦华人高净值群体，提供法律+链上双轨方案，降低合规风险。",
+            "business_model": "按跨境转移金额收取0.3-0.5%手续费，高端客户理财顾问服务收年费。",
+            "ai_angle": "AI实时匹配最优跨境路径，综合评估汇率、Gas费、合规风险三维成本。",
+            "target_customer": "有海外资产配置需求的华人高净值人群",
+            "market_size": "华人跨境资产管理市场超万亿",
+            "difficulty": "高",
+            "urgency": "中",
+            "first_step": "在香港注册合规实体，取得MSO牌照，与1家稳定币发行方洽谈合作协议。"
+          }
+        ],
+        "watch_out": "中国境内加密监管红线不可触碰，所有产品需以香港或海外市场为主体，避免触发内地监管风险。"
+      },
+      {
+        "emoji": "💻",
+        "name": "芯片 / 半导体",
+        "news_connection": "维泛智能完成数亿元融资，国内首家原生机器人「大脑芯片」企业崛起，标志着具身智能专用芯片赛道正式开启。",
+        "trend": "通用GPU算力内卷加剧，垂直场景专用芯片（机器人、边缘推理）成为新蓝海。国产替代压力下，软硬协同的「场景定制芯片」将成主流路径。",
+        "opportunities": [
+          {
+            "title": "机器人专用推理芯片设计",
+            "description": "面向具身智能机器人的低功耗实时推理芯片，解决通用GPU在机器人端侧能耗高、延迟大的痛点，切入宇树、云深处等本土机器人厂商供应链。",
+            "business_model": "芯片授权+定制开发服务费，随机器人出货量收取IP版税",
+            "ai_angle": "AI编译器自动优化神经网络模型到芯片指令集，降低适配成本",
+            "target_customer": "国内机器人整机厂商、高校具身智能实验室",
+            "market_size": "2026年国内具身智能芯片市场预估超50亿元",
+            "difficulty": "高",
+            "urgency": "高",
+            "first_step": "联合1-2家机器人厂商做联合定义，输出详细算力/功耗需求白皮书"
+          },
+          {
+            "title": "边缘AI推理模组标准化平台",
+            "description": "面向工厂、零售、医疗等场景的标准化边缘推理模组，封装主流小模型，提供开箱即用的本地AI能力，规避数据出境合规风险。",
+            "business_model": "模组硬件销售+云端模型订阅双收入，SaaS化管理平台收年费",
+            "ai_angle": "集成量化压缩技术，将7B级模型部署至低成本ARM芯片",
+            "target_customer": "中小制造企业、连锁零售品牌IT部门",
+            "market_size": "中国边缘计算市场2026年超800亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "选定1个垂直场景（如质检），完成3家工厂POC验证并收费"
+          }
+        ],
+        "watch_out": "国产芯片生态软件配套薄弱，CUDA生态迁移成本高，客户采用周期长达12-18个月。"
+      },
+      {
+        "emoji": "🦾",
+        "name": "机器人 / 具身智能",
+        "news_connection": "宇树赌未来押注通用人形，云深处靠机器狗率先盈利，两条路径揭示具身智能「商业化先行」与「技术引领」的分野。",
+        "trend": "机器狗已验证商业闭环，人形机器人量产临界点将至。「大脑芯片+云端大模型+本地执行」三层架构成为行业共识，垂直场景部署商机爆发。",
+        "opportunities": [
+          {
+            "title": "工业巡检机器狗SaaS运营商",
+            "description": "以轻资产模式租赁机器狗并叠加AI巡检SaaS，为化工、电力、矿山提供7×24小时自主巡检服务，将硬件成本转化为按次计费的服务订阅。",
+            "business_model": "机器狗租赁费+巡检数据分析订阅费，按异常事件数量阶梯收费",
+            "ai_angle": "多模态视觉大模型实时识别设备异常、气体泄漏、仪表读数",
+            "target_customer": "石化、电力、矿山等高危行业安全管理部门",
+            "market_size": "工业巡检机器人市场2026年超200亿元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与云深处或宇树签订转售协议，锁定1家电厂做3个月免费试点"
+          },
+          {
+            "title": "机器人本体运动技能数据集市",
+            "description": "构建垂直化机器人操作技能数据集平台，收集真实场景的示教数据，以数据订阅形式售卖给机器人厂商，解决其最稀缺的具身训练数据瓶颈。",
+            "business_model": "数据集订阅年费+定制数据采集服务费",
+            "ai_angle": "用生成式AI做数据增强，将100条真实数据扩展为10000条仿真数据",
+            "target_customer": "人形机器人研发团队、高校具身智能实验室",
+            "market_size": "全球机器人训练数据市场预估2027年超50亿美元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与3所高校机器人实验室合作，建立第一批家庭场景操作技能数据集"
+          }
+        ],
+        "watch_out": "硬件可靠性和售后成本极高，轻资产模式需谨慎评估单台ROI，避免陷入硬件补贴陷阱。"
+      },
+      {
+        "emoji": "💰",
+        "name": "金融 / 金融科技",
+        "news_connection": "永辉超市向王健林等追债超36亿，零售业资产重组频发，催生企业债务追踪与风险预警的智能化需求。",
+        "trend": "AI驱动的风控和合规工具成刚需，中小企业融资决策场景亟待智能化提效。",
+        "opportunities": [
+          {
+            "title": "企业舆情债务风险AI预警",
+            "description": "实时监控企业司法、工商、舆情数据，用AI预判债务违约风险，服务律所和供应链金融机构。",
+            "business_model": "按被监控企业数量收取SaaS年费",
+            "ai_angle": "大模型解读法律文书和财报，自动生成风险评分报告",
+            "target_customer": "商业律所、供应链金融平台、保理公司",
+            "market_size": "国内企业征信市场超500亿元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "爬取100家上市公司近三年数据，训练违约预测模型并验证准确率"
+          },
+          {
+            "title": "中小企业AI财务决策助手",
+            "description": "为中小企主提供AI驱动的现金流预测、税务优化和融资方案匹配，替代昂贵财务顾问。",
+            "business_model": "基础版免费获客，高级分析功能按月订阅",
+            "ai_angle": "接入银行流水和发票数据，大模型自动生成经营诊断报告",
+            "target_customer": "年营收500万-5000万的中小企业主",
+            "market_size": "国内中小企业财税SaaS市场超300亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "与1家银行或记账公司合作，获取脱敏数据并开发MVP版本"
+          }
+        ],
+        "watch_out": "金融数据合规监管严格，与持牌机构合作是前提，避免无证经营风险。"
+      },
+      {
+        "emoji": "🎬",
+        "name": "媒体 / 娱乐 / 内容",
+        "news_connection": "36氪密集报道AI产业大会，内容生产端AI工具渗透率极高，但「套壳」内容同质化严重。",
+        "trend": "AI降低内容生产门槛，但分发和信任成新瓶颈，垂直深度内容和互动体验将溢价。",
+        "opportunities": [
+          {
+            "title": "垂直行业AI播客自动生产平台",
+            "description": "输入行业报告和新闻，AI自动生成专业播客脚本并合成双人对话音频，服务B端品牌内容营销。",
+            "business_model": "按期数收费或年度内容订阅套餐",
+            "ai_angle": "RAG+TTS技术实现高质量行业向音频内容全自动生产",
+            "target_customer": "金融、医疗、科技领域的品牌市场部门",
+            "market_size": "国内播客广告市场2026年预估超20亿元",
+            "difficulty": "低",
+            "urgency": "中",
+            "first_step": "做10期金融行业AI播客样本，在小宇宙测试用户完播率"
+          },
+          {
+            "title": "AI驱动的互动剧情短剧平台",
+            "description": "用户可在关键节点做剧情选择，AI实时生成分支剧情视频，打造「无限结局」短剧体验。",
+            "business_model": "解锁付费剧情分支+虚拟道具内购",
+            "ai_angle": "视频生成大模型实现低成本多分支内容制作",
+            "target_customer": "18-30岁短剧重度用户",
+            "market_size": "国内短剧市场2025年超500亿元",
+            "difficulty": "高",
+            "urgency": "中",
+            "first_step": "用现有短剧素材+AI改写脚本，做3条分支剧情的互动demo测试留存"
+          }
+        ],
+        "watch_out": "AI生成内容版权归属模糊，平台监管政策收紧风险较高。"
+      },
+      {
+        "emoji": "👟",
+        "name": "潮流 / 时尚 / 运动",
+        "news_connection": "千禧年老式漂亮饭翻红，说明「复古审美」和「高性价比社交体验」是当前消费者核心诉求，时尚领域同理。",
+        "trend": "Z世代追求个性表达，AI个性化设计和虚拟试穿将重塑购买决策链路，「小众定制+快速交付」成趋势。",
+        "opportunities": [
+          {
+            "title": "AI个性化球鞋定制平台",
+            "description": "用户输入偏好关键词，AI生成专属配色方案并对接工厂小批量生产，主打潮玩人群。",
+            "business_model": "定制溢价收费，单双利润空间300-800元",
+            "ai_angle": "AIGC生成设计图+3D虚拟试穿，降低决策门槛",
+            "target_customer": "18-35岁潮鞋爱好者、球鞋二次元文化圈",
+            "market_size": "国内定制鞋服市场超百亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "接入Midjourney或稳定扩散模型，做100个球鞋设计demo并在小红书测试转化"
+          },
+          {
+            "title": "运动数据驱动的AI装备选型顾问",
+            "description": "通过手机摄像头分析跑姿、步态，推荐最适合的跑鞋和运动装备，嵌入运动品牌App提升转化。",
+            "business_model": "向品牌收取流量导购佣金或SaaS接入费",
+            "ai_angle": "姿态识别AI+RAG装备知识库实现个性化推荐",
+            "target_customer": "跑步爱好者及运动品牌电商渠道",
+            "market_size": "国内运动鞋服市场超4000亿元",
+            "difficulty": "低",
+            "urgency": "中",
+            "first_step": "与1家跑步APP合作，接入姿态检测API开发最小可行产品"
+          }
+        ],
+        "watch_out": "定制供应链管理复杂，小批量生产成本控制是核心难题。"
+      },
+      {
+        "emoji": "🎌",
+        "name": "动漫 / 二次元 / IP",
+        "news_connection": "泡泡玛特8.8亿买楼彰显IP经济强势，二次元消费力持续爆发，AI将加速IP内容生产和个性化衍生品开发。",
+        "trend": "AI降低原创IP开发门槛，虚拟偶像和AI陪伴型IP将成新增长极，个性化衍生品需求激增。",
+        "opportunities": [
+          {
+            "title": "AI原创IP孵化工作室",
+            "description": "用AI生成IP形象、世界观和短内容，以低成本测试市场反馈，再投入被验证IP进行商业化开发。",
+            "business_model": "IP授权费+衍生品分成+粉丝订阅",
+            "ai_angle": "AIGC生成角色设定和短漫，A/B测试高效筛选爆款潜力IP",
+            "target_customer": "B站、抖音二次元内容消费者",
+            "market_size": "国内泛二次元用户超5亿，IP衍生品市场超千亿",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "用AI批量生成20个IP形象，在小红书和B站测试互动数据，选出top3深度运营"
+          },
+          {
+            "title": "AI驱动的二次元周边定制平台",
+            "description": "用户上传喜爱角色，AI生成个性化周边设计并对接POD工厂，实现零库存按需生产。",
+            "business_model": "平台抽佣15-25%+设计师分成激励",
+            "ai_angle": "风格迁移AI将用户创意快速转化为可印刷的商品设计稿",
+            "target_customer": "二次元重度用户、同人创作者",
+            "market_size": "国内动漫周边市场超200亿元",
+            "difficulty": "低",
+            "urgency": "中",
+            "first_step": "接入POD供应商API，开发微信小程序MVP，联系5位二次元博主做首批测试"
+          }
+        ],
+        "watch_out": "IP版权争议风险高，AI生成内容涉及原作版权的法律边界仍不清晰。"
+      },
+      {
+        "emoji": "🚗",
+        "name": "出行 / 交通",
+        "news_connection": "小米YU7临时降价显示新能源车价格战白热化，出行赛道竞争从硬件转向软件和服务体验。",
+        "trend": "自动驾驶数据闭环加速，车载AI助手从信息娱乐延伸至行程规划和车辆健康管理，出行即服务模式深化。",
+        "opportunities": [
+          {
+            "title": "新能源车主AI健康管家",
+            "description": "基于OBD数据和车辆日志，AI预测电池衰减、故障风险，主动推送保养建议和最优保险方案。",
+            "business_model": "车主端免费，向4S店和保险公司收取线索导流佣金",
+            "ai_angle": "时序数据分析模型预测电池SOH，准确率超90%",
+            "target_customer": "新能源车主，尤其二三线城市维修资源不足群体",
+            "market_size": "国内新能源车保有量2026年预计超3000万辆",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "与1家新能源车品牌合作获取脱敏数据，训练电池健康预测模型"
+          },
+          {
+            "title": "城市货运AI调度优化SaaS",
+            "description": "为同城货运平台和物流公司提供AI路线优化和运力匹配，降低空驶率和配送成本。",
+            "business_model": "按优化订单量收取SaaS费用，节省成本分成",
+            "ai_angle": "强化学习模型实时优化多车多单配送路径",
+            "target_customer": "同城货运平台、B2B物流企业",
+            "market_size": "国内城配物流市场超万亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "对接货拉拉或快狗开放API，在1个城市跑通调度优化试点"
+          }
+        ],
+        "watch_out": "车载数据安全和用户隐私合规要求极严，需提前布局数据脱敏和合规体系。"
+      },
+      {
+        "emoji": "⚡",
+        "name": "能源 / 清洁能源",
+        "news_connection": "印度屋顶太阳能市场吸引大量风险投资，全球家庭分布式光伏需求爆发，中国作为最大光伏制造国具备天然产业链优势。",
+        "trend": "分布式储能+光伏一体化加速落地，AI能源管理系统成为降本增效核心工具，虚拟电厂概念逐步商业化。",
+        "opportunities": [
+          {
+            "title": "工商业储能AI能源管理系统",
+            "description": "为工厂和商业楼宇提供AI驱动的储充放智能调度，实现峰谷套利最大化，加速储能投资回收期。",
+            "business_model": "软件年费+节省电费按比例分成，IRR分成比例15-20%",
+            "ai_angle": "AI预测电价峰谷、负荷曲线，自动制定最优充放电策略",
+            "target_customer": "有自备储能设备的工厂和商业综合体",
+            "market_size": "国内工商业储能市场2026年超500亿元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "接入宁德时代或比亚迪储能系统API，在1家工厂验证节电收益数据"
+          },
+          {
+            "title": "屋顶光伏AI一站式服务平台",
+            "description": "AI评估屋顶条件和收益预测，撮合安装商、金融机构和用户，提供从选型到贷款的全链路服务。",
+            "business_model": "安装导流佣金+金融产品分销收益",
+            "ai_angle": "卫星遥感+AI评估屋顶朝向、遮挡、面积，生成收益报告",
+            "target_customer": "有自有房屋的工厂主、农村用户",
+            "market_size": "国内屋顶光伏市场2025年新增装机超50GW",
+            "difficulty": "低",
+            "urgency": "高",
+            "first_step": "开发微信小程序，用户上传屋顶照片即可获得AI收益估算报告"
+          }
+        ],
+        "watch_out": "补贴政策变动频繁，光伏安装商资质参差不齐，平台需建立严格供应商筛选机制。"
+      },
+      {
+        "emoji": "🏥",
+        "name": "医疗健康",
+        "news_connection": "王小川转型造AI医生，《柳叶刀》揭示全球近12亿人有精神障碍，心理健康AI赛道紧迫性凸显。",
+        "trend": "AI心理健康助手从情绪陪伴向临床辅助延伸，低线城市心理医生严重不足提供巨大替代空间。",
+        "opportunities": [
+          {
+            "title": "AI心理健康筛查与干预平台",
+            "description": "面向企业员工和学生提供AI心理状态筛查和轻度干预，严重案例转介专业医生。",
+            "business_model": "向企业和学校收取EAP心理健康服务年费",
+            "ai_angle": "对话式大模型识别情绪危机信号并触发分级干预流程",
+            "target_customer": "500人以上企业HR、高校心理健康中心",
+            "market_size": "国内EAP市场超100亿元且快速增长",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与1所高校签订试点协议，完成PHQ-9量表数字化和AI问诊MVP"
+          }
+        ],
+        "watch_out": "心理健康属高风险医疗场景，AI误判可能引发严重后果，需严格人工审核兜底机制。"
+      },
+      {
+        "emoji": "🌾",
+        "name": "农业 / 食品",
+        "news_connection": "新鲜零食品牌「金粒门」加速全国化，千禧年老式漂亮饭翻红，消费者回归「真实食材+高性价比」价值主张。",
+        "trend": "新鲜食品供应链效率成核心竞争力，AI需求预测和产地直采将重塑传统零食渠道利润结构。",
+        "opportunities": [
+          {
+            "title": "AI驱动的生鲜损耗预测系统",
+            "description": "为生鲜连锁和社区团购平台提供AI订货量预测，将损耗率从行业平均15%降至5%以内。",
+            "business_model": "按门店数量收取SaaS月费，损耗节省额分成",
+            "ai_angle": "时序预测模型结合天气、节假日、促销等因子精准预测销量",
+            "target_customer": "生鲜连锁超市、社区团购平台",
+            "market_size": "国内生鲜零售市场超5万亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "获取1家连锁超市6个月历史销售数据，训练预测模型并对比损耗改善效果"
+          }
+        ],
+        "watch_out": "生鲜数据标准化程度低，历史数据质量差影响模型效果，需投入大量数据清洗工作。"
+      },
+      {
+        "emoji": "🏭",
+        "name": "制造业 / 工业",
+        "news_connection": "边缘AI芯片和机器人巡检需求双驱动，工厂智能化改造进入「AI原生」新阶段，从信息化补课转向智能化跃迁。",
+        "trend": "AI质检、预测性维护和数字孪生三大场景率先规模化，中小工厂急需低门槛AI改造方案。",
+        "opportunities": [
+          {
+            "title": "中小工厂AI质检即服务",
+            "description": "用工业相机+边缘AI为中小工厂提供视觉质检SaaS，替代人工目检，准确率超99%，按检测数量计费。",
+            "business_model": "设备租赁+按检测件数计费，无需工厂前期大额投入",
+            "ai_angle": "小样本学习模型快速适配新产品缺陷类型，部署周期压缩至1周",
+            "target_customer": "电子、汽配、食品包装等领域中小工厂质量部门",
+            "market_size": "国内工业视觉检测市场2026年超200亿元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "与1家电子零部件工厂合作，用20张缺陷样本图完成首个质检模型并收费试用"
+          }
+        ],
+        "watch_out": "工厂现场实施成本高，每次客户切换需要重新标注数据，规模化复制难度较大。"
+      },
+      {
+        "emoji": "🏠",
+        "name": "房产 / 建筑",
+        "news_connection": "泡泡玛特8.8亿买楼折射优质商业地产稀缺，房地产从增量进入存量运营时代，AI资产管理需求上升。",
+        "trend": "存量房改造和商业地产运营效率提升成主旋律，AI驱动的楼宇能耗优化和租客匹配将成核心工具。",
+        "opportunities": [
+          {
+            "title": "商业楼宇AI运营管理平台",
+            "description": "为写字楼和商业综合体提供AI能耗优化、空间利用率分析和租客流失预警，提升资产回报率。",
+            "business_model": "按管理面积收取SaaS年费，节能收益分成",
+            "ai_angle": "IoT传感器数据+AI预测模型自动调节暖通空调，降低能耗20-30%",
+            "target_customer": "商业地产运营方、写字楼物业管理公司",
+            "market_size": "国内商业地产管理软件市场超50亿元",
+            "difficulty": "中",
+            "urgency": "中",
+            "first_step": "与1栋20层以上写字楼合作，部署IoT传感器并完成3个月能耗优化数据收集"
+          }
+        ],
+        "watch_out": "物业行业数字化基础薄弱，IoT设备部署成本高，销售周期漫长，需充足现金流支撑。"
+      },
+      {
+        "emoji": "📋",
+        "name": "政策 / 监管 / 社会",
+        "news_connection": "腾讯承诺不再与版权方达成独家授权合同，教育部拟批34所新大学，监管层持续推动平台反垄断和教育资源扩容。",
+        "trend": "AI合规工具需求激增，企业面临数据安全、版权、劳动法等多维合规压力，AI政策解读和合规自动化成刚需。",
+        "opportunities": [
+          {
+            "title": "企业AI合规自动化助手",
+            "description": "实时追踪AI、数据安全、劳动法等监管政策变化，自动生成企业合规影响评估报告和整改建议。",
+            "business_model": "按企业规模分层订阅，大型企业定制合规审计服务",
+            "ai_angle": "RAG技术构建政策知识库，大模型自动解析新法规对企业的具体影响",
+            "target_customer": "互联网、金融、医疗等受监管严格行业的法务合规部门",
+            "market_size": "国内法律科技市场预估超100亿元",
+            "difficulty": "中",
+            "urgency": "高",
+            "first_step": "构建AI相关法规数据库，开发政策变更自动推送和影响分析MVP，免费向100家企业测试"
+          }
+        ],
+        "watch_out": "法律建议存在专业责任风险，需明确产品定位为「信息参考」而非「法律意见」，避免监管处罚。"
+      }
+    ],
+    "top3": [
+      {
+        "rank": 1,
+        "industry": "AI / 科技",
+        "title": "垂直行业AI决策Agent",
+        "reason": "王小川AI医生验证路径，亦庄大会确认业务决策稀缺性共识，B端付费意愿强，2026年是垂直Agent商业化元年，窗口期仅12-18个月。"
+      },
+      {
+        "rank": 2,
+        "industry": "教育 / EdTech",
+        "title": "职场人AI技能再教育平台",
+        "reason": "AI替代就业焦虑催生再教育刚需，企业采购渠道获客效率高，政策补贴可覆盖部分成本，市场需求确定性极高。"
+      },
+      {
+        "rank": 3,
+        "industry": "消费 / 零售 / 电商",
+        "title": "AI导购+人工收尾混合电商",
+        "reason": "亦庄实战数据证明人机共生转化率提升50%，技术门槛低、品牌需求迫切，可快速完成A/B测试验证并规模化复制。"
+      }
+    ]
+  }
+}
