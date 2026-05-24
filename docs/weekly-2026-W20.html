@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创业情报周报 — 2026-W20</title>
+  <style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+               'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  line-height: 1.7;
+  font-size: 15px;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  color: white;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+.header-logo span { color: #a5b4fc; }
+.header-date { font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 4px 12px;
+  border-radius: 20px; color: rgba(255,255,255,0.8); }
+.header-nav a {
+  color: rgba(255,255,255,0.75); font-size: 0.85rem;
+  padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-left: 8px; transition: all 0.2s;
+}
+.header-nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+.header-nav a.active { background: rgba(165,180,252,0.2); border-color: #a5b4fc; color: white; }
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+}
+.sidebar-box {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.sidebar-box h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.sidebar-box a {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 0.82rem; color: #475569;
+  margin-bottom: 2px; transition: all 0.15s;
+}
+.sidebar-box a:hover { background: #f8fafc; color: #1e293b; text-decoration: none; }
+.sidebar-box a .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Main ── */
+.main { flex: 1; min-width: 0; }
+section { margin-bottom: 24px; }
+
+/* ── Card base ── */
+.card {
+  background: white; border-radius: 14px;
+  padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+/* ── Summary ── */
+.summary-card { border-left: 4px solid #6366f1; }
+.section-title {
+  font-size: 1rem; font-weight: 700; color: #1e293b;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.summary-text { font-size: 0.925rem; color: #334155; line-height: 1.8; }
+
+/* ── Top 3 ── */
+.picks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pick-card {
+  background: white; border-radius: 12px; padding: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-top: 3px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pick-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.pick-card:nth-child(1) { border-top-color: #f6ad55; }
+.pick-card:nth-child(2) { border-top-color: #a0aec0; }
+.pick-card:nth-child(3) { border-top-color: #c05621; }
+.pick-medal { font-size: 1.8rem; line-height: 1; margin-bottom: 10px; }
+.pick-industry { font-size: 0.72rem; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pick-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+.pick-reason { font-size: 0.8rem; color: #64748b; line-height: 1.6; }
+
+/* ── News ── */
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.news-col-title {
+  font-size: 0.875rem; font-weight: 600; color: #374151;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+  display: flex; align-items: center; gap: 6px;
+}
+.news-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0; border-bottom: 1px solid #f8fafc;
+}
+.news-item:last-child { border-bottom: none; }
+.news-num { font-size: 0.72rem; color: #cbd5e1; font-weight: 700; min-width: 18px; padding-top: 2px; }
+.news-body { flex: 1; }
+.news-title-link { font-size: 0.85rem; color: #1e293b; display: block; margin-bottom: 2px; }
+.news-title-link:hover { color: #6366f1; text-decoration: none; }
+.news-meta { font-size: 0.72rem; color: #94a3b8; display: flex; gap: 8px; align-items: center; }
+.news-source-badge {
+  background: #f1f5f9; padding: 1px 7px; border-radius: 10px; color: #64748b;
+}
+.news-hot { color: #f87171; }
+.news-date { color: #94a3b8; font-size: 0.7rem; }
+
+/* ── Industry card ── */
+.industry-card {
+  background: white; border-radius: 14px; padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-left: 4px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+.industry-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.industry-emoji { font-size: 1.6rem; }
+.industry-name { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+.industry-meta-row {
+  background: #f8fafc; border-radius: 10px; padding: 14px 16px;
+  margin-bottom: 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.meta-block .meta-label {
+  font-size: 0.7rem; color: #94a3b8; margin-bottom: 3px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.meta-block .meta-value { font-size: 0.85rem; color: #334155; }
+
+.opps-title { font-size: 0.875rem; font-weight: 600; color: #475569; margin-bottom: 12px; }
+
+/* ── Opportunity card ── */
+.opp-card {
+  border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px;
+  margin-bottom: 12px; transition: border-color 0.2s;
+}
+.opp-card:hover { border-color: #c7d2fe; }
+.opp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.opp-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+.opp-tags { display: flex; gap: 5px; flex-shrink: 0; }
+.tag {
+  font-size: 0.68rem; padding: 2px 8px; border-radius: 10px;
+  font-weight: 600; white-space: nowrap;
+}
+.opp-desc { font-size: 0.855rem; color: #475569; line-height: 1.75; margin-bottom: 12px; }
+.opp-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail-item { background: #f8fafc; border-radius: 7px; padding: 8px 10px; }
+.detail-item.action { grid-column: span 2; background: #eff6ff; border-left: 3px solid #3b82f6; }
+.detail-label { font-size: 0.68rem; color: #94a3b8; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+.detail-value { font-size: 0.82rem; color: #334155; }
+.detail-item.action .detail-label { color: #3b82f6; }
+.detail-item.action .detail-value { color: #1d4ed8; font-weight: 500; }
+
+.watch-out {
+  background: #fff7ed; border-radius: 8px; padding: 10px 14px;
+  font-size: 0.82rem; color: #92400e; margin-top: 12px;
+  border-left: 3px solid #f59e0b;
+}
+
+/* ── Market badge ── */
+.market-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 20px; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.02em; margin-left: auto;
+}
+.market-badge.up { background: #dcfce7; color: #166534; }
+.market-badge.down { background: #fee2e2; color: #991b1b; }
+.market-badge.flat { background: #f1f5f9; color: #64748b; }
+.market-badge .badge-etf { opacity: 0.7; font-weight: 500; margin-right: 2px; }
+.sparkline-wrap { margin-left: 8px; opacity: 0.8; }
+
+/* ── Filter bar ── */
+.filter-bar {
+  background: white; border-radius: 14px; padding: 14px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px;
+  display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+}
+.filter-label {
+  font-size: 0.72rem; color: #94a3b8; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px;
+}
+.filter-btn {
+  padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;
+  background: white; cursor: pointer; font-size: 0.78rem; color: #475569;
+  font-family: inherit; transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { background: #f8fafc; border-color: #c7d2fe; color: #4338ca; }
+.filter-btn.active { background: #eef2ff; border-color: #6366f1; color: #4338ca; font-weight: 600; }
+.filter-btn.preset { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.filter-btn.preset.active { background: #dcfce7; border-color: #4ade80; }
+.industry-card.hidden-industry { display: none; }
+
+/* ── Funding sidebar ── */
+.funding-item {
+  padding: 8px 0; border-bottom: 1px solid #f1f5f9;
+  font-size: 0.8rem;
+}
+.funding-item:last-child { border-bottom: none; }
+.funding-title { color: #1e293b; margin-bottom: 3px; line-height: 1.4; }
+.funding-title a { color: inherit; }
+.funding-title a:hover { color: #6366f1; text-decoration: none; }
+.funding-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.funding-amount { font-weight: 700; color: #059669; font-size: 0.75rem; }
+.funding-tag {
+  background: #f1f5f9; color: #64748b; padding: 1px 7px;
+  border-radius: 10px; font-size: 0.68rem;
+}
+.funding-source { color: #94a3b8; font-size: 0.68rem; }
+
+/* ── AI Chat ── */
+.chat-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white; font-size: 1.4rem; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(99,102,241,0.6); }
+
+.chat-panel {
+  position: fixed; right: 0; top: 0; bottom: 0; z-index: 1001;
+  width: 380px; max-width: 100vw;
+  background: #0f172a; display: flex; flex-direction: column;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.4);
+  transform: translateX(100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.chat-panel.open { transform: translateX(0); }
+.chat-header {
+  padding: 16px 18px; background: #1e1b4b;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.chat-header-title { color: white; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.chat-header-sub { color: #a5b4fc; font-size: 0.72rem; margin-top: 1px; }
+.chat-close {
+  background: none; border: none; color: rgba(255,255,255,0.5);
+  font-size: 1.3rem; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+}
+.chat-close:hover { background: rgba(255,255,255,0.1); color: white; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin; scrollbar-color: #334155 transparent;
+}
+.chat-msg { display: flex; gap: 8px; align-items: flex-start; max-width: 100%; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+}
+.chat-msg.user .chat-avatar { background: #6366f1; }
+.chat-msg.ai .chat-avatar { background: #1e293b; border: 1px solid #334155; }
+.chat-bubble {
+  padding: 10px 14px; border-radius: 14px; font-size: 0.83rem;
+  line-height: 1.65; max-width: calc(100% - 44px);
+}
+.chat-msg.user .chat-bubble {
+  background: #6366f1; color: white; border-bottom-right-radius: 4px;
+}
+.chat-msg.ai .chat-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-msg.ai .chat-bubble.loading { color: #64748b; }
+.chat-suggestions {
+  padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+}
+.chat-sugg {
+  background: #1e293b; border: 1px solid #334155; color: #94a3b8;
+  padding: 5px 11px; border-radius: 20px; font-size: 0.73rem;
+  cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.chat-sugg:hover { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
+.chat-input-row {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.chat-input {
+  flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 22px;
+  padding: 9px 16px; color: white; font-size: 0.85rem; font-family: inherit;
+  outline: none; resize: none; max-height: 100px; line-height: 1.4;
+}
+.chat-input:focus { border-color: #6366f1; }
+.chat-input::placeholder { color: #475569; }
+.chat-send {
+  width: 38px; height: 38px; border-radius: 50%; background: #6366f1;
+  border: none; color: white; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.chat-send:hover { background: #4f46e5; }
+.chat-send:disabled { background: #334155; cursor: not-allowed; }
+.chat-key-prompt {
+  padding: 20px; color: #94a3b8; font-size: 0.83rem; text-align: center;
+}
+.chat-key-input {
+  width: 100%; margin-top: 10px; background: #1e293b; border: 1px solid #334155;
+  border-radius: 8px; padding: 8px 12px; color: white; font-size: 0.83rem;
+  font-family: inherit; outline: none;
+}
+.chat-key-input:focus { border-color: #6366f1; }
+.chat-key-save {
+  margin-top: 8px; width: 100%; padding: 8px; background: #6366f1;
+  border: none; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 0.83rem; font-family: inherit;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center; padding: 32px 20px;
+  font-size: 0.8rem; color: #94a3b8;
+}
+.footer a { color: #6366f1; }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .layout { flex-direction: column; padding: 16px; }
+  .sidebar { width: 100%; position: static; }
+  .sidebar-box { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sidebar-box h3 { width: 100%; }
+  .sidebar-box a { margin-bottom: 0; }
+  .picks-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .opp-details { grid-template-columns: 1fr; }
+  .detail-item.action { grid-column: span 1; }
+  .industry-meta-row { grid-template-columns: 1fr; }
+}
+
+.signal-card {background:white;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.07)}
+.signal-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.signal-name {font-size:0.9rem;font-weight:700;color:#1e293b}
+.signal-days {font-size:0.75rem;background:#dbeafe;color:#1e40af;padding:2px 10px;border-radius:20px;font-weight:600}
+.signal-bar {height:6px;background:#f1f5f9;border-radius:3px;margin-bottom:8px}
+.signal-fill {height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);border-radius:3px}
+.signal-insight {font-size:0.84rem;color:#475569;margin-bottom:6px}
+.signal-industries {font-size:0.75rem;color:#94a3b8}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">🧠 创业情报<span>雷达</span></div>
+    <span class="header-date">2026-W20 · 周报</span>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html">最新日报</a>
+    <a href="archive.html">归档</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <h3>本页导航</h3>
+      <a href="#summary">📊 总结</a>
+      <a href="#signals">📡 强信号</a>
+      <a href="#top5">🏆 TOP 5 机会</a>
+      <a href="#ai-dive">🔬 AI 深度</a>
+      <a href="#industry">💡 行业洞见</a>
+      <a href="#next">🔭 下期预判</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="summary">
+      <div class="card summary-card">
+        <div class="section-title">📊 本周趋势总结</div>
+        <p class="summary-text">本周AI产业化进入关键拐点：从通用大模型的「技术叙事」全面转向垂直场景的「价值交付」，单纯套壳时代宣告终结。英伟达583亿净利润、百度AI单季136亿、Anthropic即将盈利，三大数据印证AI商业化已进入收获期而非投入期。具身智能与数字劳动力双轨并进，机器狗率先实现工业场景商业化验证，Robo Labor概念获资本密集押注。AI落地路径呈现「工具层→执行层→决策层」的逐级渗透，垂直行业AI Agent成为本周出现频率最高的创业方向。消费侧「高性价比+情绪溢价」双驱动格局确立，千禧复古、跨城体验、宠物情感等细分赛道逆势融资。整体而言，本周最核心信号是：懂业务+懂AI的复合型产品与团队成为稀缺资产，执行速度正在取代技术壁垒成为创业胜负手。</p>
+      </div>
+    </section>
+
+    <section id="signals">
+      <div class="section-title" style="margin-bottom:14px">📡 本周强信号（反复出现的主题）</div>
+      
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">垂直行业AI Agent/数字员工规模化落地</span>
+            <span class="signal-days">出现 7 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:98%"></div></div>
+          <div class="signal-insight">从「垂直行业AI决策Agent」到「工厂AI运营副驾驶」再到「垂直行业数字员工平台」，该方向连续7天出现，是本周最强信号。这意味着通用大模型红利已被平台层截取，真正的创业机会集中在『懂行业流程+能交付闭环结果』的垂直Agent产品。谁先在特定行业建立数据飞轮和工作流壁垒，谁就能在2026年下半年形成护城河。</div>
+          <div class="signal-industries">AI / 科技 · 制造业 / 工业 · 金融 / 金融科技 · 医疗健康</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">AI职场技能再教育与转型培训</span>
+            <span class="signal-days">出现 7 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:98%"></div></div>
+          <div class="signal-insight">「职场人AI技能再教育平台」「AI职业转型陪跑平台」「中文AI素养职业培训平台」连续7天高频出现，且紧迫度均标注为高。AI替代白领工作的焦虑正在转化为庞大的再培训需求，这是一个需求端极度刚性、供给端严重分散的市场。关键差异化在于：能否提供可验证的技能成果（证书/作品集/薪资提升），而非停留在知识传授层面。</div>
+          <div class="signal-industries">教育 / EdTech</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">AI导购+私域转化全链路工具</span>
+            <span class="signal-days">出现 7 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:98%"></div></div>
+          <div class="signal-insight">「AI导购私域运营工具」「AI导购+人工收尾混合电商」「内容电商AI选品助手」连续7天出现，消费侧AI渗透路径已清晰：从选品预测→导购转化→私域留存的全链路闭环。混合人机模式（AI做初筛和触达、人工做临门一脚）正在成为电商新标准，纯AI或纯人工都将失去竞争力。</div>
+          <div class="signal-industries">消费 / 零售 / 电商</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">工商业储能AI运营管理</span>
+            <span class="signal-days">出现 6 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:84%"></div></div>
+          <div class="signal-insight">储能AI调度/运营/能管系统连续6天出现，且紧迫度持续标注为高。智算中心爆发带动绿电需求激增，工商业储能正从「节省电费」升级为「AI算力园区能源底座」，市场规模与商业逻辑均已重构。具备AI调度能力的储能运营SaaS将同时吃到能源转型和AI算力两条主线的红利。</div>
+          <div class="signal-industries">能源 / 清洁能源</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">宠物AI健康管理与情感陪伴</span>
+            <span class="signal-days">出现 7 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:98%"></div></div>
+          <div class="signal-insight">宠物AI健康管理连续7天出现，从健康监测、慢病管理到情感陪伴、营养定制，场景覆盖极广，且多数方向难度标注为中，进入门槛相对可控。中国宠物主「拟人化养宠」趋势加速，用户为宠物健康和情感付费意愿持续走高，AI使个性化服务的边际成本接近零，是情感消费与AI技术结合最顺滑的赛道之一。</div>
+          <div class="signal-industries">宠物 / 宠物经济</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">机器人训练数据飞轮与运营管理中台</span>
+            <span class="signal-days">出现 6 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:84%"></div></div>
+          <div class="signal-insight">「机器人训练数据飞轮平台」「具身智能数据采集与标注工厂」「机器人舰队运营管理中台」连续6天出现，紧迫度均为高。这揭示出具身智能产业化的真实瓶颈已从硬件制造转向数据和运营：谁能建立高质量的行为数据飞轮，谁就掌握了下一代机器人大脑的训练原料，这是比本体制造更确定的商业机会。</div>
+          <div class="signal-industries">机器人 / 具身智能</div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-name">企业AI合规与风控自动化</span>
+            <span class="signal-days">出现 5 天</span>
+          </div>
+          <div class="signal-bar"><div class="signal-fill" style="width:70%"></div></div>
+          <div class="signal-insight">「企业AI合规自动化助手」「AI内容版权合规自动检测」「企业合规风险自查平台」连续5天出现，随着AI应用大规模落地，合规风险从「边缘问题」上升为「核心议题」。监管收紧与AI部署提速形成张力，合规SaaS将成为每家AI化企业的必配基础设施，市场空间确定性极高。</div>
+          <div class="signal-industries">政策 / 监管 / 社会 · 金融 / 金融科技 · 加密货币 / Web3 / DeFi</div>
+        </div>
+    </section>
+
+    <section id="top5">
+      <div class="section-title" style="margin-bottom:14px">🏆 本周最值得关注的 TOP 5 创业机会</div>
+      
+        <div class="opp-card" style="border-left:4px solid #6366f1">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">🥇</div>
+              <div class="opp-title">垂直行业AI决策Agent平台</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">AI / 科技</div>
+            </div>
+            <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ 连续7天出现，覆盖制造、金融、医疗、农业等多个行业，是本周出现频率最高、跨行业共识最强的方向。AI商业化进入收获期叠加企业降本压力，垂直Agent的付费意愿和预算已从「探索」转为「刚需」。
+          </div>
+          <p class="opp-desc">面向特定垂直行业（如工厂质检、信贷风控、医疗辅诊）构建端到端AI决策Agent，深度嵌入行业核心工作流，替代或增强人工决策节点。区别于通用大模型套壳，该方向需要沉淀行业Know-how、私有数据和流程编排能力。商业模式采用SaaS订阅+按决策量计费，早期可通过行业ISV或头部企业合作快速获取数据和场景。核心壁垒在于行业数据飞轮和工作流适配深度，一旦跑通单一行业可横向复制。</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">SaaS年订阅（基础功能）+ 按决策量/Token消耗计费（弹性收费），头部客户可做定制化集成服务获取现金流</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">基于行业私有数据微调的专有模型+多步骤推理Agent框架，结合RAG检索行业规范知识库，实现可解释的决策输出</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">选定一个决策节点高频、人工成本高、数据相对标准化的垂直场景（如中小工厂来料质检），找3家种子客户免费共建3个月，跑通数据飞轮后再谈付费</div></div>
+          </div>
+        </div>
+        <div class="opp-card" style="border-left:4px solid #3b82f6">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">🥈</div>
+              <div class="opp-title">职场人AI技能再教育与转型陪跑平台</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">教育 / EdTech</div>
+            </div>
+            <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ 连续7天出现，紧迫度持续为高，且需求端焦虑随AI替代新闻持续发酵而放大。从「中文AI素养培训」到「AI副业孵化训练营」再到「职业转型陪跑」，市场从认知层向实战层迁移，付费转化率将显著提升。
+          </div>
+          <p class="opp-desc">专注职场在职人群的AI技能升级，提供从「AI工具使用」到「AI驱动的岗位重构」的完整学习路径。核心差异在于：不卖课程卖结果——以薪资提升、副业收入、岗位晋升为KPI，采用「学习+实战项目+就业/接单撮合」一体化模式。平台沉淀行业专属AI工作流模板库，学员边学边产出真实商业作品。可切入HR、市场、运营、客服等最先被AI影响的白领岗位，设计3-8周的垂直职能AI化训练营。</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">训练营收费（3000-8000元/期）+ 就业/接单撮合佣金 + 企业内训B2B版，后期发展AI技能认证体系构建品牌溢价</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">AI个性化学习路径规划+AI作业批改+AI模拟面试官，同时将AI工具使用本身作为教学内容，做到「用AI学AI」的飞轮</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">在特定职能（如AI+运营、AI+HR）做一期50人封闭训练营，结营后收集薪资/接单数据作为营销素材，验证结果交付能力后再扩规模</div></div>
+          </div>
+        </div>
+        <div class="opp-card" style="border-left:4px solid #7c3aed">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">🥉</div>
+              <div class="opp-title">具身智能行为数据飞轮平台</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">机器人 / 具身智能</div>
+            </div>
+            <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ 连续6天出现，随着机器狗商业化验证成功和Robo Labor资本热潮，训练数据成为整个具身智能产业链最稀缺的瓶颈资源。该方向是「卖铲子」逻辑，不押注单一机器人本体厂商，服务整个产业。
+          </div>
+          <p class="opp-desc">构建面向具身智能厂商的行为数据采集、标注、清洗、版权确权一站式平台。通过在工厂、仓库、医院等真实场景部署数据采集设备和标注工作流，持续产出高质量的机器人动作数据集。平台采用数据集市模式，既可向机器人厂商销售标准数据集，也可承接定制数据采集任务。随着数据积累形成独特壁垒，可进一步提供基于数据的预训练模型服务，从数据层延伸到模型层。</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">标准数据集订阅销售 + 定制数据采集服务（按场景/小时计费）+ 预训练模型API授权，长期目标是建立机器人领域的「ImageNet级」数据资产</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">AI辅助数据标注（大幅降低人工标注成本）+ 自动数据质量评估 + 基于已有数据的合成数据增强，实现数据飞轮自我强化</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">联系2-3家头部机器人厂商（宇树、傅利叶等）谈数据需求，同时在一个标准工业场景搭建数据采集demo，以免费数据换取场景准入和反馈</div></div>
+          </div>
+        </div>
+        <div class="opp-card" style="border-left:4px solid #84cc16">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">4️⃣</div>
+              <div class="opp-title">工商业储能AI智能运营管理SaaS</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">能源 / 清洁能源</div>
+            </div>
+            <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ 连续6天出现，智算中心绿电需求爆发叠加工商业储能装机量快速增长，双重催化使该方向从「节能工具」升级为「AI时代能源基础设施」。紧迫度持续为高，市场窗口已开启。
+          </div>
+          <p class="opp-desc">为工商业储能用户（工厂、商业楼宇、数据中心）提供AI驱动的储能调度优化SaaS。核心功能包括：基于电价预测的充放电策略自动优化、多储能设备统一调度、与绿电采购平台的实时撮合、碳排放核算与报告。面向智算中心客户可提供绿电+储能+算力的综合能源管理方案，打包溢价空间大。平台通过积累多客户调度数据形成预测模型优势，越用越准的飞轮效应显著。</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">按储能装机容量收取年订阅费（SaaS）+ 电费优化收益分成（效果付费），智算中心客户可做综合能源服务包提升ARPU</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">电价和电网负荷AI预测模型 + 多目标强化学习调度算法 + 实时异常检测与预测性维护，持续学习优化收益</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">选定一个细分场景（优先智算中心或大型工厂），免费接入3-5家客户的储能系统，用3个月数据验证电费节省效果，形成可量化ROI案例</div></div>
+          </div>
+        </div>
+        <div class="opp-card" style="border-left:4px solid #f97316">
+          <div class="opp-header">
+            <div>
+              <div style="font-size:1.3rem;margin-bottom:4px">5️⃣</div>
+              <div class="opp-title">宠物AI慢病健康管理订阅服务</div>
+              <div style="font-size:0.75rem;color:#94a3b8;margin-top:2px">宠物 / 宠物经济</div>
+            </div>
+            <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+          </div>
+          <div style="background:#fffbeb;border-radius:7px;padding:8px 12px;margin-bottom:10px;font-size:0.82rem;color:#92400e;border-left:3px solid #f59e0b">
+            ⏰ 连续7天出现，是本周「情感消费+AI落地」结合最顺滑的方向。宠物医疗AI融资验证（宠物健康大模型获投）提供了产业信号，用户付费意愿强、场景刚性高、AI降低边际成本空间大，三要素齐备。
+          </div>
+          <p class="opp-desc">专注宠物慢性病（糖尿病、肾病、心脏病、肥胖等）的AI辅助健康管理平台，提供「智能硬件监测+AI分析+兽医远程复诊+定制营养方案」的订阅服务。通过可穿戴设备或家用检测套件持续采集宠物健康数据，AI生成个性化健康报告并预警异常，连接兽医资源提供远程问诊。订阅模式形成稳定现金流，数据积累提升诊断准确率，可逐步建立宠物慢病AI诊断的行业标准。</p>
+          <div class="opp-details">
+            <div class="detail-item"><div class="detail-label">商业模式</div><div class="detail-value">硬件设备一次性销售（低价或免费）+ 健康管理订阅月费（199-399元/月）+ 兽医远程问诊分成 + 定制营养品/药品复购</div></div>
+            <div class="detail-item"><div class="detail-label">AI 赋能</div><div class="detail-value">基于连续健康数据的宠物慢病AI预测模型 + 多模态症状识别（图像+数据+描述）+ 个性化营养配方AI生成，数据越多越精准</div></div>
+            <div class="detail-item action" style="grid-column:span 2"><div class="detail-label">🚀 第一步</div><div class="detail-value">与1-2家连锁宠物医院合作，选取糖尿病或肾病宠物患者作为种子用户，提供3个月免费试用，验证AI预警准确率和用户留存，同步建立兽医顾问委员会背书</div></div>
+          </div>
+        </div>
+    </section>
+
+    <section id="ai-dive">
+      
+    <div class="card" style="border-left:4px solid #6366f1">
+      <div class="section-title">🔬 AI 赛道深度分析</div>
+      <div style="display:grid;gap:12px;margin-top:8px">
+        <div style="background:#f0f4ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#4f46e5;margin-bottom:6px">🤖 AI / 科技</div>
+          <p style="font-size:0.875rem;color:#334155">本周AI/科技赛道呈现清晰的「分层竞争」格局：底层大模型红利被OpenAI、谷歌、Anthropic等平台层截取，中间件和垂直Agent层成为创业主战场。连续7天出现的「垂直行业AI Agent」信号表明，2026年AI创业的核心命题已从『如何调用大模型』转变为『如何用AI重构行业工作流并收取价值』。GEO优化（生成式引擎优化）作为新营销基础设施在多天出现，预示搜索流量分配逻辑正在被AI改写，这将催生新一波围绕AI可见性的SaaS工具赛道。整体而言，AI赋能点的密度和深度决定产品天花板，浅层套壳产品的生命周期正在被大模型能力升级快速压缩，必须在数据、流程、关系三个维度建立壁垒才能存活。</p>
+        </div>
+        <div style="background:#f0f9ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#0369a1;margin-bottom:6px">💻 芯片 / 半导体</div>
+          <p style="font-size:0.875rem;color:#334155">本周芯片赛道最重要的信号是「推理侧」的战略地位超越「训练侧」：算力消耗重心从训练转向推理，边缘AI推理芯片适配平台和Token消耗优化中间件连续多天出现。这意味着芯片创业的机会不一定在设计新芯片（门槛极高），而在于构建跨芯片架构的「适配层」和「优化层」——帮助AI应用在英伟达、华为昇腾、国产NPU等异构算力上无缝迁移并最小化推理成本。Robo Labor爆发进一步催生「机器人专用推理芯片」需求，边缘端低功耗高算力芯片的市场空间在具身智能场景下将呈指数级扩大。</p>
+        </div>
+        <div style="background:#faf5ff;border-radius:8px;padding:14px">
+          <div style="font-size:0.8rem;font-weight:700;color:#7c3aed;margin-bottom:6px">🦾 机器人 / 具身智能</div>
+          <p style="font-size:0.875rem;color:#334155">本周机器人/具身智能赛道完成了一次重要的叙事升级：从『技术可行性验证』转向『商业化规模复制』。机器狗工业巡检实现首批商业化验证，为整个具身智能赛道提供了「第一桶金」范本，资本信心快速修复。连续6天出现的「训练数据飞轮平台」和「机器人运营管理中台」揭示出产业化的真实卡点：不是硬件做不出来，而是训练数据不够用、机器人舰队管不过来。最值得关注的机会是「数据+运营」的服务层，这一层不依赖单一硬件厂商，可以服务整个行业，且随着机器人部署量增长呈现强正相关增长，是当下风险收益比最优的具身智能创业切入点。</p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="industry">
+      <div class="card">
+        <div class="section-title">💡 各行业本周核心洞见</div>
+        <div style="margin-top:12px">
+          
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #6366f1;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🤖 AI / 科技</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">通用大模型套壳时代终结，真正的创业机会集中在『深懂行业流程+能交付闭环结果』的垂直Agent，数据飞轮与工作流壁垒取代模型能力成为核心竞争力。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #3b82f6;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🎓 教育 / EdTech</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI技能再教育需求已从「好奇探索」转为「就业焦虑驱动的刚需」，能交付可验证职场结果（薪资/接单/晋升）的训练营模式将成为本轮EdTech复苏的主角。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #ec4899;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🛍️ 消费 / 零售 / 电商</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI导购+私域转化已成电商新基建，「机器做触达、人工做关系」的混合模式正在取代纯人工运营，谁先建立AI选品→AI导购→AI复购的全链路闭环谁就赢得下一个增长周期。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #f97316;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🐾 宠物 / 宠物经济</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">宠物医疗AI大模型获投标志着宠物健康管理从「人工经验」升级为「数据驱动」，慢病管理订阅是情感消费与AI结合最高付费意愿的交叉点。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #f7931a;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">💰 加密货币 / Web3 / DeFi</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI Agent自主执行链上交易使链上合规风控从「可选项」变为「必选项」，AI链上合规SaaS是Web3与AI融合最确定性的监管套利机会。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #0ea5e9;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">⚡ 芯片 / 半导体</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">算力需求从训练转向推理，边缘AI推理芯片适配和Token消耗优化中间件成为芯片生态中门槛最低、市场最确定的创业切入点。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #7c3aed;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🦾 机器人 / 具身智能</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">机器狗完成工业商业化首轮验证，产业瓶颈从「能不能动」转向「数据够不够用+运营管不管得好」，训练数据平台和运营管理中台是比本体制造更确定的机会。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #f59e0b;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🏦 金融 / 金融科技</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">企业债务风险AI预警和AI投研助手需求随经济不确定性上升而快速增长，中小企业财务AI工具因决策链短、付费意愿验证充分，是金融AI最快跑通PMF的方向。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #8b5cf6;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🎬 媒体 / 娱乐 / 内容</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI短剧制作成本暴跌九成重写内容行业经济模型，IP孵化+版权授权的轻资产模式将比制作工具本身创造更持久的商业价值。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #e11d48;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">👟 潮流 / 时尚 / 运动</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">千禧复古情绪消费席卷Z世代，AI个性化设计工具正在降低小众审美的商业化门槛，情绪共鸣先于产品功能是该赛道选品的第一原则。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #d946ef;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🎌 动漫 / 二次元 / IP</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI辅助IP孵化使原创动漫从「十年磨一剑」压缩到「季度迭代验证」，快速试错找到情感共鸣点后再工业化放量，将是国漫出海的新范式。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #06b6d4;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🚗 出行 / 交通</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">无人车规模化运营瓶颈已从技术转向管理，AI调度中台和极端场景安全预警系统的商业化窗口比本体研发更接近当下。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #84cc16;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">☀️ 能源 / 清洁能源</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">智算中心绿电需求重构储能市场逻辑，工商业储能AI运营从「节省电费工具」升级为「AI算力时代能源基础设施」，市场规模与商业确定性同步放大。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #10b981;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🏥 医疗健康</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI心理健康筛查连续多日高频出现且紧迫度为高，心理健康刚需与AI低成本覆盖的组合正在打开此前因专业资源稀缺而被压制的千亿级市场。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #a78bfa;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🌾 农业 / 食品</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">新鲜零食供应链损耗优化是农业AI落地最快的商业切口，AI减损直接等于利润提升，ROI清晰到不需要教育市场。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #64748b;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🏭 制造业 / 工业</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">中小工厂AI质检即服务连续多日出现且紧迫度为高，「按检测量付费+免部署」的SaaS模式正在破解工厂AI化的最大阻力——前期投入高和专业人才缺。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #78716c;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">🏢 房产 / 建筑</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">存量房AI改造和商业楼宇AI运营是房地产下行周期中少数需求逆势增长的方向，降本增效的确定性需求取代了增量开发逻辑。</span>
+        </div>
+        <div style="padding:10px 14px;border-radius:8px;border-left:3px solid #ef4444;background:white;margin-bottom:8px">
+          <span style="font-size:0.85rem;font-weight:600;color:#1e293b">⚖️ 政策 / 监管 / 社会</span>
+          <span style="font-size:0.82rem;color:#475569;margin-left:10px">AI合规自动化工具需求随着企业AI部署量的爆发而同步放大，这是一个越来越多企业「不得不买」而非「可以不买」的基础设施市场。</span>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next">
+      <div class="card">
+        <div class="section-title">🔭 下周重点关注方向</div>
+        <div style="margin-top:12px">
+          
+        <div style="display:flex;gap:12px;padding:12px;background:white;border-radius:8px;margin-bottom:8px">
+          <div style="font-size:1.2rem;color:#94a3b8;font-weight:800;min-width:28px">1</div>
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;color:#1e293b;margin-bottom:3px">AI Agent与企业工作流的深度集成标准化</div>
+            <div style="font-size:0.82rem;color:#64748b">随着垂直行业AI Agent密集落地，企业系统对接（ERP/CRM/MES）的标准化接口和安全合规框架将成为下一个爆发点，预计下周将有更多企业级AI中间件和集成平台的融资消息出现。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;padding:12px;background:white;border-radius:8px;margin-bottom:8px">
+          <div style="font-size:1.2rem;color:#94a3b8;font-weight:800;min-width:28px">2</div>
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;color:#1e293b;margin-bottom:3px">Robo Labor具体场景商业模式验证进展</div>
+            <div style="font-size:0.82rem;color:#64748b">本周机器人劳动力概念获多家机构密集投注，下周将是验证期——具体哪些场景（仓储分拣、安保巡逻、餐饮服务）率先跑通单位经济模型，将决定下一轮融资的方向和估值锚点，值得重点追踪。</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;padding:12px;background:white;border-radius:8px;margin-bottom:8px">
+          <div style="font-size:1.2rem;color:#94a3b8;font-weight:800;min-width:28px">3</div>
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;color:#1e293b;margin-bottom:3px">AI心理健康平台的监管政策与商业化路径</div>
+            <div style="font-size:0.82rem;color:#64748b">AI心理健康筛查连续多日高频出现且紧迫度为高，但该赛道面临医疗监管和数据隐私的双重合规压力，下周预计将有相关政策信号或头部玩家的合规路径公告出现，将直接影响整个赛道的商业化节奏和入场时机判断。</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="font-size:0.8rem;color:#94a3b8;margin-top:8px"><a href="weekly-2026-W20.html" style="color:#6366f1">2026-W20 周报</a> · <a href="weekly-2026-W19.html" style="color:#6366f1">2026-W19 周报</a> · <a href="weekly-2026-W18.html" style="color:#6366f1">2026-W18 周报</a> · <a href="weekly-2026-W17.html" style="color:#6366f1">2026-W17 周报</a> · <a href="weekly-2026-W16.html" style="color:#6366f1">2026-W16 周报</a> · <a href="weekly-2026-W15.html" style="color:#6366f1">2026-W15 周报</a> · <a href="2026-05-24.html" style="color:#6366f1">2026-05-24 日报</a> · <a href="2026-05-23.html" style="color:#6366f1">2026-05-23 日报</a> · <a href="2026-05-22.html" style="color:#6366f1">2026-05-22 日报</a> · <a href="2026-05-21.html" style="color:#6366f1">2026-05-21 日报</a></div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  由 Claude AI 自动生成 · 2026-W20 · 周报 ·
+  <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
+</footer>
+</body>
+</html>
