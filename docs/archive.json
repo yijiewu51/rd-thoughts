@@ -703,5 +703,10 @@
     "date": "2026-W30",
     "url": "weekly-2026-W30.html",
     "label": "2026-W30 周报"
+  },
+  {
+    "date": "2026-W31",
+    "url": "weekly-2026-W31.html",
+    "label": "2026-W31 周报"
   }
 ]
