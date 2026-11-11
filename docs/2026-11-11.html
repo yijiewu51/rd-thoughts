@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创业情报日报 — 2026-11-11</title>
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="情报雷达">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+               'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  line-height: 1.7;
+  font-size: 15px;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  color: white;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+.header-logo span { color: #a5b4fc; }
+.header-date { font-size: 0.85rem; background: rgba(255,255,255,0.1); padding: 4px 12px;
+  border-radius: 20px; color: rgba(255,255,255,0.8); }
+.header-nav a {
+  color: rgba(255,255,255,0.75); font-size: 0.85rem;
+  padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-left: 8px; transition: all 0.2s;
+}
+.header-nav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+.header-nav a.active { background: rgba(165,180,252,0.2); border-color: #a5b4fc; color: white; }
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+}
+.sidebar-box {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.sidebar-box h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.sidebar-box a {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 0.82rem; color: #475569;
+  margin-bottom: 2px; transition: all 0.15s;
+}
+.sidebar-box a:hover { background: #f8fafc; color: #1e293b; text-decoration: none; }
+.sidebar-box a .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Main ── */
+.main { flex: 1; min-width: 0; }
+section { margin-bottom: 24px; }
+
+/* ── Card base ── */
+.card {
+  background: white; border-radius: 14px;
+  padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+/* ── Summary ── */
+.summary-card { border-left: 4px solid #6366f1; }
+.section-title {
+  font-size: 1rem; font-weight: 700; color: #1e293b;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.summary-text { font-size: 0.925rem; color: #334155; line-height: 1.8; }
+
+/* ── Top 3 ── */
+.picks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pick-card {
+  background: white; border-radius: 12px; padding: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-top: 3px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pick-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.pick-card:nth-child(1) { border-top-color: #f6ad55; }
+.pick-card:nth-child(2) { border-top-color: #a0aec0; }
+.pick-card:nth-child(3) { border-top-color: #c05621; }
+.pick-medal { font-size: 1.8rem; line-height: 1; margin-bottom: 10px; }
+.pick-industry { font-size: 0.72rem; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pick-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+.pick-reason { font-size: 0.8rem; color: #64748b; line-height: 1.6; }
+
+/* ── News ── */
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.news-col-title {
+  font-size: 0.875rem; font-weight: 600; color: #374151;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+  display: flex; align-items: center; gap: 6px;
+}
+.news-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0; border-bottom: 1px solid #f8fafc;
+}
+.news-item:last-child { border-bottom: none; }
+.news-num { font-size: 0.72rem; color: #cbd5e1; font-weight: 700; min-width: 18px; padding-top: 2px; }
+.news-body { flex: 1; }
+.news-title-link { font-size: 0.85rem; color: #1e293b; display: block; margin-bottom: 2px; }
+.news-title-link:hover { color: #6366f1; text-decoration: none; }
+.news-meta { font-size: 0.72rem; color: #94a3b8; display: flex; gap: 8px; align-items: center; }
+.news-source-badge {
+  background: #f1f5f9; padding: 1px 7px; border-radius: 10px; color: #64748b;
+}
+.news-hot { color: #f87171; }
+.news-date { color: #94a3b8; font-size: 0.7rem; }
+
+/* ── Industry card ── */
+.industry-card {
+  background: white; border-radius: 14px; padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-left: 4px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+.industry-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.industry-emoji { font-size: 1.6rem; }
+.industry-name { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+.industry-meta-row {
+  background: #f8fafc; border-radius: 10px; padding: 14px 16px;
+  margin-bottom: 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.meta-block .meta-label {
+  font-size: 0.7rem; color: #94a3b8; margin-bottom: 3px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.meta-block .meta-value { font-size: 0.85rem; color: #334155; }
+
+.opps-title { font-size: 0.875rem; font-weight: 600; color: #475569; margin-bottom: 12px; }
+
+/* ── Opportunity card ── */
+.opp-card {
+  border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px;
+  margin-bottom: 12px; transition: border-color 0.2s;
+}
+.opp-card:hover { border-color: #c7d2fe; }
+.opp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.opp-title { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+.opp-tags { display: flex; gap: 5px; flex-shrink: 0; }
+.tag {
+  font-size: 0.68rem; padding: 2px 8px; border-radius: 10px;
+  font-weight: 600; white-space: nowrap;
+}
+.opp-desc { font-size: 0.855rem; color: #475569; line-height: 1.75; margin-bottom: 12px; }
+.opp-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail-item { background: #f8fafc; border-radius: 7px; padding: 8px 10px; }
+.detail-item.action { grid-column: span 2; background: #eff6ff; border-left: 3px solid #3b82f6; }
+.detail-label { font-size: 0.68rem; color: #94a3b8; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+.detail-value { font-size: 0.82rem; color: #334155; }
+.detail-item.action .detail-label { color: #3b82f6; }
+.detail-item.action .detail-value { color: #1d4ed8; font-weight: 500; }
+
+.watch-out {
+  background: #fff7ed; border-radius: 8px; padding: 10px 14px;
+  font-size: 0.82rem; color: #92400e; margin-top: 12px;
+  border-left: 3px solid #f59e0b;
+}
+
+/* ── Market badge ── */
+.market-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 20px; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.02em; margin-left: auto;
+}
+.market-badge.up { background: #dcfce7; color: #166534; }
+.market-badge.down { background: #fee2e2; color: #991b1b; }
+.market-badge.flat { background: #f1f5f9; color: #64748b; }
+.market-badge .badge-etf { opacity: 0.7; font-weight: 500; margin-right: 2px; }
+.sparkline-wrap { margin-left: 8px; opacity: 0.8; }
+
+/* ── Filter bar ── */
+.filter-bar {
+  background: white; border-radius: 14px; padding: 14px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 20px;
+  display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+}
+.filter-label {
+  font-size: 0.72rem; color: #94a3b8; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px;
+}
+.filter-btn {
+  padding: 4px 12px; border-radius: 20px; border: 1px solid #e2e8f0;
+  background: white; cursor: pointer; font-size: 0.78rem; color: #475569;
+  font-family: inherit; transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { background: #f8fafc; border-color: #c7d2fe; color: #4338ca; }
+.filter-btn.active { background: #eef2ff; border-color: #6366f1; color: #4338ca; font-weight: 600; }
+.filter-btn.preset { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.filter-btn.preset.active { background: #dcfce7; border-color: #4ade80; }
+.industry-card.hidden-industry { display: none; }
+
+/* ── Funding sidebar ── */
+.funding-item {
+  padding: 8px 0; border-bottom: 1px solid #f1f5f9;
+  font-size: 0.8rem;
+}
+.funding-item:last-child { border-bottom: none; }
+.funding-title { color: #1e293b; margin-bottom: 3px; line-height: 1.4; }
+.funding-title a { color: inherit; }
+.funding-title a:hover { color: #6366f1; text-decoration: none; }
+.funding-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.funding-amount { font-weight: 700; color: #059669; font-size: 0.75rem; }
+.funding-tag {
+  background: #f1f5f9; color: #64748b; padding: 1px 7px;
+  border-radius: 10px; font-size: 0.68rem;
+}
+.funding-source { color: #94a3b8; font-size: 0.68rem; }
+
+/* ── AI Chat ── */
+.chat-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white; font-size: 1.4rem; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(99,102,241,0.6); }
+
+.chat-panel {
+  position: fixed; right: 0; top: 0; bottom: 0; z-index: 1001;
+  width: 380px; max-width: 100vw;
+  background: #0f172a; display: flex; flex-direction: column;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.4);
+  transform: translateX(100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.chat-panel.open { transform: translateX(0); }
+.chat-header {
+  padding: 16px 18px; background: #1e1b4b;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.chat-header-title { color: white; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.chat-header-sub { color: #a5b4fc; font-size: 0.72rem; margin-top: 1px; }
+.chat-close {
+  background: none; border: none; color: rgba(255,255,255,0.5);
+  font-size: 1.3rem; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+}
+.chat-close:hover { background: rgba(255,255,255,0.1); color: white; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin; scrollbar-color: #334155 transparent;
+}
+.chat-msg { display: flex; gap: 8px; align-items: flex-start; max-width: 100%; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+}
+.chat-msg.user .chat-avatar { background: #6366f1; }
+.chat-msg.ai .chat-avatar { background: #1e293b; border: 1px solid #334155; }
+.chat-bubble {
+  padding: 10px 14px; border-radius: 14px; font-size: 0.83rem;
+  line-height: 1.65; max-width: calc(100% - 44px);
+}
+.chat-msg.user .chat-bubble {
+  background: #6366f1; color: white; border-bottom-right-radius: 4px;
+}
+.chat-msg.ai .chat-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  white-space: pre-wrap;
+}
+.chat-msg.ai .chat-bubble.loading { color: #64748b; }
+.chat-suggestions {
+  padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+}
+.chat-sugg {
+  background: #1e293b; border: 1px solid #334155; color: #94a3b8;
+  padding: 5px 11px; border-radius: 20px; font-size: 0.73rem;
+  cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.chat-sugg:hover { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
+.chat-input-row {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.chat-input {
+  flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 22px;
+  padding: 9px 16px; color: white; font-size: 0.85rem; font-family: inherit;
+  outline: none; resize: none; max-height: 100px; line-height: 1.4;
+}
+.chat-input:focus { border-color: #6366f1; }
+.chat-input::placeholder { color: #475569; }
+.chat-send {
+  width: 38px; height: 38px; border-radius: 50%; background: #6366f1;
+  border: none; color: white; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.chat-send:hover { background: #4f46e5; }
+.chat-send:disabled { background: #334155; cursor: not-allowed; }
+.chat-key-prompt {
+  padding: 20px; color: #94a3b8; font-size: 0.83rem; text-align: center;
+}
+.chat-key-input {
+  width: 100%; margin-top: 10px; background: #1e293b; border: 1px solid #334155;
+  border-radius: 8px; padding: 8px 12px; color: white; font-size: 0.83rem;
+  font-family: inherit; outline: none;
+}
+.chat-key-input:focus { border-color: #6366f1; }
+.chat-key-save {
+  margin-top: 8px; width: 100%; padding: 8px; background: #6366f1;
+  border: none; border-radius: 8px; color: white; cursor: pointer;
+  font-size: 0.83rem; font-family: inherit;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center; padding: 32px 20px;
+  font-size: 0.8rem; color: #94a3b8;
+}
+.footer a { color: #6366f1; }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .layout { flex-direction: column; padding: 16px; }
+  .sidebar { width: 100%; position: static; }
+  .sidebar-box { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sidebar-box h3 { width: 100%; }
+  .sidebar-box a { margin-bottom: 0; }
+  .picks-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .opp-details { grid-template-columns: 1fr; }
+  .detail-item.action { grid-column: span 1; }
+  .industry-meta-row { grid-template-columns: 1fr; }
+}
+</style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+          onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js'"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="header-logo">🧠 创业情报<span>雷达</span></div>
+    <span class="header-date">2026-11-11 · 日报</span>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html" class="active">最新</a>
+    <a href="archive.html">归档</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <h3>行业导航</h3>
+      <a href="#AI-科技"><span class="dot" style="background:#6366f1"></span>🤖 AI / 科技</a>
+<a href="#宠物-宠物经济"><span class="dot" style="background:#f97316"></span>🐾 宠物 / 宠物经济</a>
+<a href="#教育-EdTech"><span class="dot" style="background:#3b82f6"></span>📚 教育 / EdTech</a>
+<a href="#消费-零售-电商"><span class="dot" style="background:#ec4899"></span>🛍️ 消费 / 零售 / 电商</a>
+<a href="#加密货币-Web3-DeFi"><span class="dot" style="background:#f7931a"></span>₿ 加密货币 / Web3 / DeFi</a>
+<a href="#芯片-半导体"><span class="dot" style="background:#0ea5e9"></span>💻 芯片 / 半导体</a>
+<a href="#机器人-具身智能"><span class="dot" style="background:#7c3aed"></span>🦾 机器人 / 具身智能</a>
+<a href="#金融-金融科技"><span class="dot" style="background:#f59e0b"></span>💰 金融 / 金融科技</a>
+<a href="#媒体-娱乐-内容"><span class="dot" style="background:#8b5cf6"></span>🎬 媒体 / 娱乐 / 内容</a>
+<a href="#潮流-时尚-运动"><span class="dot" style="background:#e11d48"></span>👟 潮流 / 时尚 / 运动</a>
+<a href="#动漫-二次元-IP"><span class="dot" style="background:#d946ef"></span>🎌 动漫 / 二次元 / IP</a>
+<a href="#出行-交通"><span class="dot" style="background:#06b6d4"></span>🚗 出行 / 交通</a>
+<a href="#能源-清洁能源"><span class="dot" style="background:#84cc16"></span>⚡ 能源 / 清洁能源</a>
+<a href="#医疗健康"><span class="dot" style="background:#10b981"></span>🏥 医疗健康</a>
+<a href="#农业-食品"><span class="dot" style="background:#a78bfa"></span>🌾 农业 / 食品</a>
+<a href="#制造业-工业"><span class="dot" style="background:#64748b"></span>🏭 制造业 / 工业</a>
+<a href="#房产-建筑"><span class="dot" style="background:#78716c"></span>🏠 房产 / 建筑</a>
+<a href="#政策-监管-社会"><span class="dot" style="background:#ef4444"></span>📋 政策 / 监管 / 社会</a>
+    </div>
+    
+    <div class="sidebar-box" style="margin-top:16px">
+      <h3>💰 融资动态</h3>
+      
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/11/10/proximal-ventures-raises-debut-fund-to-back-startups-bringing-ai-to-drug-development/" target="_blank" rel="noopener">Proximal Ventures raises debut fund to back startups bringing AI to drug development</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$27.5 m</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/11/08/the-ex-secret-service-agent-who-flipped-a-hacker-is-now-raising-a-second-250m-cybersecurity-fund/" target="_blank" rel="noopener">He arrested a hacker, then spent 18 months clearing his own name. Now he’s a cybersecurity VC.</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$250 m</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/11/03/ted-schleins-ballistic-ventures-seeks-490m-for-new-funds-amid-ai-driven-cybersecurity-boom/" target="_blank" rel="noopener">Ted Schlein’s Ballistic Ventures seeks $490M for new funds amid AI-driven cybersecurity boom</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$490M</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/11/02/trajectory-raises-45m-to-make-ai-model-training-accessible-to-nontechnical-experts/" target="_blank" rel="noopener">Trajectory raises $45M to make AI model training accessible to nontechnical experts</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$45M</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+        <div class="funding-item">
+          <div class="funding-title"><a href="https://techcrunch.com/2026/10/29/ex-palantir-execs-launch-dream-with-17m-from-a16z-to-build-ai-world-models-for-construction/" target="_blank" rel="noopener">Ex-Palantir execs launch Dream with $17M from a16z to build AI world models for construction</a></div>
+          <div class="funding-meta">
+            <span class="funding-amount">$17M</span>
+            <span class="funding-tag">AI / 科技</span>
+            <span class="funding-source">TechCrunch</span>
+          </div>
+        </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 趋势总结 -->
+    <section>
+      <div class="card summary-card">
+        <div class="section-title">📊 今日趋势总结</div>
+        <p class="summary-text">2026年AI应用资金加速向视频、图像、3D内容倾斜，芯片国产化提速（平头哥上市、粤芯扩产），智驾合资潮涌现。AI正从基础设施向应用层渗透，创业窗口从「造模型」转向「造场景」。OpenAI收购旅游创业公司信号明确：AI垂直应用并购时代开启，垂类AI产品估值逻辑重塑。</p>
+      </div>
+    </section>
+
+    <!-- Top 3 -->
+    <section>
+      <div class="section-title" style="margin-bottom:14px">🏆 今日最佳创业机会 TOP 3</div>
+      <div class="picks-grid">
+        
+        <div class="pick-card">
+          <div class="pick-medal">🥇</div>
+          <div class="pick-industry">AI / 科技</div>
+          <div class="pick-title">AI视频营销内容引擎</div>
+          <div class="pick-reason">AI资金最大流向已验证，视频营销需求确定，技术可用性高，B端付费意愿强，6个月内可跑通商业闭环。</div>
+        </div>
+
+        <div class="pick-card">
+          <div class="pick-medal">🥈</div>
+          <div class="pick-industry">消费 / 零售 / 电商</div>
+          <div class="pick-title">AI导购私域运营工具</div>
+          <div class="pick-reason">私域运营是品牌刚需，AI替代人工成本显著，技术门槛适中，微信生态基础设施完善，可快速冷启动。</div>
+        </div>
+
+        <div class="pick-card">
+          <div class="pick-medal">🥉</div>
+          <div class="pick-industry">教育 / EdTech</div>
+          <div class="pick-title">职场AI技能速训平台</div>
+          <div class="pick-reason">企业AI转型需求爆发，B端采购预算充足，监管风险低，课程产品0到1周期短，当下是最佳入场时机。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 热点新闻 -->
+    <section>
+      <div class="card">
+        <div class="section-title">📰 今日热点新闻</div>
+        <div class="news-grid">
+          
+    <div>
+      <div class="news-col-title">🇨🇳 中国热点</div>
+      
+        <div class="news-item">
+          <span class="news-num">1</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.tmtpost.com/8200229.html" target="_blank" rel="noopener">黄仁勋分手费5000亿？硅谷大佬绯闻启示录</a>
+            <div class="news-meta">
+              <span class="news-source-badge">钛媒体</span>
+              <span class="news-date">2026-11-11 02:10</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">2</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.tmtpost.com/8200663.html" target="_blank" rel="noopener">2026，AI应用的钱都流向了哪里？</a>
+            <div class="news-meta">
+              <span class="news-source-badge">钛媒体</span>
+              <span class="news-date">2026-11-11 01:42</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">3</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.tmtpost.com/8200652.html" target="_blank" rel="noopener">家电三巨头的计算中心新对决</a>
+            <div class="news-meta">
+              <span class="news-source-badge">钛媒体</span>
+              <span class="news-date">2026-11-11 01:40</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">4</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.tmtpost.com/8200714.html" target="_blank" rel="noopener">平头哥要上市，阿里AI的第一个“大结果”</a>
+            <div class="news-meta">
+              <span class="news-source-badge">钛媒体</span>
+              <span class="news-date">2026-11-11 01:40</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">5</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.tmtpost.com/8194238.html" target="_blank" rel="noopener">亚洲出口，正按AI产业链位置重新排座次</a>
+            <div class="news-meta">
+              <span class="news-source-badge">钛媒体</span>
+              <span class="news-date">2026-11-11 01:23</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">6</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.cyzone.cn/article/853464.html" target="_blank" rel="noopener">腾讯等入股沛塬电子</a>
+            <div class="news-meta">
+              <span class="news-source-badge">创业邦</span>
+              <span class="news-date">2026-11-10 06:45</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">7</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.cyzone.cn/article/853463.html" target="_blank" rel="noopener">粤芯三期集成电路制造公司增资至90亿</a>
+            <div class="news-meta">
+              <span class="news-source-badge">创业邦</span>
+              <span class="news-date">2026-11-10 02:53</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">8</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.cyzone.cn/article/853355.html" target="_blank" rel="noopener">成立两个月，杭州园林控股的杭微天算签下约1.32亿元服务器合同</a>
+            <div class="news-meta">
+              <span class="news-source-badge">创业邦</span>
+              <span class="news-date">2026-11-09 03:21</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">9</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.cyzone.cn/article/853354.html" target="_blank" rel="noopener">碳化硅外延片厂商天域半导体拟以约4亿元入股东尼电子</a>
+            <div class="news-meta">
+              <span class="news-source-badge">创业邦</span>
+              <span class="news-date">2026-11-09 03:20</span>
+              
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">10</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.cyzone.cn/article/853154.html" target="_blank" rel="noopener">全面节约方案部署电池循环，生命周期管理连接回收与制造</a>
+            <div class="news-meta">
+              <span class="news-source-badge">创业邦</span>
+              <span class="news-date">2026-11-06 09:44</span>
+              
+            </div>
+          </div>
+        </div>
+    </div>
+          
+    <div>
+      <div class="news-col-title">🌍 国际热点</div>
+      
+        <div class="news-item">
+          <span class="news-num">1</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.vulncheck.com/blog/anthropic-glasswing-november-update" target="_blank" rel="noopener">After 7 months, Glasswing overwelms maintainers with underwhelming findings</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 22:17</span>
+              <span class="news-hot">↑305</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">2</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://neil.fraser.name/news/2026/11/10/" target="_blank" rel="noopener">.name Grandfathered</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 16:37</span>
+              <span class="news-hot">↑715</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">3</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://www.theautopian.com/scion-is-back-and-its-going-to-sell-a-freaking-kei-truck-in-america/" target="_blank" rel="noopener">Scion is back and is going to sell a kei truck in America</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 19:50</span>
+              <span class="news-hot">↑360</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">4</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://docodethatmatters.com/home-automation-overnight-success/" target="_blank" rel="noopener">Smart home devices should work without the internet</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 15:25</span>
+              <span class="news-hot">↑755</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">5</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://teorth.github.io/tao-web/six-math-essentials.html" target="_blank" rel="noopener">Six Math Essentials by Terence Tao</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 20:58</span>
+              <span class="news-hot">↑154</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">6</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://starlink.com/mini-2" target="_blank" rel="noopener">Starlink Mini 2</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 18:22</span>
+              <span class="news-hot">↑293</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">7</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/" target="_blank" rel="noopener">Synaptics patent claims stop work on DisplayLink drivers</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 18:02</span>
+              <span class="news-hot">↑322</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">8</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://p0pcycle.com/2026/11/06/hacking-the-meta-ray-ban-smartglasses/" target="_blank" rel="noopener">Hacking the Meta Ray-Ban smartglasses</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-07 17:19</span>
+              <span class="news-hot">↑61</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">9</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://blog.val.town/winding-down" target="_blank" rel="noopener">Val Town is winding down</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 17:31</span>
+              <span class="news-hot">↑322</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-num">10</span>
+          <div class="news-body">
+            <a class="news-title-link" href="https://deepmind.google/blog/introducing-alphaproof-code/" target="_blank" rel="noopener">AlphaProof Code</a>
+            <div class="news-meta">
+              <span class="news-source-badge">黑客新闻</span>
+              <span class="news-date">2026-11-10 12:11</span>
+              <span class="news-hot">↑586</span>
+            </div>
+          </div>
+        </div>
+    </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 行业分析 -->
+    <section>
+      <div class="section-title" style="margin-bottom:16px">💡 全行业创业机会分析</div>
+      
+    <div class="filter-bar" id="filter-bar">
+      <span class="filter-label">筛选</span>
+      <button class="filter-btn active" id="filter-all">全部</button>
+      <button class="filter-btn preset" id="filter-preset">🔥 重点赛道</button>
+      <button class="filter-btn" data-id="AI-科技" style="border-color:#6366f120">🤖 AI / 科技</button>
+      <button class="filter-btn" data-id="宠物-宠物经济" style="border-color:#f9731620">🐾 宠物 / 宠物经济</button>
+      <button class="filter-btn" data-id="教育-EdTech" style="border-color:#3b82f620">📚 教育 / EdTech</button>
+      <button class="filter-btn" data-id="消费-零售-电商" style="border-color:#ec489920">🛍️ 消费 / 零售 / 电商</button>
+      <button class="filter-btn" data-id="加密货币-Web3-DeFi" style="border-color:#f7931a20">₿ 加密货币 / Web3 / DeFi</button>
+      <button class="filter-btn" data-id="芯片-半导体" style="border-color:#0ea5e920">💻 芯片 / 半导体</button>
+      <button class="filter-btn" data-id="机器人-具身智能" style="border-color:#7c3aed20">🦾 机器人 / 具身智能</button>
+      <button class="filter-btn" data-id="金融-金融科技" style="border-color:#f59e0b20">💰 金融 / 金融科技</button>
+      <button class="filter-btn" data-id="媒体-娱乐-内容" style="border-color:#8b5cf620">🎬 媒体 / 娱乐 / 内容</button>
+      <button class="filter-btn" data-id="潮流-时尚-运动" style="border-color:#e11d4820">👟 潮流 / 时尚 / 运动</button>
+      <button class="filter-btn" data-id="动漫-二次元-IP" style="border-color:#d946ef20">🎌 动漫 / 二次元 / IP</button>
+      <button class="filter-btn" data-id="出行-交通" style="border-color:#06b6d420">🚗 出行 / 交通</button>
+      <button class="filter-btn" data-id="能源-清洁能源" style="border-color:#84cc1620">⚡ 能源 / 清洁能源</button>
+      <button class="filter-btn" data-id="医疗健康" style="border-color:#10b98120">🏥 医疗健康</button>
+      <button class="filter-btn" data-id="农业-食品" style="border-color:#a78bfa20">🌾 农业 / 食品</button>
+      <button class="filter-btn" data-id="制造业-工业" style="border-color:#64748b20">🏭 制造业 / 工业</button>
+      <button class="filter-btn" data-id="房产-建筑" style="border-color:#78716c20">🏠 房产 / 建筑</button>
+      <button class="filter-btn" data-id="政策-监管-社会" style="border-color:#ef444420">📋 政策 / 监管 / 社会</button>
+    </div>
+    <script>
+    (function(){
+      var PRESET = ["AI-\u79d1\u6280", "\u5ba0\u7269-\u5ba0\u7269\u7ecf\u6d4e", "\u6559\u80b2-EdTech", "\u6d88\u8d39-\u96f6\u552e-\u7535\u5546", "\u52a0\u5bc6\u8d27\u5e01-Web3-DeFi"];
+      var KEY = 'rd_filter_v1';
+      var sel = null;
+      function save(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){} }
+      function apply(ids){
+        document.querySelectorAll('.industry-card').forEach(function(c){
+          c.classList.toggle('hidden-industry', !(!ids || ids.includes(c.id)));
+        });
+        document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){
+          b.classList.toggle('active', !!(ids && ids.includes(b.dataset.id)));
+        });
+        document.getElementById('filter-all').classList.toggle('active', !ids);
+        document.getElementById('filter-preset').classList.toggle('active',
+          !!(ids && ids.length===PRESET.length && PRESET.every(function(p){return ids.includes(p);})));
+      }
+      function toggle(id){
+        var cur = sel ? sel.slice() : [];
+        var i = cur.indexOf(id);
+        if(i>=0) cur.splice(i,1); else cur.push(id);
+        sel = cur.length ? cur : null; apply(sel); save(sel);
+      }
+      document.getElementById('filter-all').onclick = function(){ sel=null; apply(null); save(null); };
+      document.getElementById('filter-preset').onclick = function(){ sel=PRESET.slice(); apply(sel); save(sel); };
+      document.querySelectorAll('.filter-btn[data-id]').forEach(function(b){
+        b.onclick = function(){ toggle(b.dataset.id); };
+      });
+      try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length){ sel=s; apply(sel); } }catch(e){}
+    })();
+    </script>
+      
+    <div class="industry-card" id="AI-科技" style="border-left-color:#6366f1">
+      <div class="industry-header">
+        <span class="industry-emoji">🤖</span>
+        <span class="industry-name">AI / 科技</span>
+        <canvas class="sparkline-wrap" id="spark-AI-科技" data-values='[2, 1, 2, 3, 1, 2, 2]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">XLK</span>▼ -11.6%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI应用资金流向视频/图像/3D，平头哥上市加速国产算力闭环，AI应用层爆发窗口明确。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI投资从基础层向应用层迁移，视频生成、3D内容、垂类AI Agent成资本宠儿。国产算力链条逐步闭合，本土AI应用成本边际下降，创业门槛降低。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 3D内容AI生产平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">AI资金大头流向3D方向，但专业3D内容生产门槛极高。面向游戏、电商、工业设计场景，提供「文字/图片→3D资产」一键生成SaaS，降低中小企业3D内容成本90%，切入存量需求最大的电商3D展示场景。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按资产生成量订阅收费+企业私有化部署授权</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">接入国产多模态大模型，微调3D生成专项能力，结合NeRF/Gaussian Splatting技术</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">中小电商卖家、游戏独立工作室、工业设计公司</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">国内3D内容服务市场预计2027年超500亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">锁定淘宝/京东商家做3D商品展示MVP，跑通10个付费客户验证需求</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI视频营销内容引擎</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">视频AI是当前吸金第一赛道，但多数工具面向C端。面向品牌方和MCN机构，构建「产品信息→营销短视频」自动化流水线，支持多平台格式适配与品牌风格锁定，解决内容规模化生产痛点。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按视频产出量阶梯计费，企业年框合同</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">大模型驱动脚本生成+视频生成模型+品牌风格LoRA微调</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">品牌电商、MCN机构、连锁零售商</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">国内短视频营销年支出超2000亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接入即梦/可灵API，做3个行业（美妆/食品/3C）的Demo视频，找10家品牌试用</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 智能家电AI交互中台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">家电三巨头争建计算中心，但AI能力与家电终端的连接仍碎片化。为美的/海尔/格力等提供统一AI交互中台，打通语音、视觉、场景感知，实现跨品牌设备协同与用户行为预测，构建家庭AI OS底座。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">平台授权费+用户数据运营分成</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">端侧小模型+云端大模型协同，家庭场景多模态感知与意图理解</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">家电厂商、智能家居集成商</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">智能家居AI服务市场2026年超300亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">选定一个家电品牌做POC，先打通3类设备的统一指令协议Demo</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 国产大模型能力迭代极快，应用层产品护城河浅，需快速建立数据飞轮与行业壁垒。</div>
+    </div>
+
+    <div class="industry-card" id="宠物-宠物经济" style="border-left-color:#f97316">
+      <div class="industry-header">
+        <span class="industry-emoji">🐾</span>
+        <span class="industry-name">宠物 / 宠物经济</span>
+        <canvas class="sparkline-wrap" id="spark-宠物-宠物经济" data-values='[0, 0, 0, 1, 1, 1, 1]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLY*</span>▲ +5.0%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">消费情感化趋势延续，索尼复古耳机「情怀溢价」爆卖逻辑同样适用宠物情感消费升级。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">中国宠物消费从基础喂养向健康管理、情感陪伴升级，AI宠物健康监测与个性化服务成新增长极。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI宠物健康管家App</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">宠物主痛点：看病贵、预防难、疾病识别慢。用AI实现粪便/皮肤/行为图像异常识别，结合可穿戴数据给出健康预警，连接线下宠物医院做分诊导流，构建「检测-问诊-用药」闭环。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">订阅制健康会员+医院导流佣金+自营宠物保险</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">视觉大模型微调宠物病症识别，LLM驱动AI兽医问诊</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">25-40岁一二线城市养猫狗用户</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">宠物医疗市场2026年超600亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">搭建猫狗粪便/皮肤异常识别模型，联合5家宠物医院做免费检测工具冷启动</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 宠物AI陪伴智能硬件</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">宠物独处焦虑是高频痛点，现有摄像头产品功能单薄。做搭载AI的宠物互动机器人，支持自主游戏、主人远程互动、异常行为报警，主打「宠物情绪价值」，溢价空间大。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">硬件销售+月度AI服务订阅</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">端侧视觉模型识别宠物情绪与行为，AI生成个性化互动策略</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">双职工家庭、空巢青年宠物主</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">宠物智能硬件市场年增速超30%</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">先做App+现有摄像头联动的软件版MVP，验证用户付费意愿后再立硬件项目</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 宠物个性化营养定制平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">宠物食品同质化严重，主人对配方认知低。用AI分析宠物品种/年龄/健康数据，定制个性化主粮配方并按月配送，打「营养师级别」差异化，客单价是通用粮2-3倍。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">订阅制按月配送+健康复测续费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI营养模型根据宠物档案动态调整配方</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">愿为宠物健康溢价的高线城市宠物主</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">宠物食品市场超900亿，定制化渗透率不足5%</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">与1家代工厂合作，上线问卷+AI推荐配方的小程序，测试100单真实购买转化</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 宠物食品需通过农业农村部审批，定制配方合规周期长，需提前规划。</div>
+    </div>
+
+    <div class="industry-card" id="教育-EdTech" style="border-left-color:#3b82f6">
+      <div class="industry-header">
+        <span class="industry-emoji">📚</span>
+        <span class="industry-name">教育 / EdTech</span>
+        <canvas class="sparkline-wrap" id="spark-教育-EdTech" data-values='[2, 2, 2, 2, 2, 2, 2]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">XLK*</span>▼ -11.6%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI算力与应用层爆发，叠加国内对AI人才的强烈需求，AI教育赛道结构性机会显现。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">双减后K12压力转移至素质与职业赛道，AI技能教育需求爆发，个性化AI家教替代传统辅导成主流方向。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 职场AI技能速训平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">企业员工迫切需要AI工具实操能力，但系统课程稀缺。做「岗位专属AI技能包」：财务/HR/销售/运营各岗位定制课，以项目实战为核心，2-4周速成，直接对接企业内训采购预算。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">企业内训团购+个人订阅+认证体系</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI模拟真实工作场景，提供个性化练习与即时反馈</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">500人以上企业HR/培训部门、职场转型个人</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">企业数字化培训市场超800亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">先做「销售岗AI工具实战」1门精品课，在LinkedIn/脉脉测试付费转化率</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI个性化学科家教产品</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">传统一对一辅导成本高，AI可实现7×24小时千人千面辅导。聚焦初高中数理化，AI实时分析错题根因，动态调整练习难度，提供语音互动讲解，以远低于人工辅导的价格切入下沉市场。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">月度订阅制，家长端付费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">大模型驱动自适应学习路径+语音交互讲解</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">三四线城市初高中生家长</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">K12课外辅导刚需市场仍超3000亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接入DeepSeek API做数学题讲解Demo，在小红书/抖音做免费工具冷启动引流</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI编程启蒙少儿课程</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">AI时代编程素养成基础能力，家长付费意愿高。做「AI+编程」融合课：用AI助手辅助孩子完成小游戏/动画项目，所见即所得，8-14岁目标人群，线上直播+AI练习系统双轨并行。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">课程包销售+年度会员订阅</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI实时代码纠错与创意建议，降低儿童学习挫败感</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">一二线城市8-14岁学生家长</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">少儿编程市场2026年超200亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">招募10名种子学员免费体验，收集课程反馈打磨核心模块后批量推广</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ K12在线教育监管政策随时可能收紧，需密切关注教育部针对AI教育工具的合规要求。</div>
+    </div>
+
+    <div class="industry-card" id="消费-零售-电商" style="border-left-color:#ec4899">
+      <div class="industry-header">
+        <span class="industry-emoji">🛍️</span>
+        <span class="industry-name">消费 / 零售 / 电商</span>
+        <canvas class="sparkline-wrap" id="spark-消费-零售-电商" data-values='[2, 2, 1, 1, 2, 1, 2]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLY</span>▲ +5.0%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">双十一节点+索尼复古耳机情怀爆卖揭示：情绪价值驱动消费，差异化定位比价格战更有效。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">消费者从「功能满足」转向「情绪满足」，AI驱动的个性化推荐与内容电商重构流量分配逻辑，白牌溢价靠情感叙事。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI选品与爆款预测SaaS</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">中小电商卖家选品靠经验，试错成本高。用AI抓取全网销售数据、社媒趋势、搜索热词，提前30天预测品类爆款，给出备货建议与定价策略，帮助卖家降低库存风险。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按月订阅分层定价，高阶版含私域选品顾问</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">多源数据融合大模型预测，实时监控竞品动态</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">月GMV 10-500万的中小电商卖家</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">电商SaaS工具市场超400亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">先聚焦1个品类（如家居/美妆），爬取数据做选品报告，免费给100个卖家用并收集反馈</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 情绪消费品牌孵化器</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">索尼复古耳机无降噪仍爆卖，证明「情怀+颜值」溢价逻辑有效。建立AI辅助品牌孵化体系：用AI分析情感消费趋势，快速定义品牌人格，对接柔性供应链，0到1孵化情绪型消费品牌。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">股权共建+品牌GMV分成</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI趋势分析+AI生成品牌视觉与文案，压缩从0到1周期</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">有货源资源的供应链方、品牌创业者</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">情绪消费品市场年增速超25%</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">选1个情感品类（如国潮文具/复古家居），用AI生成品牌方案，小红书测试内容反响</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI导购私域运营工具</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">品牌私域运营依赖人力，转化率低且难以规模化。用AI构建「懂产品+懂用户」的智能导购机器人，部署在企业微信/小程序，实现主动触达、个性化推荐、售后跟进全流程自动化。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按私域用户规模订阅+成交额佣金分成</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">RAG架构接入品牌产品知识库，大模型驱动拟人化对话</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">有私域流量的品牌商、连锁门店</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">私域运营服务市场超500亿</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接入微信生态API，做1个美妆品牌智能导购Demo，跑通「推荐-下单」完整链路</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ AI导购数据安全与用户隐私合规是红线，需提前完成数据安全评估与备案。</div>
+    </div>
+
+    <div class="industry-card" id="加密货币-Web3-DeFi" style="border-left-color:#f7931a">
+      <div class="industry-header">
+        <span class="industry-emoji">₿</span>
+        <span class="industry-name">加密货币 / Web3 / DeFi</span>
+        <canvas class="sparkline-wrap" id="spark-加密货币-Web3-DeFi" data-values='[2, 0, 1, 1, 2, 2, 1]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">BITO</span>▼ -10.0%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">无直接新闻，结合AI+去中心化算力趋势，以及国产算力链条完善带来的分布式计算新机遇。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI与Web3融合加速，去中心化AI算力网络、链上AI Agent、数据确权成前沿方向。国内合规框架下，香港Web3生态持续扩张提供出海窗口。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 去中心化AI算力租赁网络</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">AI推理算力需求爆发，中心化云成本高。搭建P2P算力共享网络，让闲置GPU持有者出租算力，AI开发者按需购买，用Token激励算力供给侧，解决AI算力供需错配问题。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">平台撮合手续费+Token经济治理</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI动态调度算力资源，优化延迟与成本匹配</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">中小AI开发者、GPU矿机持有者</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">去中心化算力市场2026年超50亿美元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">在香港注册实体，接入Render Network等协议做二层调度层MVP，验证供需撮合效率</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 链上AI Agent资产管理</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">DeFi用户需要自动化策略执行但缺乏技术能力。构建链上AI Agent，自主监控DeFi协议收益变化，执行跨协议资产再平衡，用户授权后全程无人值守，降低DeFi参与门槛。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">管理资产规模收取固定比例服务费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">大模型分析链上数据与市场情绪，驱动自主决策与执行</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">持有加密资产10万美元以上的DeFi用户</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">DeFi TVL重回千亿美元级，自动化管理渗透率低</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">先做只读版链上AI分析报告工具，积累用户信任后再逐步开放执行权限</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 数据确权与AI训练数据市场</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">AI训练数据需求旺盛但版权争议不断。用区块链做数据确权登记，构建合规数据交易市场，数据提供方按AI使用次数获得Token分成，解决AI训练数据来源合法性问题。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">数据交易手续费+数据确权服务费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI自动完成数据质量评估与标注分级，提升交易效率</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">内容创作者、数据标注公司、AI企业</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">AI训练数据市场2026年超20亿美元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">在香港搭建数据确权Demo平台，联合3家AI公司做数据采购试点验证合规路径</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 国内加密监管政策未松动，需通过香港合规架构运营，避免直接面向内地用户的Token发行。</div>
+    </div>
+
+    <div class="industry-card" id="芯片-半导体" style="border-left-color:#0ea5e9">
+      <div class="industry-header">
+        <span class="industry-emoji">💻</span>
+        <span class="industry-name">芯片 / 半导体</span>
+        <canvas class="sparkline-wrap" id="spark-芯片-半导体" data-values='[1, 0, 0, 2, 0, 0, 2]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">SOXX</span>▼ -15.7%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">平头哥拟上市、粤芯三期增资90亿、天域半导体入股东尼电子，国产半导体资本化提速。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">国产芯片从追赶进入规模化量产阶段，碳化硅、AI推理芯片成两大热点；供应链本土化压力推动设计、封测、材料全链条机会涌现。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI芯片IP授权与EDA工具服务</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">国内中小芯片设计公司缺乏推理加速IP核，可提供面向边缘AI场景的可授权IP模块及AI辅助EDA优化工具，降低设计门槛，以订阅+分成模式切入。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">IP授权费 + 流片成功分成 + EDA SaaS年费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI自动完成时序优化、功耗分析，将设计周期缩短30%以上</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">国内中小型芯片设计公司、高校研究院</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">国内EDA及IP市场超200亿元且快速增长</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">招募2名前ARM/RISC-V IP工程师，打磨1个边缘推理IP核Demo并接触5家Fabless客户</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 碳化硅功率器件检测SaaS</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">碳化硅外延片良率检测依赖进口设备，可开发AI视觉缺陷检测软件，对接国产光学设备硬件，以SaaS形式售给外延片和器件厂，快速替代人工抽检。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按检测量计费的SaaS订阅 + 硬件集成服务费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">视觉大模型识别微管、堆垛层错等微米级缺陷，准确率超人工</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">天域半导体、瀚天天成等碳化硅外延及器件厂</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">碳化硅检测设备市场预计2027年达50亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">与1家碳化硅厂谈数据标注合作，收集500张缺陷样本训练基础模型</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ EDA和IP领域技术壁垒极高，烧钱周期长，需警惕资金链断裂风险。</div>
+    </div>
+
+    <div class="industry-card" id="机器人-具身智能" style="border-left-color:#7c3aed">
+      <div class="industry-header">
+        <span class="industry-emoji">🦾</span>
+        <span class="industry-name">机器人 / 具身智能</span>
+        <canvas class="sparkline-wrap" id="spark-机器人-具身智能" data-values='[2, 0, 0, 1, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">ROBO</span>▼ -7.1%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI应用资金向视频/3D集中，为具身智能训练数据和仿真场景生成提供上游支撑。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">具身智能进入量产前夜，训练数据稀缺和部署成本高是两大核心瓶颈；工厂、仓储场景率先落地，服务型机器人紧随其后。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 具身智能合成训练数据平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">机器人大模型训练严重依赖真实操作数据，成本极高。用3D生成+物理仿真引擎批量合成多样化操作场景数据，以数据集订阅卖给机器人公司，填补数据荒。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">数据集按场景类型订阅 + 定制数据生成服务</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">视频生成模型+物理引擎联合渲染，自动标注6DoF动作标签</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">宇树、智元、傅利叶等具身智能公司及高校实验室</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">具身智能训练数据市场预计2027年超30亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">用Blender+Isaac Sim搭建厨房操作场景，生成1000条标注数据送给3家机器人公司试用</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 工厂机器人远程运维SaaS</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">工厂部署机器人后缺乏专业运维团队，故障停机损失大。提供AI驱动的远程状态监测、故障预测和OTA调度平台，按机器人台数收取年费。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按台数收取年费（SaaS）+ 故障快速响应增值服务</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">时序异常检测模型实时分析电机/关节传感器数据，预测故障提前3天预警</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">引入工业机器人的中大型制造企业</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">工业机器人运维服务市场规模超100亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接触1家已部署机器人的工厂，免费安装传感器采集3个月数据验证预测准确率</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 具身智能落地周期比预期长，To B销售周期和账期风险需重点控制。</div>
+    </div>
+
+    <div class="industry-card" id="金融-金融科技" style="border-left-color:#f59e0b">
+      <div class="industry-header">
+        <span class="industry-emoji">💰</span>
+        <span class="industry-name">金融 / 金融科技</span>
+        <canvas class="sparkline-wrap" id="spark-金融-金融科技" data-values='[0, 0, 0, 1, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLF</span>▲ +3.9%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI应用资金流向清晰，资本市场对AI赛道估值分化，需要更精准的投研工具辅助决策。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI重塑投研、风控、合规三大环节，监管趋严背景下合规AI工具需求爆发，中小金融机构是最大空白市场。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 中小券商AI投研助手</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">中小券商研究所人手不足，AI可自动生成行业跟踪报告、财报摘要和舆情预警，以私有化部署保障合规。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">私有化部署授权费 + 年度维护订阅</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">金融垂直大模型+RAG实时接入公告、研报数据库</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">100家中小券商研究部门、私募基金</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">券商金融科技支出年超500亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">用DeepSeek微调金融报告写作模型，制作1份A股行业对比报告Demo送券商试用</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI反欺诈实时风控中台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">消费金融、网络支付欺诈手段升级，传统规则引擎失效。提供AI实时图神经网络风控API，按调用量计费。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">API按调用量计费 + 月度风险报告订阅</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">图神经网络识别团伙欺诈关联，毫秒级响应</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">消费金融公司、中小银行、支付机构</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">金融风控市场规模超300亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">与1家消费金融公司签POC协议，接入其脱敏交易数据训练图模型</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 金融数据隐私监管严格，数据合规成本高，需提前布局等保三级认证。</div>
+    </div>
+
+    <div class="industry-card" id="媒体-娱乐-内容" style="border-left-color:#8b5cf6">
+      <div class="industry-header">
+        <span class="industry-emoji">🎬</span>
+        <span class="industry-name">媒体 / 娱乐 / 内容</span>
+        <canvas class="sparkline-wrap" id="spark-媒体-娱乐-内容" data-values='[1, 0, 0, 2, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLC</span>▲ +4.5%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">2026年AI应用资金视频、图像、3D占大头，内容生产AI化进入规模爆发期。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI生成内容成本断崖式下降，专业内容团队用AI放大产能是核心机会；垂直场景定制化内容需求激增。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 品牌AI短视频批量生产工具</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">电商品牌需要海量SKU视频，AI可一键生成多语言多风格短视频，大幅降低制作成本。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按视频条数计费 + 品牌专属模型训练服务费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">视频生成模型+品牌风格LoRA微调，保持品牌一致性</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">跨境电商品牌、国内中小品牌主</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">短视频营销市场规模超3000亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">用即梦/可灵API搭建MVP，找5个跨境电商商家免费试用并收集反馈</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI播客与有声内容工厂</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">文字内容转高质量多角色有声播客，支持方言和情绪化语音，服务出版、教育、媒体机构。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按字数/时长订阅 + 分发渠道对接增值服务</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">TTS+情感控制模型实现影视级有声表演</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">出版社、在线教育平台、内容MCN</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">有声内容市场规模超百亿且高速增长</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接入火山引擎TTS，制作3个样本集打包给出版社演示</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ AI内容版权归属法规尚不明确，需规避训练数据侵权法律风险。</div>
+    </div>
+
+    <div class="industry-card" id="潮流-时尚-运动" style="border-left-color:#e11d48">
+      <div class="industry-header">
+        <span class="industry-emoji">👟</span>
+        <span class="industry-name">潮流 / 时尚 / 运动</span>
+        
+        <span class="market-badge up"><span class="badge-etf">XLY*</span>▲ +5.0%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">索尼复古耳机靠情怀卖爆，印证消费者对个性化、情感化产品的强烈需求。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">Z世代追求个性表达，AI个性化定制和虚拟试穿重塑时尚消费链路；运动科技与数据结合打造差异化体验。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI个性化球鞋定制平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">用AI生成设计图案+小批量柔性供应链实现个人专属球鞋，主打潮流圈层社交传播。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">定制鞋溢价销售 + 设计师IP联名分成</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">图像生成模型根据用户偏好生成配色方案并直连工厂打版</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">18-30岁潮流青年、球鞋收藏爱好者</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">国内潮鞋市场规模超500亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">用Midjourney做50款设计样稿，在小红书发帖测试预约意愿</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 运动员AI体能数据教练</div>
+        <div class="opp-tags"><span class="tag" style="background:#c6f6d5;color:#276749">🟢 难度 低</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">整合可穿戴设备数据，AI生成个性化训练计划和伤病风险预警，服务业余跑者和健身人群。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">会员订阅制 + 高阶教练连线增值包</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">时序模型分析运动数据预测过度训练风险并自动调整计划</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">马拉松跑者、健身房会员、业余球队</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">运动健康APP市场规模超200亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">对接Garmin/华为手表API，开发微信小程序MVP，邀请100名跑者内测</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 柔性供应链最小起订量和质量控制是定制赛道最大执行难点。</div>
+    </div>
+
+    <div class="industry-card" id="动漫-二次元-IP" style="border-left-color:#d946ef">
+      <div class="industry-header">
+        <span class="industry-emoji">🎌</span>
+        <span class="industry-name">动漫 / 二次元 / IP</span>
+        <canvas class="sparkline-wrap" id="spark-动漫-二次元-IP" data-values='[1, 0, 0, 1, 0, 0, 2]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLC*</span>▲ +4.5%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI视频图像资金集中，为动漫工业化生产提供技术底座，降低IP内容创作门槛。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI大幅降低动漫制作成本，使中小团队能制作高质量内容；IP延伸至实体商品和虚拟互动是变现新路径。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI动漫分镜与动效生产工具</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">动漫制作中分镜和中间帧最耗人力，AI可自动生成高质量中间帧和分镜稿，服务国内动漫工作室。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">SaaS订阅 + 超出用量按帧计费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">视频生成+角色一致性模型保持跨帧角色外观稳定</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">中小动漫工作室、独立动画导演</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">国内动漫制作市场规模超300亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">用ComfyUI搭建角色一致性工作流，联系3家动漫工作室做免费试用</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 二次元IP虚拟陪伴订阅</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">基于热门IP角色打造有记忆、有情感的AI虚拟伴侣，粉丝通过订阅付费与角色深度互动。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">月度订阅 + 角色限定剧情DLC单独付费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">角色扮演大模型+长期记忆模块，模拟IP角色人格</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">18-25岁二次元重度用户</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">虚拟陪伴市场规模快速增长预计超50亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">与1个独立IP版权方谈授权合作，开发微信小程序内测版测试付费转化率</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ IP授权费用高且谈判周期长，建议优先孵化原创IP降低依赖风险。</div>
+    </div>
+
+    <div class="industry-card" id="出行-交通" style="border-left-color:#06b6d4">
+      <div class="industry-header">
+        <span class="industry-emoji">🚗</span>
+        <span class="industry-name">出行 / 交通</span>
+        <canvas class="sparkline-wrap" id="spark-出行-交通" data-values='[1, 0, 0, 2, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">IYT</span>▲ +3.8%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">上汽+Momenta成立3亿智驾合资公司，车企与AI公司深度绑定，智驾商业化提速。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">智能驾驶进入量产落地关键期，数据闭环和场景覆盖是核心竞争要素；智驾后市场服务和保险是新兴蓝海。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 智驾长尾场景数据采集服务</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">主机厂智驾系统在恶劣天气、特殊路况等长尾场景数据严重不足，专业众包采集+标注服务能快速填补缺口。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按采集里程和标注量收费的项目制服务</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI预标注+人工审核流水线，标注效率提升5倍</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">上汽、比亚迪等主机厂及Momenta等智驾公司</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">自动驾驶数据服务市场规模超百亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">招募50名有驾照的兼职采集员，在上海郊区跑1000公里数据，制作Demo递给主机厂</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 智驾保险定价AI引擎</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">传统车险无法处理智驾数据，提供基于驾驶行为数据的UBI保险定价模型API，服务保险公司开发智驾险种。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">向保险公司收取API调用费 + 精算咨询服务费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">时序模型分析OBD和智驾日志，输出风险评分和定价建议</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">人保、平安等险企智驾险产品团队</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">车险市场规模超9000亿元，智驾险是新增量</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">收集公开驾驶数据集训练风险评分模型，制作精算报告拜访1家险企创新部门</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 智驾数据涉及个人位置隐私，数据采集需严格遵守个人信息保护法。</div>
+    </div>
+
+    <div class="industry-card" id="能源-清洁能源" style="border-left-color:#84cc16">
+      <div class="industry-header">
+        <span class="industry-emoji">⚡</span>
+        <span class="industry-name">能源 / 清洁能源</span>
+        <canvas class="sparkline-wrap" id="spark-能源-清洁能源" data-values='[2, 0, 0, 2, 0, 0, 2]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">ICLN</span>▲ +2.5%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">《全面节约战略行动方案》推动动力电池全生命周期管理，政策强驱动下回收与再生材料市场启动。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI算力中心高速扩张带来巨大电力需求，储能+绿电配套成刚需；电池回收政策落地推动循环经济商业化。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI数据中心绿电撮合平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">算力中心绿电采购繁琐且价格不透明，搭建AI撮合平台对接风光电场与数据中心，实现实时绿电匹配交易。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按撮合电量抽取服务佣金（0.5-1分/度）</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">AI预测风光发电曲线与算力负荷曲线，优化供需匹配减少弃电</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">中小算力中心运营商、工商业储能项目方</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">绿电交易市场规模已超千亿且快速增长</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">对接电力交易所数据接口，搭建绿电供需看板，邀请3家算力中心和3家电场试用</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 动力电池梯次利用评估SaaS</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">退役动力电池梯次利用需快速评估健康度，AI无损检测替代人工拆解，降低评估成本和时间90%。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按检测电池包数量收费 + 电池数字护照年费</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">电化学阻抗谱+AI模型5分钟内评估SOH精度超90%</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">电池回收企业、储能集成商、汽车厂回收部门</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">动力电池回收市场2026年规模超500亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">采购EIS测试仪，与1家回收企业合作采集200组退役电池数据训练模型</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 绿电交易平台需取得电力经营许可，牌照申请周期需纳入计划。</div>
+    </div>
+
+    <div class="industry-card" id="医疗健康" style="border-left-color:#10b981">
+      <div class="industry-header">
+        <span class="industry-emoji">🏥</span>
+        <span class="industry-name">医疗健康</span>
+        <canvas class="sparkline-wrap" id="spark-医疗健康" data-values='[0, 1, 0, 1, 1, 1, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">XLV</span>▲ +5.1%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">AI算力基础设施完善为医疗AI大模型落地提供算力支撑，诊断辅助场景加速商业化。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">基层医疗AI辅助诊断需求迫切，合规路径趋于清晰。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 基层诊所AI辅助诊断工具</div>
+        <div class="opp-tags"><span class="tag" style="background:#fed7d7;color:#822727">🔴 难度 高</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">乡镇卫生院和社区诊所缺乏专科医生，AI辅助诊断分诊可提升诊疗质量，以低价SaaS切入。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">诊所月度订阅 + 医院HIS系统集成授权</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">医疗垂直模型分析症状+检查报告给出辅助诊断建议</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">全国50万家基层诊所和卫生院</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">基层医疗信息化市场规模超200亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">与1家三甲医院合作获取脱敏病历数据，申请医疗AI软件备案</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 医疗AI须取得二类医疗器械软件注册证，监管周期至少18个月。</div>
+    </div>
+
+    <div class="industry-card" id="农业-食品" style="border-left-color:#a78bfa">
+      <div class="industry-header">
+        <span class="industry-emoji">🌾</span>
+        <span class="industry-name">农业 / 食品</span>
+        <canvas class="sparkline-wrap" id="spark-农业-食品" data-values='[0, 0, 0, 1, 0, 0, 0]' width="80" height="28"></canvas>
+        <span class="market-badge up"><span class="badge-etf">MOO</span>▲ +4.3%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">节约战略推动再生材料应用，农业废弃物资源化利用获政策加持。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI农业精准化管理和食品溯源需求增长，政策推动绿色农业标准化。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 农业大棚AI精准环控系统</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">蔬菜大棚温湿度CO2管理依赖人工经验，AI自动调控可节能20%、增产15%，以硬件+订阅模式切入。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">传感器硬件销售 + AI管控软件年费订阅</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">强化学习模型根据作物生长阶段自动优化环控参数</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">规模化蔬菜种植基地、农业园区</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">智慧农业市场规模超700亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">采购低成本传感器套件，在1个50亩大棚试点部署3个月收集效果数据</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 农业客户决策慢、账期长，需控制硬件垫资规模。</div>
+    </div>
+
+    <div class="industry-card" id="制造业-工业" style="border-left-color:#64748b">
+      <div class="industry-header">
+        <span class="industry-emoji">🏭</span>
+        <span class="industry-name">制造业 / 工业</span>
+        <canvas class="sparkline-wrap" id="spark-制造业-工业" data-values='[1, 0, 0, 1, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge flat"><span class="badge-etf">XLI</span>— +0.1%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">家电三巨头入局计算中心，制造企业向科技公司转型趋势明显，AI工业软件需求爆发。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">制造业AI化从设备预测维护延伸到工艺优化和质检全流程。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI视觉质检即插即用设备</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">中小工厂质检依赖人工，AI视觉设备以边缘盒子+相机形态快速部署，1周上线，误检率低于0.1%。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">硬件买断 + AI算法年费订阅（硬件+软件双收入）</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">工业视觉大模型少样本学习，10张样本即可训练新品类缺陷检测</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">3C电子、汽车零部件、食品包装中小工厂</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">工业视觉检测市场规模超150亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">采购工业相机+Jetson边缘盒子，联系1家PCB工厂做免费质检样品线试点</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 工厂产线停产部署成本高，需提供非停产热插拔部署方案。</div>
+    </div>
+
+    <div class="industry-card" id="房产-建筑" style="border-left-color:#78716c">
+      <div class="industry-header">
+        <span class="industry-emoji">🏠</span>
+        <span class="industry-name">房产 / 建筑</span>
+        
+        <span class="market-badge up"><span class="badge-etf">IYR</span>▲ +5.8%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">算力中心建设热潮带动工业地产和特殊用途建筑需求增长，BIM+AI改造空间大。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">地产下行周期中存量改造和智能化运营是增量机会，AI降低设计和运维成本。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 AI存量建筑节能改造顾问</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fefcbf;color:#744210">🟡 紧迫 中</span></div>
+      </div>
+      <p class="opp-desc">老旧商业建筑能耗高，AI分析楼控数据输出精准节能改造方案，以效果付费模式消除客户决策障碍。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">免费诊断 + 按节能量分成（节省电费的20-30%）</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">时序模型分析楼宇能耗数据，识别最优改造优先级和ROI</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">商业地产运营商、物业公司、写字楼业主</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">建筑节能改造市场规模超千亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">接入1栋写字楼楼控系统，做3个月能耗分析报告验证节能效果</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 效果付费模式需严格定义节能基准线，避免结算纠纷。</div>
+    </div>
+
+    <div class="industry-card" id="政策-监管-社会" style="border-left-color:#ef4444">
+      <div class="industry-header">
+        <span class="industry-emoji">📋</span>
+        <span class="industry-name">政策 / 监管 / 社会</span>
+        <canvas class="sparkline-wrap" id="spark-政策-监管-社会" data-values='[1, 0, 0, 1, 0, 0, 1]' width="80" height="28"></canvas>
+        <span class="market-badge down"><span class="badge-etf">SPY*</span>▼ -2.9%</span>
+      </div>
+      <div class="industry-meta-row">
+        <div class="meta-block">
+          <div class="meta-label">📌 新闻关联</div>
+          <div class="meta-value">《全面节约战略行动方案》出台，电池全生命周期管理、再生材料应用获政策强力背书。</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">📈 核心趋势</div>
+          <div class="meta-value">AI监管合规要求趋严，ESG信息披露和碳核查成企业刚需，合规科技（RegTech）迎来窗口期。</div>
+        </div>
+      </div>
+      <div class="opps-title">创业机会</div>
+      
+    <div class="opp-card">
+      <div class="opp-header">
+        <div class="opp-title">💡 ESG碳核查AI合规平台</div>
+        <div class="opp-tags"><span class="tag" style="background:#fefcbf;color:#744210">🟡 难度 中</span><span class="tag" style="background:#fed7d7;color:#822727">🔴 紧迫 高</span></div>
+      </div>
+      <p class="opp-desc">上市公司ESG强制披露政策落地，AI自动采集生产数据生成合规碳排放报告，大幅降低人工核查成本。</p>
+      <div class="opp-details">
+        <div class="detail-item">
+          <div class="detail-label">商业模式</div>
+          <div class="detail-value">按企业规模年费订阅 + 第三方核查机构认证合作分成</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">AI 赋能</div>
+          <div class="detail-value">大模型自动解析能耗账单和工艺参数，输出符合GHG Protocol的碳报告</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">目标客户</div>
+          <div class="detail-value">A股上市公司、出口型制造企业</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">市场规模</div>
+          <div class="detail-value">ESG合规服务市场规模预计超百亿元</div>
+        </div>
+        <div class="detail-item action" style="grid-column:span 2">
+          <div class="detail-label">🚀 第一步行动</div>
+          <div class="detail-value">研究上交所ESG披露指引，开发碳排放自动计算Excel插件作为MVP验证需求</div>
+        </div>
+      </div>
+    </div>
+      <div class="watch-out">⚠️ 碳核查资质认证门槛高，需与有资质第三方机构合作规避法律风险。</div>
+    </div>
+    </section>
+
+    
+        <div class="card" style="margin-top:24px">
+          <div class="section-title">📁 历史报告</div>
+          <ul style="list-style:none;columns:2;gap:16px">
+            <li><a href="weekly-2026-W44.html">2026-W44 周报</a></li>
+<li><a href="weekly-2026-W43.html">2026-W43 周报</a></li>
+<li><a href="weekly-2026-W42.html">2026-W42 周报</a></li>
+<li><a href="weekly-2026-W41.html">2026-W41 周报</a></li>
+<li><a href="weekly-2026-W40.html">2026-W40 周报</a></li>
+<li><a href="weekly-2026-W39.html">2026-W39 周报</a></li>
+<li><a href="weekly-2026-W38.html">2026-W38 周报</a></li>
+<li><a href="weekly-2026-W37.html">2026-W37 周报</a></li>
+<li><a href="weekly-2026-W36.html">2026-W36 周报</a></li>
+<li><a href="weekly-2026-W35.html">2026-W35 周报</a></li>
+<li><a href="weekly-2026-W34.html">2026-W34 周报</a></li>
+<li><a href="weekly-2026-W33.html">2026-W33 周报</a></li>
+<li><a href="weekly-2026-W32.html">2026-W32 周报</a></li>
+<li><a href="weekly-2026-W31.html">2026-W31 周报</a></li>
+<li><a href="weekly-2026-W30.html">2026-W30 周报</a></li>
+<li><a href="weekly-2026-W29.html">2026-W29 周报</a></li>
+<li><a href="weekly-2026-W28.html">2026-W28 周报</a></li>
+<li><a href="weekly-2026-W27.html">2026-W27 周报</a></li>
+<li><a href="weekly-2026-W26.html">2026-W26 周报</a></li>
+<li><a href="weekly-2026-W25.html">2026-W25 周报</a></li>
+          </ul>
+        </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  由 Claude AI 自动生成 · 2026-11-11 ·
+  数据来源：微博 / 百度 / 知乎 / 36氪 / 创业邦 / 爱范儿 / 黑客新闻 / TechCrunch / 加密电讯 / VentureBeat ·
+  <a href="https://github.com/yijiewu51/rd-thoughts" target="_blank">GitHub</a>
+</footer>
+
+<!-- AI Chat -->
+<button class="chat-btn" id="chat-toggle" title="问问 AI">💬</button>
+
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-header">
+    <div>
+      <div class="chat-header-title">🧠 AI 创业顾问</div>
+      <div class="chat-header-sub">基于今日报告内容 · 2026-11-11</div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button id="chat-settings-btn" title="设置 API Key" style="background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:1rem;padding:4px 6px;border-radius:6px;">⚙️</button>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+  </div>
+
+  <!-- Key setup screen -->
+  <div id="chat-setup" style="display:none;padding:24px 20px;color:#94a3b8;font-size:0.85rem;">
+    <div style="font-size:1.1rem;margin-bottom:8px;color:white;">🔑 设置 API Key</div>
+    <div style="margin-bottom:16px;line-height:1.6;">输入 DeepSeek API Key，只需一次，存在本地不上传。</div>
+    <input id="key-input" class="chat-key-input" type="password" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
+    <button id="key-save" class="chat-key-save">保存并开始对话</button>
+    <div style="margin-top:12px;font-size:0.75rem;color:#475569;">Key 仅保存在你的浏览器本地，不会发送给任何第三方。</div>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg ai">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-bubble">你好！我已读取今日报告的全部内容，可以回答你关于各行业机会、创业策略、市场分析的问题。有什么想深入了解的？</div>
+    </div>
+  </div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-sugg">🔥 今天最值得做的机会是？</button>
+    <button class="chat-sugg">₿ Web3 机会详细分析</button>
+    <button class="chat-sugg">🐾 宠物行业怎么切入？</button>
+    <button class="chat-sugg">💰 50万预算选哪个赛道？</button>
+    <button class="chat-sugg">📈 和上周比有什么变化？</button>
+  </div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" placeholder="问任何关于创业机会的问题..." rows="1"></textarea>
+    <button class="chat-send" id="chat-send">➤</button>
+  </div>
+</div>
+
+<script>
+window.__REPORT__ = {"date": "2026-11-11", "summary": "2026年AI应用资金加速向视频、图像、3D内容倾斜，芯片国产化提速（平头哥上市、粤芯扩产），智驾合资潮涌现。AI正从基础设施向应用层渗透，创业窗口从「造模型」转向「造场景」。OpenAI收购旅游创业公司信号明确：AI垂直应用并购时代开启，垂类AI产品估值逻辑重塑。", "top3": [{"rank": 1, "industry": "AI / 科技", "title": "AI视频营销内容引擎", "reason": "AI资金最大流向已验证，视频营销需求确定，技术可用性高，B端付费意愿强，6个月内可跑通商业闭环。"}, {"rank": 2, "industry": "消费 / 零售 / 电商", "title": "AI导购私域运营工具", "reason": "私域运营是品牌刚需，AI替代人工成本显著，技术门槛适中，微信生态基础设施完善，可快速冷启动。"}, {"rank": 3, "industry": "教育 / EdTech", "title": "职场AI技能速训平台", "reason": "企业AI转型需求爆发，B端采购预算充足，监管风险低，课程产品0到1周期短，当下是最佳入场时机。"}], "industries": [{"name": "AI / 科技", "trend": "AI投资从基础层向应用层迁移，视频生成、3D内容、垂类AI Agent成资本宠儿。国产算力链条逐步闭合，本土AI应用成本边际下降，创业门槛降低。", "opportunities": [{"title": "3D内容AI生产平台", "description": "AI资金大头流向3D方向，但专业3D内容生产门槛极高。面向游戏、电商、工业设计场景，提供「文字/图片→3D资产」一键生成SaaS，降低中小企业3D内容成本90%，切入存量需求最大的电商3D展示场景。", "urgency": "高", "first_step": "锁定淘宝/京东商家做3D商品展示MVP，跑通10个付费客户验证需求"}, {"title": "AI视频营销内容引擎", "description": "视频AI是当前吸金第一赛道，但多数工具面向C端。面向品牌方和MCN机构，构建「产品信息→营销短视频」自动化流水线，支持多平台格式适配与品牌风格锁定，解决内容规模化生产痛点。", "urgency": "高", "first_step": "接入即梦/可灵API，做3个行业（美妆/食品/3C）的Demo视频，找10家品牌试用"}, {"title": "智能家电AI交互中台", "description": "家电三巨头争建计算中心，但AI能力与家电终端的连接仍碎片化。为美的/海尔/格力等提供统一AI交互中台，打通语音、视觉、场景感知，实现跨品牌设备协同与用户行为预测，构建家庭AI OS底座。", "urgency": "中", "first_step": "选定一个家电品牌做POC，先打通3类设备的统一指令协议Demo"}]}, {"name": "宠物 / 宠物经济", "trend": "中国宠物消费从基础喂养向健康管理、情感陪伴升级，AI宠物健康监测与个性化服务成新增长极。", "opportunities": [{"title": "AI宠物健康管家App", "description": "宠物主痛点：看病贵、预防难、疾病识别慢。用AI实现粪便/皮肤/行为图像异常识别，结合可穿戴数据给出健康预警，连接线下宠物医院做分诊导流，构建「检测-问诊-用药」闭环。", "urgency": "高", "first_step": "搭建猫狗粪便/皮肤异常识别模型，联合5家宠物医院做免费检测工具冷启动"}, {"title": "宠物AI陪伴智能硬件", "description": "宠物独处焦虑是高频痛点，现有摄像头产品功能单薄。做搭载AI的宠物互动机器人，支持自主游戏、主人远程互动、异常行为报警，主打「宠物情绪价值」，溢价空间大。", "urgency": "中", "first_step": "先做App+现有摄像头联动的软件版MVP，验证用户付费意愿后再立硬件项目"}, {"title": "宠物个性化营养定制平台", "description": "宠物食品同质化严重，主人对配方认知低。用AI分析宠物品种/年龄/健康数据，定制个性化主粮配方并按月配送，打「营养师级别」差异化，客单价是通用粮2-3倍。", "urgency": "中", "first_step": "与1家代工厂合作，上线问卷+AI推荐配方的小程序，测试100单真实购买转化"}]}, {"name": "教育 / EdTech", "trend": "双减后K12压力转移至素质与职业赛道，AI技能教育需求爆发，个性化AI家教替代传统辅导成主流方向。", "opportunities": [{"title": "职场AI技能速训平台", "description": "企业员工迫切需要AI工具实操能力，但系统课程稀缺。做「岗位专属AI技能包」：财务/HR/销售/运营各岗位定制课，以项目实战为核心，2-4周速成，直接对接企业内训采购预算。", "urgency": "高", "first_step": "先做「销售岗AI工具实战」1门精品课，在LinkedIn/脉脉测试付费转化率"}, {"title": "AI个性化学科家教产品", "description": "传统一对一辅导成本高，AI可实现7×24小时千人千面辅导。聚焦初高中数理化，AI实时分析错题根因，动态调整练习难度，提供语音互动讲解，以远低于人工辅导的价格切入下沉市场。", "urgency": "高", "first_step": "接入DeepSeek API做数学题讲解Demo，在小红书/抖音做免费工具冷启动引流"}, {"title": "AI编程启蒙少儿课程", "description": "AI时代编程素养成基础能力，家长付费意愿高。做「AI+编程」融合课：用AI助手辅助孩子完成小游戏/动画项目，所见即所得，8-14岁目标人群，线上直播+AI练习系统双轨并行。", "urgency": "中", "first_step": "招募10名种子学员免费体验，收集课程反馈打磨核心模块后批量推广"}]}, {"name": "消费 / 零售 / 电商", "trend": "消费者从「功能满足」转向「情绪满足」，AI驱动的个性化推荐与内容电商重构流量分配逻辑，白牌溢价靠情感叙事。", "opportunities": [{"title": "AI选品与爆款预测SaaS", "description": "中小电商卖家选品靠经验，试错成本高。用AI抓取全网销售数据、社媒趋势、搜索热词，提前30天预测品类爆款，给出备货建议与定价策略，帮助卖家降低库存风险。", "urgency": "高", "first_step": "先聚焦1个品类（如家居/美妆），爬取数据做选品报告，免费给100个卖家用并收集反馈"}, {"title": "情绪消费品牌孵化器", "description": "索尼复古耳机无降噪仍爆卖，证明「情怀+颜值」溢价逻辑有效。建立AI辅助品牌孵化体系：用AI分析情感消费趋势，快速定义品牌人格，对接柔性供应链，0到1孵化情绪型消费品牌。", "urgency": "中", "first_step": "选1个情感品类（如国潮文具/复古家居），用AI生成品牌方案，小红书测试内容反响"}, {"title": "AI导购私域运营工具", "description": "品牌私域运营依赖人力，转化率低且难以规模化。用AI构建「懂产品+懂用户」的智能导购机器人，部署在企业微信/小程序，实现主动触达、个性化推荐、售后跟进全流程自动化。", "urgency": "高", "first_step": "接入微信生态API，做1个美妆品牌智能导购Demo，跑通「推荐-下单」完整链路"}]}, {"name": "加密货币 / Web3 / DeFi", "trend": "AI与Web3融合加速，去中心化AI算力网络、链上AI Agent、数据确权成前沿方向。国内合规框架下，香港Web3生态持续扩张提供出海窗口。", "opportunities": [{"title": "去中心化AI算力租赁网络", "description": "AI推理算力需求爆发，中心化云成本高。搭建P2P算力共享网络，让闲置GPU持有者出租算力，AI开发者按需购买，用Token激励算力供给侧，解决AI算力供需错配问题。", "urgency": "中", "first_step": "在香港注册实体，接入Render Network等协议做二层调度层MVP，验证供需撮合效率"}, {"title": "链上AI Agent资产管理", "description": "DeFi用户需要自动化策略执行但缺乏技术能力。构建链上AI Agent，自主监控DeFi协议收益变化，执行跨协议资产再平衡，用户授权后全程无人值守，降低DeFi参与门槛。", "urgency": "中", "first_step": "先做只读版链上AI分析报告工具，积累用户信任后再逐步开放执行权限"}, {"title": "数据确权与AI训练数据市场", "description": "AI训练数据需求旺盛但版权争议不断。用区块链做数据确权登记，构建合规数据交易市场，数据提供方按AI使用次数获得Token分成，解决AI训练数据来源合法性问题。", "urgency": "高", "first_step": "在香港搭建数据确权Demo平台，联合3家AI公司做数据采购试点验证合规路径"}]}, {"name": "芯片 / 半导体", "trend": "国产芯片从追赶进入规模化量产阶段，碳化硅、AI推理芯片成两大热点；供应链本土化压力推动设计、封测、材料全链条机会涌现。", "opportunities": [{"title": "AI芯片IP授权与EDA工具服务", "description": "国内中小芯片设计公司缺乏推理加速IP核，可提供面向边缘AI场景的可授权IP模块及AI辅助EDA优化工具，降低设计门槛，以订阅+分成模式切入。", "urgency": "高", "first_step": "招募2名前ARM/RISC-V IP工程师，打磨1个边缘推理IP核Demo并接触5家Fabless客户"}, {"title": "碳化硅功率器件检测SaaS", "description": "碳化硅外延片良率检测依赖进口设备，可开发AI视觉缺陷检测软件，对接国产光学设备硬件，以SaaS形式售给外延片和器件厂，快速替代人工抽检。", "urgency": "高", "first_step": "与1家碳化硅厂谈数据标注合作，收集500张缺陷样本训练基础模型"}]}, {"name": "机器人 / 具身智能", "trend": "具身智能进入量产前夜，训练数据稀缺和部署成本高是两大核心瓶颈；工厂、仓储场景率先落地，服务型机器人紧随其后。", "opportunities": [{"title": "具身智能合成训练数据平台", "description": "机器人大模型训练严重依赖真实操作数据，成本极高。用3D生成+物理仿真引擎批量合成多样化操作场景数据，以数据集订阅卖给机器人公司，填补数据荒。", "urgency": "高", "first_step": "用Blender+Isaac Sim搭建厨房操作场景，生成1000条标注数据送给3家机器人公司试用"}, {"title": "工厂机器人远程运维SaaS", "description": "工厂部署机器人后缺乏专业运维团队，故障停机损失大。提供AI驱动的远程状态监测、故障预测和OTA调度平台，按机器人台数收取年费。", "urgency": "中", "first_step": "接触1家已部署机器人的工厂，免费安装传感器采集3个月数据验证预测准确率"}]}, {"name": "金融 / 金融科技", "trend": "AI重塑投研、风控、合规三大环节，监管趋严背景下合规AI工具需求爆发，中小金融机构是最大空白市场。", "opportunities": [{"title": "中小券商AI投研助手", "description": "中小券商研究所人手不足，AI可自动生成行业跟踪报告、财报摘要和舆情预警，以私有化部署保障合规。", "urgency": "中", "first_step": "用DeepSeek微调金融报告写作模型，制作1份A股行业对比报告Demo送券商试用"}, {"title": "AI反欺诈实时风控中台", "description": "消费金融、网络支付欺诈手段升级，传统规则引擎失效。提供AI实时图神经网络风控API，按调用量计费。", "urgency": "高", "first_step": "与1家消费金融公司签POC协议，接入其脱敏交易数据训练图模型"}]}, {"name": "媒体 / 娱乐 / 内容", "trend": "AI生成内容成本断崖式下降，专业内容团队用AI放大产能是核心机会；垂直场景定制化内容需求激增。", "opportunities": [{"title": "品牌AI短视频批量生产工具", "description": "电商品牌需要海量SKU视频，AI可一键生成多语言多风格短视频，大幅降低制作成本。", "urgency": "高", "first_step": "用即梦/可灵API搭建MVP，找5个跨境电商商家免费试用并收集反馈"}, {"title": "AI播客与有声内容工厂", "description": "文字内容转高质量多角色有声播客，支持方言和情绪化语音，服务出版、教育、媒体机构。", "urgency": "中", "first_step": "接入火山引擎TTS，制作3个样本集打包给出版社演示"}]}, {"name": "潮流 / 时尚 / 运动", "trend": "Z世代追求个性表达，AI个性化定制和虚拟试穿重塑时尚消费链路；运动科技与数据结合打造差异化体验。", "opportunities": [{"title": "AI个性化球鞋定制平台", "description": "用AI生成设计图案+小批量柔性供应链实现个人专属球鞋，主打潮流圈层社交传播。", "urgency": "中", "first_step": "用Midjourney做50款设计样稿，在小红书发帖测试预约意愿"}, {"title": "运动员AI体能数据教练", "description": "整合可穿戴设备数据，AI生成个性化训练计划和伤病风险预警，服务业余跑者和健身人群。", "urgency": "中", "first_step": "对接Garmin/华为手表API，开发微信小程序MVP，邀请100名跑者内测"}]}, {"name": "动漫 / 二次元 / IP", "trend": "AI大幅降低动漫制作成本，使中小团队能制作高质量内容；IP延伸至实体商品和虚拟互动是变现新路径。", "opportunities": [{"title": "AI动漫分镜与动效生产工具", "description": "动漫制作中分镜和中间帧最耗人力，AI可自动生成高质量中间帧和分镜稿，服务国内动漫工作室。", "urgency": "高", "first_step": "用ComfyUI搭建角色一致性工作流，联系3家动漫工作室做免费试用"}, {"title": "二次元IP虚拟陪伴订阅", "description": "基于热门IP角色打造有记忆、有情感的AI虚拟伴侣，粉丝通过订阅付费与角色深度互动。", "urgency": "高", "first_step": "与1个独立IP版权方谈授权合作，开发微信小程序内测版测试付费转化率"}]}, {"name": "出行 / 交通", "trend": "智能驾驶进入量产落地关键期，数据闭环和场景覆盖是核心竞争要素；智驾后市场服务和保险是新兴蓝海。", "opportunities": [{"title": "智驾长尾场景数据采集服务", "description": "主机厂智驾系统在恶劣天气、特殊路况等长尾场景数据严重不足，专业众包采集+标注服务能快速填补缺口。", "urgency": "高", "first_step": "招募50名有驾照的兼职采集员，在上海郊区跑1000公里数据，制作Demo递给主机厂"}, {"title": "智驾保险定价AI引擎", "description": "传统车险无法处理智驾数据，提供基于驾驶行为数据的UBI保险定价模型API，服务保险公司开发智驾险种。", "urgency": "中", "first_step": "收集公开驾驶数据集训练风险评分模型，制作精算报告拜访1家险企创新部门"}]}, {"name": "能源 / 清洁能源", "trend": "AI算力中心高速扩张带来巨大电力需求，储能+绿电配套成刚需；电池回收政策落地推动循环经济商业化。", "opportunities": [{"title": "AI数据中心绿电撮合平台", "description": "算力中心绿电采购繁琐且价格不透明，搭建AI撮合平台对接风光电场与数据中心，实现实时绿电匹配交易。", "urgency": "高", "first_step": "对接电力交易所数据接口，搭建绿电供需看板，邀请3家算力中心和3家电场试用"}, {"title": "动力电池梯次利用评估SaaS", "description": "退役动力电池梯次利用需快速评估健康度，AI无损检测替代人工拆解，降低评估成本和时间90%。", "urgency": "高", "first_step": "采购EIS测试仪，与1家回收企业合作采集200组退役电池数据训练模型"}]}, {"name": "医疗健康", "trend": "基层医疗AI辅助诊断需求迫切，合规路径趋于清晰。", "opportunities": [{"title": "基层诊所AI辅助诊断工具", "description": "乡镇卫生院和社区诊所缺乏专科医生，AI辅助诊断分诊可提升诊疗质量，以低价SaaS切入。", "urgency": "中", "first_step": "与1家三甲医院合作获取脱敏病历数据，申请医疗AI软件备案"}]}, {"name": "农业 / 食品", "trend": "AI农业精准化管理和食品溯源需求增长，政策推动绿色农业标准化。", "opportunities": [{"title": "农业大棚AI精准环控系统", "description": "蔬菜大棚温湿度CO2管理依赖人工经验，AI自动调控可节能20%、增产15%，以硬件+订阅模式切入。", "urgency": "中", "first_step": "采购低成本传感器套件，在1个50亩大棚试点部署3个月收集效果数据"}]}, {"name": "制造业 / 工业", "trend": "制造业AI化从设备预测维护延伸到工艺优化和质检全流程。", "opportunities": [{"title": "AI视觉质检即插即用设备", "description": "中小工厂质检依赖人工，AI视觉设备以边缘盒子+相机形态快速部署，1周上线，误检率低于0.1%。", "urgency": "高", "first_step": "采购工业相机+Jetson边缘盒子，联系1家PCB工厂做免费质检样品线试点"}]}, {"name": "房产 / 建筑", "trend": "地产下行周期中存量改造和智能化运营是增量机会，AI降低设计和运维成本。", "opportunities": [{"title": "AI存量建筑节能改造顾问", "description": "老旧商业建筑能耗高，AI分析楼控数据输出精准节能改造方案，以效果付费模式消除客户决策障碍。", "urgency": "中", "first_step": "接入1栋写字楼楼控系统，做3个月能耗分析报告验证节能效果"}]}, {"name": "政策 / 监管 / 社会", "trend": "AI监管合规要求趋严，ESG信息披露和碳核查成企业刚需，合规科技（RegTech）迎来窗口期。", "opportunities": [{"title": "ESG碳核查AI合规平台", "description": "上市公司ESG强制披露政策落地，AI自动采集生产数据生成合规碳排放报告，大幅降低人工核查成本。", "urgency": "高", "first_step": "研究上交所ESG披露指引，开发碳排放自动计算Excel插件作为MVP验证需求"}]}]};
+
+(function() {
+  var KEY_STORE = 'ds_api_key';
+  var panel = document.getElementById('chat-panel');
+  var msgs = document.getElementById('chat-messages');
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  var history = [];
+
+  var setup = document.getElementById('chat-setup');
+  var keyInput = document.getElementById('key-input');
+  var chatMsgs = document.getElementById('chat-messages');
+  var chatSugg = document.getElementById('chat-suggestions');
+  var chatInputRow = document.querySelector('.chat-input-row');
+
+  function showSetup() {
+    setup.style.display = 'block';
+    chatMsgs.style.display = 'none';
+    chatSugg.style.display = 'none';
+    chatInputRow.style.display = 'none';
+  }
+
+  function showChat() {
+    setup.style.display = 'none';
+    chatMsgs.style.display = '';
+    chatSugg.style.display = '';
+    chatInputRow.style.display = '';
+  }
+
+  document.getElementById('chat-toggle').onclick = function() {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      if (!getKey()) { showSetup(); } else { showChat(); }
+    }
+  };
+  document.getElementById('chat-close').onclick = function() { panel.classList.remove('open'); };
+
+  document.getElementById('key-save').onclick = function() {
+    var k = keyInput.value.trim();
+    if (k) {
+      localStorage.setItem(KEY_STORE, k);
+      showChat();
+    }
+  };
+
+  document.getElementById('chat-settings-btn').onclick = function() {
+    if (setup.style.display === 'none' || setup.style.display === '') {
+      keyInput.value = getKey() || '';
+      showSetup();
+    } else {
+      showChat();
+    }
+  };
+
+  document.querySelectorAll('.chat-sugg').forEach(function(b) {
+    b.onclick = function() {
+      input.value = b.textContent.replace(/^[^\s]+\s/, '');
+      send();
+    };
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  sendBtn.onclick = send;
+
+  function getKey() { return localStorage.getItem(KEY_STORE); }
+
+  function addMsg(role, text, loading) {
+    var d = document.createElement('div');
+    d.className = 'chat-msg ' + (role === 'user' ? 'user' : 'ai');
+    var bubble = loading ? '<div class="chat-bubble loading">思考中…</div>' :
+      '<div class="chat-bubble">' + text.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') + '</div>';
+    d.innerHTML = '<div class="chat-avatar">' + (role==='user'?'👤':'🤖') + '</div>' + bubble;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
+
+  function buildSystem() {
+    var r = window.__REPORT__;
+    var inds = (r.industries||[]).map(function(i) {
+      var opps = (i.opportunities||[]).map(function(o) {
+        return o.title + '（' + o.description + '，紧迫度:' + o.urgency + '，第一步:' + o.first_step + '）';
+      }).join('；');
+      return i.name + '——趋势:' + i.trend + '；机会:' + opps;
+    }).join('\n');
+    return '你是创业顾问AI，基于' + r.date + '的市场分析报告回答用户问题。\n\n报告摘要：' + r.summary + '\n\n各行业详情：\n' + inds + '\n\n请用中文回答，结合报告数据，给出具体可行的建议。';
+  }
+
+  function send() {
+    var text = input.value.trim();
+    if (!text) return;
+    var key = getKey();
+    if (!key) { showSetup(); return; }
+    input.value = '';
+    sendBtn.disabled = true;
+    addMsg('user', text);
+    history.push({'role':'user','content':text});
+    var placeholder = addMsg('ai', '', true);
+    var messages = [{'role':'system','content':buildSystem()}].concat(history);
+    fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body: JSON.stringify({model:'deepseek-chat',messages:messages,stream:true,max_tokens:1000})
+    }).then(function(resp) {
+      if(!resp.ok) throw new Error('API错误 '+resp.status);
+      var bubble = placeholder.querySelector('.chat-bubble');
+      bubble.className = 'chat-bubble';
+      bubble.textContent = '';
+      var full = '';
+      var reader = resp.body.getReader();
+      var dec = new TextDecoder();
+      function read() {
+        return reader.read().then(function(r) {
+          if(r.done) { history.push({'role':'assistant','content':full}); sendBtn.disabled=false; return; }
+          dec.decode(r.value).split('\n').forEach(function(line) {
+            line = line.replace(/^data: /,'').trim();
+            if(!line||line==='[DONE]') return;
+            try {
+              var d = JSON.parse(line).choices[0].delta.content;
+              if(d) { full+=d; bubble.textContent=full; msgs.scrollTop=msgs.scrollHeight; }
+            } catch(e) {}
+          });
+          return read();
+        });
+      }
+      return read();
+    }).catch(function(e) {
+      placeholder.querySelector('.chat-bubble').textContent = '出错了：'+e.message+'，请检查 API Key 是否正确。';
+      sendBtn.disabled = false;
+    });
+  }
+
+  // Initialize: hide setup by default
+  setup.style.display = 'none';
+})();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/rd-thoughts/sw.js');
+}
+if(typeof Chart !== 'undefined') {
+  document.querySelectorAll('[data-values]').forEach(function(c) {
+    var vals = JSON.parse(c.dataset.values);
+    var color = (c.closest('.industry-card') || {}).style && c.closest('.industry-card').style.borderLeftColor || '#6366f1';
+    new Chart(c, {
+      type: 'line',
+      data: {
+        labels: vals.map(function(_,i){ return i; }),
+        datasets: [{ data: vals, borderColor: color, borderWidth: 1.5,
+          fill: true, backgroundColor: 'rgba(99,102,241,0.07)',
+          pointRadius: 0, tension: 0.4 }]
+      },
+      options: {
+        responsive: false, animation: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: { x: { display: false }, y: { display: false, min: 0 } }
+      }
+    });
+  });
+}
+</script>
+</body>
+</html>
